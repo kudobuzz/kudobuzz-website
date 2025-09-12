@@ -1,0 +1,176 @@
+---
+import Base from "../../layouts/Base.astro";
+import Navbar from '../../components/Navbar.astro';
+import Footer from "../../components/Footer.astro";
+import Hero from '../../components/Hero.astro';
+import Section from '../../components/Section.astro';
+import AddSpace from "../../components/AddSpace.astro";
+import { menuItems } from "../../data/menuItems.js";
+
+export async function getStaticPaths() {
+  // definisikan langsung di dalam fungsi
+  const solutions = menuItems.find((item) => item.label === "Solutions")?.children || [];
+
+  return solutions.map((item) => {
+    const slug = item.link.split("/").pop(); // contoh: "product-reviews"
+    return {
+      params: { slug },
+      props: { solution: item },
+    };
+  });
+}
+
+const { solution } = Astro.props;
+
+
+
+const companyLinks = [
+  { name: "Pricing", url: "#" },
+  { name: "Blogs", url: "#" },
+  { name: "Jobs", url: "#" }
+];
+
+const integrationLinks = [
+  { name: "Developer API", url: "#" },
+  { name: "Developer API", url: "#" },
+];
+
+const resourcesLinks = [
+  { name: "E-Books", url: "#" },
+  { name: "Merchant Stories", url: "#" },
+];
+
+const supportLinks = [
+  { name: "Help Center", url: "#" },
+  { name: "GDPR", url: "#" },
+  { name: "GDPR2", url: "#" },
+  { name: "GDPR3", url: "#" },
+];
+
+const socialLinks = [
+  { icon: "/assets/icons/icon-linkedin.svg", url: "#" },
+  { icon: "/assets/icons/icon-x.svg", url: "#" },
+  { icon: "/assets/icons/icon-youtube.svg", url: "#" },
+  { icon: "/assets/icons/icon-instagram.svg", url: "#" },
+  { icon: "/assets/icons/icon-facebook.svg", url: "#" },
+];
+---
+
+<Base title="CRO — Kudobuzz">
+ <Navbar menuItems={menuItems} />
+ <Hero 
+      tag = "Conversion Rate Optimization"
+      title = "Conversion Rate Optimization "
+      titlehighlight = "That Works While You Sleep."
+      subtitle = "Understand your shoppers. Optimize what matters. Convert more sales."
+      description = "Kudobuzz CRO helps you unlock hidden revenue by showing exactly how visitors interact with your store — and what is stopping them from buying. Powered by AI and built for merchants, not analysts." 
+      buttonText1 = "Try Kudobuzz Free" 
+      buttonTextLink1 = "https://kudobuzz.com/"
+      buttonText2 = "Get a Free Demo"
+      buttonTextLink2 = "https://kudobuzz.com/"
+
+      feature1 = "No credit card required"
+      feature2 = "Free plan available"
+      feature3 = "Cancel anytime"
+      imageSrc = "/assets/illustrations/cro-hero1.svg"
+      imageAlt = "Kudobuzz"
+    />
+
+  <AddSpace color="grey"/>
+   <Section
+      
+      title="You’re Getting Traffic. "
+      titlehighlight = "But Are You Getting Sales?"
+      description = "Most online stores convert under 3 percent of visitors. That means 97 percent of your traffic is leaving without buying. Kudobuzz CRO shows you why — and gives you clear steps to fix it. No spreadsheets. No guesswork. Just the insights you need to grow." 
+      layout="center"
+      colorScheme="grey"
+      showImage={true}
+      imageSrc = "/assets/illustrations/cro-kudobuzz-img1.svg"
+      imageAlt = "Kudobuzz"
+   />
+    <AddSpace color="grey"/>
+     <AddSpace color="white"/>
+   <Section
+      
+      title="AI "
+      titlehighlight = "Insight"
+      subtitle="AI-Powered CRO Report"
+      description = "A clear, actionable summary of what is hurting your conversion rate. Our AI scans your store, identifies friction points, and gives you a prioritized list of what to fix. You do not need to be a data analyst. Just follow the insights and watch your revenue grow." 
+      layout="left"
+      colorScheme="white"
+      showImage={false}
+       showImage={true}
+       imageSrc = "/assets/illustrations/cro-kudobuzz-img2.svg"
+      imageAlt = "Kudobuzz"
+
+       showChecklist={true}
+      checkedItems={[
+        {icon: "/assets/icon-check.svg", title: "Identify broken flows or confusing CTAs"},
+        {icon: "/assets/icon-check.svg", title: "EUnderstand drop-off points on any page"},
+        {icon: "/assets/icon-check.svg", title: "Get instant recommendations to improve conversions"},
+        
+      ]} 
+   />
+    <AddSpace color="white"/>
+
+    <AddSpace color="white"/>
+    <Section
+        
+        title="Session "
+        titlehighlight = "Replays"
+
+        subtitle="Watch how real visitors experience your store"
+        
+        description = " Replay customer journeys from landing to exit. Spot the hesitation, confusion, or bugs that hurt conversions." 
+        layout="right"
+        colorScheme="white"
+        showImage={false}
+        
+        showImage={true}
+        imageSrc = "/assets/illustrations/cro-kudobuzz-img3.svg"
+        imageAlt = "Kudobuzz"
+
+        showChecklist={true}
+        checkedItems={[
+          {icon: "/assets/icon-check.svg", title: "Install Kudobuzz CRO on your store (Shopify, Shoplazza, Wix, or BigCommerce)"},
+          {icon: "/assets/icon-check.svg", title: "Explore your AI dashboard, heatmaps, and replays. Let the AI analyze customer behavior across your store"},
+          {icon: "/assets/icon-check.svg", title: "Track your conversion improvements in real time, Apply clear, high-impact changes based on data"},
+          
+        ]} />
+
+    />
+      <AddSpace color="white"/>
+
+      
+
+   <AddSpace color="white"/>
+   <AddSpace color="grey"/>
+
+     <Section
+      title="How It Works?"
+      layout="center"
+      colorScheme="grey"
+      showImage={false}
+
+      sliderSteps={[
+        { image: "/assets/illustrations/ugc-kudobuzz-img3.svg", title: "Step 1", text: "Connect your TikTok and Instagram accounts, Kudobuzz automatically pulls in tagged and mentioned content — or lets you request direct uploads" },
+        { image: "/assets/illustrations/ugc-kudobuzz-img4.svg", title: "Step 2", text: "Approve and tag products in each video or post." },
+        { image: "/assets/illustrations/ugc-kudobuzz-img5.svg", title: "Step 3", text: "Publish shoppable UGC anywhere on your store." },
+        { image: "/assets/illustrations/ugc-kudobuzz-img5.svg", title: "Step 3", text: "Watch conversions increase with content your customers already trust." }
+      ]}
+    />
+
+   
+    <AddSpace color="grey"/>
+    <AddSpace color="grey"/>
+    <AddSpace color="grey"/>
+    <AddSpace color="grey"/>
+    
+<Footer
+  companyLinks={companyLinks}
+  integrationLinks={integrationLinks}
+  resourcesLinks={resourcesLinks}
+  supportLinks={supportLinks}
+  socialLinks={socialLinks}
+  showBanner={false}/>
+ </Base>

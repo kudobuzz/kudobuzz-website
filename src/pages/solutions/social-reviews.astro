@@ -1,0 +1,173 @@
+---
+import Base from "../../layouts/Base.astro";
+import Navbar from '../../components/Navbar.astro';
+import Footer from "../../components/Footer.astro";
+import Hero from '../../components/Hero.astro';
+import Section from '../../components/Section.astro';
+import AddSpace from "../../components/AddSpace.astro";
+import { menuItems } from "../../data/menuItems.js";
+
+export async function getStaticPaths() {
+  // definisikan langsung di dalam fungsi
+  const solutions = menuItems.find((item) => item.label === "Solutions")?.children || [];
+
+  return solutions.map((item) => {
+    const slug = item.link.split("/").pop(); // contoh: "product-reviews"
+    return {
+      params: { slug },
+      props: { solution: item },
+    };
+  });
+}
+
+const { solution } = Astro.props;
+
+
+
+const companyLinks = [
+  { name: "Pricing", url: "#" },
+  { name: "Blogs", url: "#" },
+  { name: "Jobs", url: "#" }
+];
+
+const integrationLinks = [
+  { name: "Developer API", url: "#" },
+  { name: "Developer API", url: "#" },
+];
+
+const resourcesLinks = [
+  { name: "E-Books", url: "#" },
+  { name: "Merchant Stories", url: "#" },
+];
+
+const supportLinks = [
+  { name: "Help Center", url: "#" },
+  { name: "GDPR", url: "#" },
+  { name: "GDPR2", url: "#" },
+  { name: "GDPR3", url: "#" },
+];
+
+const socialLinks = [
+  { icon: "/assets/icons/icon-linkedin.svg", url: "#" },
+  { icon: "/assets/icons/icon-x.svg", url: "#" },
+  { icon: "/assets/icons/icon-youtube.svg", url: "#" },
+  { icon: "/assets/icons/icon-instagram.svg", url: "#" },
+  { icon: "/assets/icons/icon-facebook.svg", url: "#" },
+];
+---
+
+<Base title="Social Reviews — Kudobuzz">
+ <Navbar menuItems={menuItems} />
+ <Hero 
+      tag = "Social Reviews"
+      title = "Sync your social reviews "
+      titlehighlight = "with a few clicks."
+      
+      description = "Automatically curate all your your social reviews into Kudobuzz and showcase them on your website in seconds." 
+      buttonText1 = "Try Kudobuzz Free" 
+      buttonTextLink1 = "https://kudobuzz.com/"
+      buttonText2 = "Get a Free Demo"
+      buttonTextLink2 = "https://kudobuzz.com/"
+
+      feature1 = "No credit card required"
+      feature2 = "Free plan available"
+      feature3 = "Cancel anytime"
+      imageSrc = "/assets/illustrations/social-reviews-hero1.svg"
+      imageAlt = "Kudobuzz"
+    />
+
+  <AddSpace color="grey"/>
+   <Section
+      tag = "Real time authentic reviews"
+      title="Supported "
+      titlehighlight = "Channels"
+      description = "Kudobuzz currently supports and integrates with Facebook, Google Maps, Yelp, Amazon and Etsy with more coming soon." 
+      imageSrc="/assets/illustrations/social-reviews-kudobuzz-img1.svg"
+      imageAlt="kudobuzz-illustration"
+      layout="right"
+      colorScheme="grey"
+      showImage={true}
+      showCheckgrid={true}
+      checkedItems={[
+        {icon: "/assets/icon-check.svg", title: "Amazon"},  
+        {icon: "/assets/icon-check.svg", title: "Facebook"},
+        
+        {icon: "/assets/icon-check.svg", title: "Google Map"},
+        {icon: "/assets/icon-check.svg", title: "Etsy"},
+        {icon: "/assets/icon-check.svg", title: "Ali Express"}
+          
+      ]} 
+      
+   />
+   <AddSpace color="grey"/>
+  <AddSpace color="white"/>
+    <Section
+      tag = "Auto collect + Mobile friendly"
+      title="Verified "
+      titlehighlight = "Reviews"
+      description = "All social synced reviews are marked as verified and your potential customers can easily reference it to the actual source." 
+      imageSrc="/assets/illustrations/social-reviews-kudobuzz-img2.svg"
+      imageAlt="kudobuzz-illustration"
+      layout="center"
+      colorScheme="white"
+      showImage={true}
+      
+   />
+   <Section
+      tag = "Assigned to Boosting SEO Rank"
+      title="Assign "
+      titlehighlight = "to Products"
+      description = "Kudobuzz currently supports and integrates with Facebook, Google Maps, Yelp, Amazon and Etsy with more coming soon." 
+      imageSrc="/assets/illustrations/social-reviews-kudobuzz-img3.svg"
+      imageAlt="kudobuzz-illustration"
+      layout="right"
+      colorScheme="white"
+      showImage={true}
+      showCheckgrid={true}
+      checkedItems={[
+        {icon: "/assets/icon-check.svg", title: "Amazon"},  
+        {icon: "/assets/icon-check.svg", title: "Facebook"},
+        
+        {icon: "/assets/icon-check.svg", title: "Google Map"},
+        {icon: "/assets/icon-check.svg", title: "Etsy"},
+        {icon: "/assets/icon-check.svg", title: "Ali Express"}
+          
+      ]} 
+      
+   />
+   <AddSpace color="white"/>
+   <AddSpace color="grey"/>
+    <Section
+      tag = "Assigned to Boosting SEO Rank"
+      title="Boost Reviews "
+      titlehighlight = "on Other Platforms"
+      description = "Send your customers to other review platforms and boost your social reviews across the web. This will also help boost your SEO juice and organic rankings." 
+      imageSrc="/assets/illustrations/social-reviews-kudobuzz-img4.svg"
+      imageAlt="kudobuzz-illustration"
+      layout="left"
+      colorScheme="grey"
+      showImage={true}
+      showCheckgrid={true}
+      checkedItems={[
+        {icon: "/assets/icon-check.svg", title: "Amazon"},  
+        {icon: "/assets/icon-check.svg", title: "Facebook"},
+        
+        {icon: "/assets/icon-check.svg", title: "Google Map"},
+        {icon: "/assets/icon-check.svg", title: "Etsy"},
+        {icon: "/assets/icon-check.svg", title: "Ali Express"}
+          
+      ]} 
+      
+   />
+    <AddSpace color="grey"/>
+    <AddSpace color="grey"/>
+    <AddSpace color="grey"/>
+    
+<Footer
+  companyLinks={companyLinks}
+  integrationLinks={integrationLinks}
+  resourcesLinks={resourcesLinks}
+  supportLinks={supportLinks}
+  socialLinks={socialLinks}
+  showBanner={false}/>
+ </Base>

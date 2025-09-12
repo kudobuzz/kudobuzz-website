@@ -1,0 +1,315 @@
+---
+const { 
+
+  tag,
+  title,
+  titlehighlight, 
+  subtitle, 
+  description, 
+  buttonText1, 
+  buttonTextLink1,
+  buttonText2, 
+  buttonTextLink2,
+  feature1, 
+  feature2, 
+  feature3, 
+  imageSrc,
+  imageAlt,
+  animate = false
+
+} = Astro.props;
+---
+
+<section class="hero">
+  <div class={`hero-image ${animate ? 'is-animated' : ''}`} data-animate="slide-left">
+    <img src={imageSrc} alt={imageAlt} decoding="async" fetchpriority="high" /> 
+  </div>
+  <div class="hero-content">
+   {tag && <div class="tag">
+      {tag}
+    </div>
+   }
+    <h1 class="hero-title">
+      {title} <span>{titlehighlight}</span>
+    </h1>
+
+    {subtitle &&
+      <h2 class="hero-subtitle">{subtitle}</h2>
+    }
+    <p class="hero-description">
+      {description}
+    </p>
+    <div class="hero-buttons">
+      <a href={buttonTextLink1} target=blank class="btn-primary">{buttonText1}</a>
+      <a href={buttonTextLink2} target=blank class="btn-outline">{buttonText2}</a>
+    </div>
+   <ul class="hero-features">
+      <li>
+        <img src="/assets/icon-check.svg" alt="check" class="feature-icon">
+        {feature1}
+      </li>
+      <li>
+        <img src="/assets/icon-check.svg" alt="check" class="feature-icon">
+        {feature2}
+      </li>
+      <li>
+        <img src="/assets/icon-check.svg" alt="check" class="feature-icon">
+        {feature3}
+      </li>
+    </ul>
+
+  </div>
+  
+</section>
+
+<script client:load>
+  const wrap = document.querySelector('.hero-image.is-animated');
+  const section = document.querySelector('.hero');
+  if (wrap && window.matchMedia('(pointer: fine)').matches) {
+    let raf = 0;
+    let targetX = 0, targetY = 0;
+    let currentX = 0, currentY = 0;
+
+    function onMove(e) {
+      const rect = section.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+      targetX = x * 12;
+      targetY = y * 10;
+      if (!raf) raf = requestAnimationFrame(tick);
+    }
+
+    function tick() {
+      currentX += (targetX - currentX) * 0.08;
+      currentY += (targetY - currentY) * 0.08;
+      wrap.style.transform = `translate3d(${currentX}px, ${currentY}px, 0)`;
+      if (Math.abs(currentX - targetX) > 0.1 || Math.abs(currentY - targetY) > 0.1) {
+        raf = requestAnimationFrame(tick);
+      } else {
+        raf = 0;
+      }
+    }
+
+    section.addEventListener('mousemove', onMove);
+    section.addEventListener('mouseleave', () => {
+      targetX = 0; targetY = 0;
+      if (!raf) raf = requestAnimationFrame(tick);
+    });
+  }
+</script>
+
+<style>
+
+/* Hero Section */
+
+
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: clamp(24px, 3vw, 60px) var(--page-padding) clamp(80px, 10vw, 150px);
+  margin: 0;
+  gap: clamp(20px, 4vw, 40px);
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.hero-content {
+  flex: 1;
+  max-width:45%;
+}
+
+.hero-title {
+  font-size: 48px;
+  font-weight: 700;
+  color: #1a1a1a;
+  line-height: 1.2;
+      margin-top: 16px;
+      text-transform: capitalize;
+}
+
+.hero-title span {
+  color: #f28c38;
+}
+
+.hero-subtitle {
+  font-size: 24px;
+  font-weight: 600;
+  margin-top: 16px;
+  color: #333;
+  
+}
+
+.hero-description {
+  font-size: 16px;
+  
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 30px;
+
+  color: #63646D;
+  margin: 16px 0 24px;
+  width:100%;
+}
+
+
+.hero-features {
+  list-style: none;
+  padding: 0;
+  margin: 48px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.hero-features li {
+  display: flex;
+  align-items: center;
+  gap: 4px; 
+  background: linear-gradient(to right, #fff7f1, #ffffff);
+  padding: 2px 2px;
+  border-radius: 25px;
+  font-size: 16px;
+  color: #63646D;
+  font-weight: 500;
+  
+}
+
+.hero-features .feature-icon {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+}
+
+.hero-image{
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  z-index: -1;
+  width: clamp(22rem, 48vw, 43rem);
+}
+
+.hero-image img {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+}
+
+.hero-image.is-animated img {
+  animation: heroFloat 6.5s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes heroFloat {
+  0% { transform: translateY(0) rotate(0.1deg); }
+  50% { transform: translateY(-10px) rotate(-0.2deg); }
+  100% { transform: translateY(0) rotate(0.1deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-image.is-animated img { animation: none !important; }
+}
+
+@media (max-width: 1024px) {
+  .hero-image{ width: clamp(20rem, 50vw, 32rem); } 
+  .hero{
+    overflow:hidden;
+    padding: 20px clamp(20px, 6vw, 64px) 20px;
+  }
+  
+    .hero-title{
+      font-size: 40px;
+      margin-bottom:16px;
+    }
+    .hero-description{
+          font-size: 16px;
+              line-height: 23px;
+    }
+
+    hero-subtitle{
+      line-height: 28px;
+
+    }
+  }
+
+@media (max-width: 768px) {
+  .hero{
+    overflow:hidden;
+    padding: 20px clamp(16px, 6vw, 32px) 96px;
+  }
+  .hero-content{
+    max-width: 50%;
+  }
+  .hero-image{
+      width: 29rem;
+          top: 30px;
+    right: -30px;
+  }
+    .hero-title{
+      font-size: 33px;
+      margin-bottom: 16px;
+  }
+  .hero-subtitle{
+    font-size: 20px;
+    line-height: 28px;
+  }
+  
+  .hero-features{
+    margin: 32px 0 0;
+  }
+  .hero-features li{
+    font-size: 14px;
+  }
+  
+}
+
+/* Responsive */
+@media (max-width: 425px) {
+  .hero {
+    flex-direction: column;
+    text-align: center;
+    padding: 20px 20px;
+  }
+.hero-image{
+      width:100%;
+  }
+  .hero-content {
+    max-width: 100%;
+  }
+
+  .hero-buttons {
+    justify-content: center;
+  }
+
+  .hero-features {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+   .hero-image{
+    position:unset;
+  }
+}
+
+@media (max-width: 376px) {
+  .hero-title {
+    font-size: 32px;
+  }
+
+  .hero-subtitle {
+    font-size: 18px;
+  }
+
+ 
+}
+
+@media (max-width: 320px) {
+      .hero-features li{
+        font-size: 12px;
+    }
+    
+}
+
+</style>

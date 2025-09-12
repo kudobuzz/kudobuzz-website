@@ -1,0 +1,287 @@
+---
+import Banner from './Banner.astro';
+
+interface FooterProps {
+  companyLinks: { name: string; url: string }[];
+  integrationLinks: { name: string; url: string }[];
+  resourcesLinks: { name: string; url: string }[];
+  supportLinks: { name: string; url: string }[];
+  socialLinks: { icon: string; url: string }[];
+}
+
+const {
+  companyLinks = [],
+  integrationLinks = [],
+  resourcesLinks = [],
+  supportLinks = [],
+  socialLinks = []
+} = Astro.props;
+---
+
+<div class="banner-wrapper">
+  <Banner />
+</div>
+
+<footer class="footer">
+    
+  <div class="footer-top">
+    
+    <img class="logo" src="/assets/kudobuzz-logo.svg" alt="Kudobuzz Logo" />
+    <div class="footer-content">
+        <p class="tagline">Start building trust today</p>
+        <div class="social-links">
+        {socialLinks.map((item) => (
+            <a href={item.url} target="_blank" rel="noopener noreferrer">
+            <img src={item.icon} alt="social" />
+            </a>
+        ))}
+        </div>
+    </div>
+
+  </div>
+
+  <hr class="divider" />
+
+  <div class="footer-links">
+    <div>
+      <h4>Company</h4>
+      <ul>
+        {companyLinks.map((link) => (
+          <li><a href={link.url}>{link.name}</a></li>
+        ))}
+      </ul>
+    </div>
+
+    <div>
+      <h4>Integration</h4>
+      <ul>
+        {integrationLinks.map((link) => (
+          <li><a href={link.url}>{link.name}</a></li>
+        ))}
+      </ul>
+    </div>
+
+    <div>
+      <h4>Resources</h4>
+      <ul>
+        {resourcesLinks.map((link) => (
+          <li><a href={link.url}>{link.name}</a></li>
+        ))}
+      </ul>
+    </div>
+
+    <div>
+      <h4>Support</h4>
+      <ul>
+        {supportLinks.map((link) => (
+          <li><a href={link.url}>{link.name}</a></li>
+        ))}
+      </ul>
+    </div>
+
+     <div>
+      <h4>Support</h4>
+      <ul>
+        {supportLinks.map((link) => (
+          <li><a href={link.url}>{link.name}</a></li>
+        ))}
+      </ul>
+    </div>
+  </div>
+    
+    <p class="title">Advanced Resources</p>
+  <hr class="divider" />
+    <div class="footer-links">
+        <div>
+        <h4>Company</h4>
+        <ul>
+            {companyLinks.map((link) => (
+            <li><a href={link.url}>{link.name}</a></li>
+            ))}
+        </ul>
+        </div>
+
+        <div>
+        <h4>Integration</h4>
+        <ul>
+            {integrationLinks.map((link) => (
+            <li><a href={link.url}>{link.name}</a></li>
+            ))}
+        </ul>
+        </div>
+
+        <div>
+        <h4>Resources</h4>
+        <ul>
+            {resourcesLinks.map((link) => (
+            <li><a href={link.url}>{link.name}</a></li>
+            ))}
+        </ul>
+        </div>
+
+        <div>
+        <h4>Support</h4>
+        <ul>
+            {supportLinks.map((link) => (
+            <li><a href={link.url}>{link.name}</a></li>
+            ))}
+        </ul>
+        </div>
+
+        <div>
+        <h4>Support</h4>
+        <ul>
+            {supportLinks.map((link) => (
+            <li><a href={link.url}>{link.name}</a></li>
+            ))}
+        </ul>
+        </div>
+    </div>
+
+
+  <div class="footer-bottom">
+    <p>© 2024 Kudobuzz, Inc. All Rights Reserved.</p>
+    <ul>
+      <li><a href="#">Terms</a></li>
+      <li><a href="#">Privacy</a></li>
+      <li><a href="#">Cookie</a></li>
+      <li><a href="#">Security</a></li>
+    </ul>
+  </div>
+</footer>
+
+<style>
+.footer {
+  background: #1e1f28;
+  color: #e2e2e2;
+  padding: 200px var(--page-padding) 50px;
+  font-family: sans-serif;
+}
+.footer-content{
+    display:flex;
+    width:100%;
+    margin-bottom:48px;
+}
+.logo {
+  height: 40px;
+  margin-bottom: 48px;
+}
+
+footer .title{
+    font-size:16px;
+    margin: 0px;
+    color: #fff;
+}
+.tagline {
+  margin: 0px;
+  color: #fff;
+  
+
+  
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 30px; /* 150% */
+}
+
+.social-links {
+  display: flex;
+  gap: 32px;
+  
+}
+
+.social-links img {
+  width: 24px;
+  height: 24px;
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid #333;
+  margin: 30px 0;
+}
+
+.footer-links {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.footer-links h4 {
+  color: #fff;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.footer-links a {
+    display:block;
+    padding: 8px 0;
+  color: #BCBDC1;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.footer-links a:hover {
+  color: #f37c26;
+}
+
+.footer-bottom {
+  
+  padding-top: 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  
+}
+
+.footer-bottom ul {
+  display: flex;
+  gap: 20px;
+}
+
+.footer-bottom a {
+
+  color: #BCBDC1;
+  text-decoration: none;
+}
+
+.footer-bottom a:hover {
+  color: #f37c26;
+}
+.footer-bottom p{
+    font-size:14px;
+    color:#BCBDC1;
+}
+
+.banner-wrapper {
+  position: relative;
+}
+
+.banner-wrapper :global(.banner) {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+@media (max-width: 1024px) {
+  .footer{ padding: 200px clamp(24px, 6vw, 64px) 50px; }
+  .footer-links {
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  }
+}
+@media (max-width: 7684px) {
+ 
+}
+@media (max-width: 425px) {
+  .footer{
+    padding: 200px 20px 32px;
+    text-align:center;
+  }
+  .footer-content, .footer-links, .footer-bottom{ display:block; }
+  .social-links{ display:inline-flex; margin:20px 0; }
+  .footer-links{ grid-template-columns: 1fr; }
+  .footer-bottom ul{ margin:20px 0; display:inline-flex; }
+}
+</style>

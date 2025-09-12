@@ -1,0 +1,105 @@
+<section class="trusted-brands">
+    <div class="content">
+        <p class="trusted-text">
+            Trusted by 30,000+ online brands — from scrappy startups to global stores.
+        </p>
+        <div class="brands-logos" data-stagger="80">
+            <img data-animate="slide-up" src="/assets/logos/total-diabetes.png" alt="Total Diabetes" loading="lazy" decoding="async" height="32" />
+            <img data-animate="slide-up" src="/assets/logos/one-of-a-kind.png" alt="One of a Kind" loading="lazy" decoding="async" height="32" />
+            <img data-animate="slide-up" src="/assets/logos/gots.png" alt="GOTS" loading="lazy" decoding="async" height="32" />
+            <img data-animate="slide-up" src="/assets/logos/clk-supplies.png" alt="CLK Supplies" loading="lazy" decoding="async" height="32" />
+            <img data-animate="slide-up" src="/assets/logos/vimhue.png" alt="Vimhue" loading="lazy" decoding="async" height="32" />
+            <img data-animate="slide-up" src="/assets/logos/bone-frog.png" alt="Bone Frog Ammunition" loading="lazy" decoding="async" height="32" />
+        </div>
+    </div>  
+</section>
+
+<style>
+.trusted-brands {
+  text-align: center;
+  
+  background-color: #fff;
+}
+.trusted-brands .content{
+    display:flex;
+    flex-direction: column;
+    gap:64px;
+    border-top: 1px solid #eaeaea;
+    
+    padding:80px 0;
+}
+.trusted-text {
+  
+  
+  margin:0;
+  
+
+  color: var(--Dark, #20222F);
+    text-align: center;
+    
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 40px; /* 166.667% */
+}
+
+.brands-logos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+.brands-logos img {
+  height: 32px;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+.brands-logos img:hover {
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .trusted-brands .content {
+    padding: 40px 0;
+        gap:32px;
+}
+.trusted-brands{
+  padding:20px;
+}
+  .trusted-text{
+    font-size: 20px;
+    width:80%;
+    margin:auto;
+    line-height: 32px;
+
+  }
+
+  .brands-logos img{
+      height: 20px;
+  }
+}
+
+@media (max-width: 425px) {
+.trusted-brands{
+  padding:20px;
+}
+  .trusted-text{
+    font-size: 20px;
+    width:100%;
+    margin:auto;
+    line-height: 32px;
+
+  }
+.brands-logos{
+      gap: 24px;
+  }
+  .brands-logos img{
+      height: 24px;
+  }
+}
+
+
+</style>

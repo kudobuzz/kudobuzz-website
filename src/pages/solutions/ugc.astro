@@ -1,0 +1,236 @@
+---
+import Base from "../../layouts/Base.astro";
+import Navbar from '../../components/Navbar.astro';
+import Footer from "../../components/Footer.astro";
+import Hero from '../../components/Hero.astro';
+import Section from '../../components/Section.astro';
+import AddSpace from "../../components/AddSpace.astro";
+import { menuItems } from "../../data/menuItems.js";
+
+export async function getStaticPaths() {
+  // definisikan langsung di dalam fungsi
+  const solutions = menuItems.find((item) => item.label === "Solutions")?.children || [];
+
+  return solutions.map((item) => {
+    const slug = item.link.split("/").pop(); // contoh: "product-reviews"
+    return {
+      params: { slug },
+      props: { solution: item },
+    };
+  });
+}
+
+const { solution } = Astro.props;
+
+
+
+const companyLinks = [
+  { name: "Pricing", url: "#" },
+  { name: "Blogs", url: "#" },
+  { name: "Jobs", url: "#" }
+];
+
+const integrationLinks = [
+  { name: "Developer API", url: "#" },
+  { name: "Developer API", url: "#" },
+];
+
+const resourcesLinks = [
+  { name: "E-Books", url: "#" },
+  { name: "Merchant Stories", url: "#" },
+];
+
+const supportLinks = [
+  { name: "Help Center", url: "#" },
+  { name: "GDPR", url: "#" },
+  { name: "GDPR2", url: "#" },
+  { name: "GDPR3", url: "#" },
+];
+
+const socialLinks = [
+  { icon: "/assets/icons/icon-linkedin.svg", url: "#" },
+  { icon: "/assets/icons/icon-x.svg", url: "#" },
+  { icon: "/assets/icons/icon-youtube.svg", url: "#" },
+  { icon: "/assets/icons/icon-instagram.svg", url: "#" },
+  { icon: "/assets/icons/icon-facebook.svg", url: "#" },
+];
+---
+<Base title="UGC — Kudobuzz">
+ <Navbar menuItems={menuItems} />
+ <Hero 
+      tag = "User Generated Content"
+      title = "Turn TikTok & Instagram Content "
+      titlehighlight = "Into Conversions."
+      subtitle = "The content your customers already love. The conversions your store really needs."
+      description = "Kudobuzz helps you collect videos and posts from TikTok and Instagram — then turn them into shoppable, high-performing assets across your store." 
+      buttonText1 = "Connect TikTok & Instagram" 
+      buttonTextLink1 = "https://kudobuzz.com/"
+      buttonText2 = "Start Free"
+      buttonTextLink2 = "https://kudobuzz.com/"
+
+      feature1 = "No credit card required"
+      feature2 = "Free plan available"
+      feature3 = "Cancel anytime"
+      imageSrc = "/assets/illustrations/ugc-hero1.svg"
+      imageAlt = "Kudobuzz"
+    />
+
+  <AddSpace color="grey"/>
+   <Section
+      
+      title="Today’s Customers Don’t Want Ads. "
+      titlehighlight = "They Want Proof."
+      description = "Polished brand ads are easy to ignore. But when real people post your product on TikTok or Instagram, your audience pays attention." 
+      layout="center"
+      colorScheme="grey"
+      showImage={false}
+      showCheckgrid={true}
+   />
+   <Section
+      
+      description = "Kudobuzz turns that attention into action. We help you pull in authentic content from the platforms your customers use daily — and make it instantly shoppable on your site." 
+      layout="right"
+      colorScheme="grey"
+      showImage={false}
+      showCheckgrid={true}
+       showImage={true}
+       imageSrc = "/assets/illustrations/ugc-kudobuzz-img1.svg"
+      imageAlt = "Kudobuzz"
+   />
+    <AddSpace color="grey"/>
+    <AddSpace color="white"/>
+   <Section
+      tag = "Key Features"
+      title="TikTok & Instagram "
+      subtitle="Bring real customer content into your store"
+      titlehighlight = "UGC Collection"
+      description = "Automatically collect videos, posts, reels, and stories where your brand is mentioned, tagged, or hashtagged." 
+      layout="left"
+      colorScheme="white"
+      showImage={false}
+      
+       showImage={true}
+       imageSrc = "/assets/illustrations/ugc-kudobuzz-img2.svg"
+      imageAlt = "Kudobuzz"
+
+      showChecklist={true}
+      checkedItems={[
+        {icon: "/assets/icon-check.svg", title: "Monitor and pull from @mentions, hashtags, and tags"},
+        {icon: "/assets/icon-check.svg", title: "Accept direct uploads from happy customers"},
+        {icon: "/assets/icon-check.svg", title: "Approve and organize by product or campaign"},
+        {icon: "/assets/icon-check.svg", title: "Works with both public and permissioned content"}
+      ]} />
+
+   />
+    <AddSpace color="white"/>
+     <AddSpace color="grey"/>
+   <Section
+      
+      title="Shoppable "
+      titlehighlight = "Video & Posts"
+      subtitle="Let customers watch and shop in one smooth experience"
+      description = "Turn TikToks, Reels, and Instagram posts into shoppable content with product tagging." 
+      layout="right"
+      colorScheme="grey"
+      showImage={false}
+       showImage={true}
+       imageSrc = "/assets/illustrations/ugc-kudobuzz-img3.svg"
+      imageAlt = "Kudobuzz"
+
+       showChecklist={true}
+      checkedItems={[
+        {icon: "/assets/icon-check.svg", title: "Tag products in videos or image posts"},
+        {icon: "/assets/icon-check.svg", title: "Embed shoppable videos on homepages, PDPs, or landing pages"},
+        {icon: "/assets/icon-check.svg", title: "Boost engagement and lower bounce rates"},
+        {icon: "/assets/icon-check.svg", title: "Keep the shopping experience native and natural"}
+      ]} 
+   />
+    <AddSpace color="grey"/>
+
+    <AddSpace color="white"/>
+    <Section
+        
+        title="Smart"
+        titlehighlight = " Galleries & Widgets"
+
+        subtitle="Display UGC where it performs best"
+        
+        description = "Use customizable Kudobuzz widgets to showcase TikTok and Instagram content throughout the buyer journey." 
+        layout="left"
+        colorScheme="white"
+        showImage={false}
+        
+        showImage={true}
+        imageSrc = "/assets/illustrations/ugc-kudobuzz-img4.svg"
+        imageAlt = "Kudobuzz"
+
+        showChecklist={true}
+        checkedItems={[
+          {icon: "/assets/icon-check.svg", title: "Product-specific carousels"},
+          {icon: "/assets/icon-check.svg", title: "Full-page galleries"},
+          {icon: "/assets/icon-check.svg", title: "Floating popups with recent Instagram buzz"},
+          {icon: "/assets/icon-check.svg", title: "Dynamic TikTok walls on high-traffic pages"}
+        ]} />
+
+    />
+      <AddSpace color="white"/>
+
+      
+   <Section
+      
+      title="Today’s Customers Don’t Want Ads. "
+      titlehighlight = "They Want Proof."
+      description = "Polished brand ads are easy to ignore. But when real people post your product on TikTok or Instagram, your audience pays attention." 
+      layout="center"
+      colorScheme="white"
+      showImage={false}
+      showCheckgrid={true}
+   />
+   <Section
+      layout="left"
+      colorScheme="white"
+      showImage={false}
+      
+       showImage={true}
+       imageSrc = "/assets/illustrations/ugc-kudobuzz-img5.svg"
+      imageAlt = "Kudobuzz"
+
+       showChecklist={true}
+        checkedItems={[
+          {icon: "/assets/icon-check.svg", title: "Approve or reject with one click"},
+          {icon: "/assets/icon-check.svg", title: "Apply consistent styling and layout"},
+          {icon: "/assets/icon-check.svg", title: "Add captions, CTAs, or star ratings"},
+          {icon: "/assets/icon-check.svg", title: "Keep your store professional and conversion-focused"}
+        ]} 
+   />
+   <AddSpace color="white"/>
+   <AddSpace color="grey"/>
+
+     <Section
+      title="How It Works?"
+      layout="center"
+      colorScheme="grey"
+      showImage={false}
+
+      sliderSteps={[
+        { image: "/assets/illustrations/ugc-kudobuzz-img3.svg", title: "Step 1", text: "Connect your TikTok and Instagram accounts, Kudobuzz automatically pulls in tagged and mentioned content — or lets you request direct uploads" },
+        { image: "/assets/illustrations/ugc-kudobuzz-img4.svg", title: "Step 2", text: "Approve and tag products in each video or post." },
+        { image: "/assets/illustrations/ugc-kudobuzz-img5.svg", title: "Step 3", text: "Publish shoppable UGC anywhere on your store." },
+        { image: "/assets/illustrations/ugc-kudobuzz-img5.svg", title: "Step 3", text: "Watch conversions increase with content your customers already trust." }
+      ]}
+    />
+
+   
+    <AddSpace color="grey"/>
+    <AddSpace color="grey"/>
+    <AddSpace color="grey"/>
+    <AddSpace color="grey"/>
+    
+<Footer
+  companyLinks={companyLinks}
+  integrationLinks={integrationLinks}
+  resourcesLinks={resourcesLinks}
+  supportLinks={supportLinks}
+  socialLinks={socialLinks}
+  showBanner={false}/>
+</Base>

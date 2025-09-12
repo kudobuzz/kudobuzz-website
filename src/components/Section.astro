@@ -1,0 +1,780 @@
+---
+export interface Props {
+  showTextSide?: boolean;
+  showCardsSide?: boolean;
+  showCardsBottom?: boolean;
+  showArrows?: boolean;
+  showBanner?: boolean;
+  showChecklist?: boolean;
+  showCheckgrid?: boolean;
+  showImage?: boolean;
+  showImageFree?: boolean;
+  showReview?: boolean;
+  cards?: Array<{ icon: string; title: string; text: string }>;
+
+  titleBanner?: string;
+  platforms?: Array<{ icon: string; name: string }>;
+  buttons?: Array<{ text: string; link: string; style: "primary" | "outline" }>;
+  
+  checkedItems?: Array<{ icon: string; title: string }>;
+  reviews?: Array<{ reviewContent: string; author: string; detailAuthor: string }>;
+
+  tag?: string;
+  titlehighlight?: string;
+  title?: string;
+  subtitle?: string;
+  description?: string;
+  imageSrc?: string;
+  imageAlt?: string;
+  layout?: "left" | "right" | "center" | "bothside";
+  colorScheme?: "white" | "grey";
+  buttonTextReview?: string;
+  buttonTextReviewLink?: string;
+}
+
+const {
+  tag,
+  titlehighlight,
+  title,
+  subtitle,
+  description,
+  imageSrc,
+  imageAlt = "Default image",
+  layout = "left",
+  colorScheme = "white",
+  checkedItems = [],
+  reviews = [],
+  buttonTextReview,
+  buttonTextReviewLink,
+  showTextSide = true,
+  showCardsSide = false,
+  showCardsBottom = false,
+  showBanner = false,
+  showChecklist = false,
+  showCheckgrid = false,
+  showImage = false,
+  showImageFree = false,
+  showReview = false,
+  showArrows = true,
+  cards = [],
+  titleBanner,
+  platforms = [],
+  buttons = [],
+  sliderSteps = []
+} = Astro.props;
+
+import AddSpace from "../components/AddSpace.astro";
+import Slider from "./Slider.astro";
+
+---
+
+<section class={`two-column-section ${colorScheme}`}>
+  {layout === "center" ? (
+    <div class="center-container">
+      <div class="center-text">
+        {tag && <div class="tag">{tag}</div>}
+        <h2>{title}<span>{titlehighlight}</span></h2>
+        <p>{description}</p>
+      </div>
+      
+      {showImage && (
+        <div class="center-image" data-animate="slide-up">
+          <img src={imageSrc} alt={imageAlt} loading="lazy" decoding="async" />
+        </div>
+      )}
+
+       {sliderSteps.length > 0 && (
+        <Slider steps={sliderSteps} />
+      )}
+
+      {showReview && (
+        <>
+          <div class="review-content">
+            {reviews.map((review) => (
+              <div class="review-card">
+                <p>{review.reviewContent}</p>
+                <h4>{review.author}</h4>
+                <div class="authorDetail">{review.detailAuthor}</div>
+              </div>
+            ))}
+          </div>
+
+          {buttonTextReview && buttonTextReviewLink && (
+            <a href={buttonTextReviewLink} target="_blank" class="btn-primary margin-top">
+              {buttonTextReview}
+            </a>
+          )}
+        </>
+      )}
+    </div>
+  ) : layout === "bothside" ? (
+    <>
+      <div class="container-bothside">
+        <!-- Left Column -->
+        <div class="text-left">
+         {tag && <div class="tag">{tag}</div>}
+          <h2>{title}<span>{titlehighlight}</span></h2>
+        </div>
+
+        <!-- Right Column -->
+        {showTextSide && (
+          <div class="text-right">
+            <h3>{subtitle}</h3>
+            <p>{description}</p>
+            {buttonTextReview && buttonTextReviewLink && (
+              <a href={buttonTextReviewLink} target="_blank" class="btn-primary">
+                {buttonTextReview}
+              </a>
+            )}
+          </div>
+        )}
+
+       
+        
+        {showCardsSide && (
+          <div class="card-container-2-columns" data-stagger>
+            {cards.map((card, index) => (
+              <div class="step-card" data-animate="slide-up">
+                <div class="icon"><img src={card.icon} alt={`${card.title} Icon`} /></div>
+                <h3>{card.title}</h3>
+                <p>{card.text}</p>
+              </div>
+            ))}
+          </div>
+        )}
+        
+         {showImageFree && (
+          <div class="free-image" data-animate="bounce">
+            <img src={imageSrc} alt={imageAlt} loading="lazy" decoding="async" />
+          </div>
+        )} 
+      
+      </div>
+      
+       {showImage && (
+          <div class="center-container">
+            <div class="center-image" data-animate="slide-up">
+              <img src={imageSrc} alt={imageAlt} loading="lazy" decoding="async" />
+            </div>
+          </div>  
+        )}
+      
+      
+     {showCardsBottom && (
+      <div class="container-card-bottom" data-stagger>
+        {cards.map((card, index) => (
+          <>
+            <div class="step-card" key={index} data-animate="slide-up">
+              <div class="icon">
+                <img src={card.icon} alt={`${card.title} Icon`} />
+              </div>
+              <h3>{card.title}</h3>
+              <p>{card.text}</p>
+            </div>
+
+            {showArrows && index !== cards.length - 1 && (
+              <div class="step-arrow" key={`arrow-${index}`}>
+                <img src="/assets/icons/icon-arrow.svg" alt="Arrow" />
+              </div>
+            )}
+          </>
+        ))}
+      </div>
+    )}
+
+
+
+
+      {showBanner && (
+        <div class="workon-section">
+          <div class="section-title">
+            <span>{titleBanner}</span>
+          </div>
+          <div class="workon-container">
+            <div class="workon-platforms">
+              {platforms.map((platform) => (
+                <div class="platform">
+                  <img src={platform.icon} alt={platform.name} /> {platform.name}
+                </div>
+              ))}
+            </div>
+            <div class="workon-buttons">
+              {buttons.map((button) => (
+                <a href={button.link} class={`btn btn-${button.style}`}>
+                  {button.text}
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  ) : (
+    <div class={`container ${layout === "right" ? 'reverse' : ''}`}>
+      
+      <div class="text-column">
+        {tag && <div class="tag">{tag}</div>}
+        <h2>{title}<span>{titlehighlight}</span></h2>
+         <h3>{subtitle}</h3>
+        <p>{description}</p>
+
+       
+        {showChecklist && (
+          <div class="feature-list">
+            {checkedItems.map((item) => (
+              <div class="feature-item">
+                <img src={item.icon} alt={`${item.title} Icon`} />
+                <p>{item.title}</p>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {showCheckgrid && (
+          <div class="feature-grid">
+            {checkedItems.map((item) => (
+              <div class="feature-item">
+                <img src={item.icon} alt={`${item.title} Icon`} />
+                <p>{item.title}</p>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>  
+       
+
+      {showImage && (
+        <div class="center-image" data-animate="slide-up">
+          <img src={imageSrc} alt={imageAlt} loading="lazy" decoding="async" />
+        </div>
+      )}
+    </div>
+  )}
+</section>
+
+
+<style>
+.two-column-section {
+  position: relative;
+  
+}
+
+.two-column-section.white {
+  background: #ffffff00;
+}
+
+.two-column-section.grey {
+  background: #f7f7f7;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  gap: clamp(24px, 6vw, 140px);
+  align-items: center;
+}
+.container-bothside{
+  display: flex;
+  justify-content: space-between;
+  gap: clamp(24px, 6vw, 140px);
+  max-width: var(--container-max);
+  margin: 0 auto;
+ }
+.container-card-bottom{
+  display: flex;
+  justify-content: space-between;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  gap: clamp(12px, 4vw, 40px)
+  
+}
+.container.reverse {
+  flex-direction: row-reverse;
+}
+
+.image-column{
+  text-align:center;
+}
+.image-column img {
+  max-width: 50%;
+  height: auto;
+  border-radius: 10px;
+  
+}
+
+.text-column {
+  max-width: 500px;
+}
+.text-column p{
+  margin-bottom:30px;
+}
+.tag {
+    display: inline-flex
+;
+    padding: 4px 12px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 40px;
+    background: var(--Primary, #EAEBEE);
+    color: var(--White, #63646D);
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+/* Center layout */
+.center-container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  text-align: center;
+}
+
+.center-container .center-image{
+  margin: 32px auto;
+}
+.center-container .center-image img{
+  max-width: min(100%, 820px);
+}
+.center-text {
+  
+  max-width:720px;
+  margin: 0px auto;
+}
+
+.center-image img {
+  max-width: 650px;
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin:auto;
+  display:block;
+      
+}
+.center-image{
+        margin: 32px 0;
+}
+.reverse .center-image{
+    margin: 0 0px 0px -90px;
+}
+.center-section {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+
+.review-card {
+  max-width:480px;
+  margin-top: 20px;
+  font-size: 16px;
+}
+.review-content {
+ display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 32px auto;
+  gap: 40px;
+}
+
+.margin-top{
+        margin: 64px 0;
+    display: inline-block;
+
+}
+
+h2 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #1f2937;
+  line-height: 1.2;
+  text-transform: capitalize;
+}
+h2 span {
+  color: #f97316; /* Orange highlight */
+}
+.text-right h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 15px;
+}
+.text-right p {
+  
+  color: #6b7280;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.steps-section {
+  display: flex;
+  justify-content: center;
+  padding: 40px 0;
+  background: #fff;
+}
+
+.steps-container {
+  display: flex;
+  gap: clamp(8px, 3vw, 20px);
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.step-card {
+  background: #f9f9f9;
+  border-radius: 12px;
+  border: 1px solid var(--Gray-50, #DBDEE3);
+box-sizing: border-box;
+  padding: 20px;
+  width: 100%;
+  text-align: center;
+  
+  transition: transform 0.3s ease;
+
+}
+
+.step-card:hover {
+  transform: translateY(-5px);
+}
+
+.step-card h3 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-top: 15px;
+  margin-bottom: 8px;
+  color: #111;
+}
+
+.step-card p {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.5;
+}
+
+.icon {
+  background: #fff;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.icon img {
+  width: 24px;
+  height: 24px;
+}
+
+.step-arrow {
+  font-size: 20px;
+  color: #bbb;
+  margin:auto;
+}
+
+.workon-section {
+  text-align: center;
+  padding: 2rem 0;
+  
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 40px 0;
+}
+
+.section-title::before,
+.section-title::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid #DBDEE3;
+  margin: 0 10px;
+}
+
+.section-title span {
+  font-weight: bold;
+  color: #f37c26; /* Warna oranye */
+  font-size: 18px;
+}
+
+
+.workon-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff5ee;
+  padding: clamp(20px, 4vw, 40px) clamp(16px, 5vw, 60px);
+  border-radius: 12px;
+  box-shadow: 0 9px 16px 0 rgba(0, 0, 0, 0.04), 0 2px 3px 0 rgba(0, 0, 0, 0.10);
+  margin-top: 1rem;
+}
+
+.workon-platforms {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  gap: 32px 90px;
+  font-size: 16px;
+  color: #1e1e1e;
+}
+
+.platform {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.platform img {
+  width: 32px;
+  height: 32px;
+}
+
+.card-container-2-columns{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(12px, 3.5vw, 20px);
+}
+
+.feature-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: min(100%, 430px);
+}
+.feature-grid{
+  display: grid;
+  gap: 0;
+  min-width: min(100%, 430px);
+  grid-template-columns: repeat(2, 1fr);
+}
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+      padding: 8px 0;
+
+  border-bottom: 1px solid #ddd;
+}
+
+.feature-item .icon {
+  width: 28px;
+  height: 28px;
+  background: radial-gradient(circle, #ff9f68 0%, #ffd6b3 100%);
+  border-radius: 50%;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.feature-item .icon::after {
+  content: "✔";
+  position: absolute;
+  color: white;
+  font-size: 14px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: bold;
+}
+
+.feature-item p {
+  font-size: 16px;
+  color: #555;
+  margin: 0;
+}
+
+.authorDetail{
+  color: var(--Dark-50, #8F9097);
+  text-align: center;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 30px; /* 214.286% */
+}
+.review-card h4{
+  font-size: 16px;
+  margin-bottom:0px;
+}
+.free-image{
+  position: absolute;
+  left: 0;
+  bottom: -210px;
+  z-index: -1;
+  width: 45%;
+}
+.free-image img{
+  width: 100%;
+  height: 100%;
+}
+
+ .workon-buttons{
+      display: flex;
+      gap: 10px;
+    }
+@media (max-width: 1024px) {
+
+  section{
+      overflow: hidden;
+      padding: 20px 64px 20px;
+    }
+    .container-card-bottom{
+      gap:8px;
+    }
+
+    .container-bothside{
+          gap: 64px;
+    }
+    .review-card {
+      max-width:340px;
+    }
+    .footer{
+      padding: 200px 64px 50px;
+    }
+    /* keep desktop positioning for tablet (no overrides) */
+    
+    .free-image{
+          width: 50%;
+          bottom:0;
+    }
+}
+  @media (max-width: 768px) {
+
+    section{
+          overflow: hidden;
+          padding:20px;
+    }
+    .feature-list{
+      min-width: 300px;
+    }
+    .container{
+      gap: 32px;
+    }
+    .feature-item{
+            padding-bottom: 8px;
+    }
+    .feature-item p{
+        font-size: 14px;
+
+        line-height: 22px;
+        
+    }
+    .container-card-bottom{
+      gap:8px;
+    }
+
+     .container-bothside{
+          gap: 48px;
+    }
+     .step-card{
+        padding: 8px;
+        width: 100%;
+        }
+    .step-card h3{
+        padding: 8px;
+        font-size: 14px;
+    }
+    .step-card p{
+        
+        font-size: 12px;
+    }
+    .workon-container{
+      padding: 40px 20px;
+    }
+    .workon-platforms{
+          gap: 20px 40px;
+          font-size: 14px;
+    }
+    .workon-buttons{
+      display: flex;
+      gap: 10px;
+    }
+    .review-card{
+      max-width:200px;
+    }
+    .review-card p{
+        font-size: 16px;
+        line-height: 25px;
+    }
+    .review-content{
+          gap: 20px;
+    }
+
+    .text-column{
+      max-width:380px;
+    }
+  }
+
+  @media (max-width: 425px) {
+      section{
+          padding:20px;
+      }
+      .container{
+        display:block;
+      }
+      .center-image, .reverse .center-image{
+        margin: 20px auto;
+        width:100%;
+      }
+      .container-bothside, .container-card-bottom{
+        display:block;
+        text-align:center;
+      }
+      .step-card{
+        margin: 20px auto;
+        padding:32px 12px;
+        width:100%;
+      }
+      .step-arrow{
+        display:none;
+      }
+      .workon-container{
+        display:block;
+        padding:20px;
+                
+      }
+      .workon-buttons a{
+        margin-top: 20px;
+        width:100%;
+      }
+      .review-content{
+        display:block;
+      }
+      .review-card{
+        margin:32px auto;
+        max-width:unset;
+      }
+      .card-container-2-columns{
+        display:block;
+      }
+      /* keep free-image visible on mobile: full width and centered */
+      .free-image{
+        position: relative;
+        left: auto;
+        bottom: auto;
+        z-index: 0;
+        width: 100%;
+        margin: 16px 0 0;
+        display: block;
+      }
+      .free-image img{
+        width: 100%;
+        height: auto;
+      }
+      .margin-top{
+        margin:20px 0 ;
+      }
+     
+  }
+
+  @media (max-width: 320px) {
+    nav, section {
+        padding: 20px 20px;
+    }
+  }
+</style>

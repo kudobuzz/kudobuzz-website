@@ -1,0 +1,181 @@
+---
+import Base from "../../layouts/Base.astro";
+import Navbar from '../../components/Navbar.astro';
+import Footer from "../../components/Footer.astro";
+import Hero from '../../components/Hero.astro';
+import Section from '../../components/Section.astro';
+import AddSpace from "../../components/AddSpace.astro";
+import TrustedBrand from '../../components/TrustedBrand.astro';
+import { menuItems } from "../../data/menuItems.js";
+
+
+export async function getStaticPaths() {
+  // definisikan langsung di dalam fungsi
+  const solutions = menuItems.find((item) => item.label === "Solutions")?.children || [];
+
+  return solutions.map((item) => {
+    const slug = item.link.split("/").pop(); // contoh: "product-reviews"
+    return {
+      params: { slug },
+      props: { solution: item },
+    };
+  });
+}
+
+const { solution } = Astro.props;
+
+
+
+const companyLinks = [
+  { name: "Pricing", url: "#" },
+  { name: "Blogs", url: "#" },
+  { name: "Jobs", url: "#" }
+];
+
+const integrationLinks = [
+  { name: "Developer API", url: "#" },
+  { name: "Developer API", url: "#" },
+];
+
+const resourcesLinks = [
+  { name: "E-Books", url: "#" },
+  { name: "Merchant Stories", url: "#" },
+];
+
+const supportLinks = [
+  { name: "Help Center", url: "#" },
+  { name: "GDPR", url: "#" },
+  { name: "GDPR2", url: "#" },
+  { name: "GDPR3", url: "#" },
+];
+
+const socialLinks = [
+  { icon: "/assets/icons/icon-linkedin.svg", url: "#" },
+  { icon: "/assets/icons/icon-x.svg", url: "#" },
+  { icon: "/assets/icons/icon-youtube.svg", url: "#" },
+  { icon: "/assets/icons/icon-instagram.svg", url: "#" },
+  { icon: "/assets/icons/icon-facebook.svg", url: "#" },
+];
+---
+
+<Base title="Product Reviews — Kudobuzz">
+ <Navbar menuItems={menuItems} />
+ <Hero 
+      tag = "Product Review"
+      title = "Generate & showcase "
+      titlehighlight = "more photo and video reviews."
+      
+      description = "Kudobuzz helps more than 20,000 businesses increase their organic traffic & sales with ratings, photo reviews and social proof." 
+      buttonText1 = "Try Kudobuzz Free" 
+      buttonTextLink1 = "https://kudobuzz.com/"
+      buttonText2 = "Get a Free Demo"
+      buttonTextLink2 = "https://kudobuzz.com/"
+
+      feature1 = "No credit card required"
+      feature2 = "Free plan available"
+      feature3 = "Cancel anytime"
+      imageSrc = "/assets/illustrations/product-reviews-hero1.svg"
+      imageAlt = "Kudobuzz"
+    />
+
+ <Section
+      tag = "Real time authentic reviews"
+      title="Customable "
+      titlehighlight = "Widgets"
+      description = "Sync all existing verified reviews from your social media pages and showcase them on your website to build trust, drive traffic and sales." 
+      imageSrc="/assets/illustrations/product-reviews-kudobuzz-img1.svg"
+      imageAlt="kudobuzz-illustration"
+      layout="right"
+      colorScheme="white"
+      showImage={true}
+      showCheckgrid={true}
+      checkedItems={[
+        {icon: "/assets/icon-check.svg", title: "Onsite"},
+        {icon: "/assets/icon-check.svg", title: "Product"},
+        {icon: "/assets/icon-check.svg", title: "Fullpage"},
+        {icon: "/assets/icon-check.svg", title: "Slider"},
+        {icon: "/assets/icon-check.svg", title: "Star Rating"},  
+        {icon: "/assets/icon-check.svg", title: "Badge"},  
+        {icon: "/assets/icon-check.svg", title: "Checkout"}  
+      ]} 
+   />
+    <AddSpace color="white"/>
+    <TrustedBrand />
+    <AddSpace color="white"/>
+    <AddSpace color="grey"/>
+    <AddSpace color="grey"/>
+    <Section
+      tag = "Auto collect + Mobile friendly"
+      title="Get authentic "
+      titlehighlight = "reviews & ratings."
+      description = "Automatically collect verified reviews by giving your customers a beautiful and mobile friendly reviewing experience." 
+      imageSrc="/assets/illustrations/product-reviews-kudobuzz-img2.svg"
+      imageAlt="kudobuzz-illustration"
+      layout="center"
+      colorScheme="grey"
+      showImage={true}
+      
+   />
+    <AddSpace color="white"/>
+
+     <Section
+      tag = "Growth with visual marketing"
+      title="All your reviews and visual marketing "
+      titlehighlight = "in one place"
+      description = "Grow your brand, organic traffic and sales using social reviews, visual marketing, customer loyalty and SMS marketing." 
+      imageSrc="/assets/illustrations/product-reviews-kudobuzz-img3.svg"
+      imageAlt="kudobuzz-illustration"
+      layout="left"
+      colorScheme="white"
+      showImage={true}
+   />
+
+   <AddSpace color="white"/>
+    <AddSpace color="grey"/>
+    <Section
+      
+      title="Increase sales "
+      titlehighlight = "with trust."
+      description = "Use reviews from past buyers to turn potential buyers into customers, and see an instant increase in your sales." 
+      imageSrc="/assets/illustrations/product-reviews-kudobuzz-img4.svg"
+      imageAlt="kudobuzz-illustration"
+      layout="center"
+      colorScheme="grey"
+      showImage={true}
+      
+   />
+
+    <AddSpace color="white"/>
+    <Section
+      tag = "Auto collect + Mobile friendly"
+      title="Supercharge your "
+      titlehighlight = " reputation and boost conversion."
+      description = "Is an undeniable fact that reviews help boost SEO rankings. However, thanks to Google’s secret algorithms, knowing exactly what to do to leverage them in your SEO strategy is what Kudobuzz does." 
+      imageSrc="/assets/illustrations/product-reviews-kudobuzz-img5.svg"
+      imageAlt="kudobuzz-illustration"
+      layout="bothside"
+      colorScheme="white"
+      showImage={true}
+      
+      showCardsBottom={true}
+      showArrows={false} 
+        cards={[
+          { icon: "/assets/icons/icon-multistar.svg", title: "Showcase Reviews", text: "Showcase reviews on your website to potential customers using different types customizable widgets." },
+          { icon: "/assets/icons/icon-play.svg", title: "Trust Badges", text: "Reviews are labeled with a trust badge, so potential customers know they’re reading real reviews, from real people." },
+          { icon:"/assets/icons/icon-boost.svg", title: "Convert", text: "Automatic & manual moderation tools to keep reviews on your website always fresh and up to date." },
+          // dst...
+        ]}
+        
+
+   />
+<AddSpace color="white"/>
+<AddSpace color="white"/>
+<AddSpace color="white"/>    
+<Footer
+  companyLinks={companyLinks}
+  integrationLinks={integrationLinks}
+  resourcesLinks={resourcesLinks}
+  supportLinks={supportLinks}
+  socialLinks={socialLinks}
+  showBanner={false}/>
+ </Base>

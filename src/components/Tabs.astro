@@ -1,0 +1,61 @@
+---
+const { tabs = [], activeTab = 0 } = Astro.props;
+---
+
+<div class="tabs">
+  {tabs.map((tab, index) => (
+    <button
+      class={`tab ${index === activeTab ? "active" : ""}`}
+      data-index={index}
+    >
+      {tab}
+    </button>
+  ))}
+</div>
+
+<script client:load>
+  const buttons = document.querySelectorAll(".tab");
+  buttons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      buttons.forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+      // TODO: ganti konten sesuai tab (misalnya show/hide section)
+    });
+  });
+</script>
+
+<style>
+.tabs {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  
+      border-bottom: 1px solid #e6e6e6;
+    padding: 20px 0;
+}
+
+.tab {
+  background: none;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0.6rem 1.5rem;
+  border-radius: 9999px;
+  transition: background 0.25s ease, color 0.25s ease, transform 0.15s ease, box-shadow 0.25s ease;
+  color: #8F9097;
+  
+}
+
+.tab.active {
+  background: #f2f2f5;
+  color: #EE8E39;
+  transform: translateY(-1px);
+  
+}
+
+@media (max-width: 768px) {{
+
+  
+}
+</style>

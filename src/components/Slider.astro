@@ -1,0 +1,118 @@
+---
+const { steps = [] } = Astro.props;
+let totalSteps = steps.length;
+---
+
+<div class="slider">
+  <div class="slider-content">
+    {steps.map((step, index) => (
+      <div class="slide" data-index={index} aria-hidden={index !== 0}>
+        <img src={step.image} alt={step.title} class="slide-image" loading="lazy" decoding="async" />
+        <p class="slide-text">{step.text}</p>
+      </div>
+    ))}
+  </div>
+
+  <div class="slider-controls">
+    <button class="prev" aria-label="Previous">&lt;</button>
+    <div class="dots">
+      {steps.map((_, i) => (
+        <span class="dot" data-index={i}></span>
+      ))}
+    </div>
+    <button class="next" aria-label="Next">&gt;</button>
+  </div>
+
+  <div class="step-indicator">
+    Step <span id="step-current">1</span> of {totalSteps}
+  </div>
+</div>
+
+<script client:load>
+  const slides = document.querySelectorAll(".slide");
+  const dots = document.querySelectorAll(".dot");
+  const prevBtn = document.querySelector(".prev");
+  const nextBtn = document.querySelector(".next");
+  const stepCurrent = document.getElementById("step-current");
+
+  let current = 0;
+
+  function showSlide(index) {
+    slides.forEach((slide, i) => {
+      slide.setAttribute("aria-hidden", i !== index);
+    });
+    dots.forEach((dot, i) => {
+      dot.classList.toggle("active", i === index);
+    });
+    stepCurrent.textContent = index + 1;
+    current = index;
+  }
+
+  prevBtn.addEventListener("click", () => {
+    showSlide((current - 1 + slides.length) % slides.length);
+  });
+  nextBtn.addEventListener("click", () => {
+    showSlide((current + 1) % slides.length);
+  });
+  dots.forEach(dot => {
+    dot.addEventListener("click", () => {
+      showSlide(Number(dot.dataset.index));
+    });
+  });
+
+  showSlide(0);
+</script>
+
+<style>
+.slider {
+  max-width: 500px;
+  margin: 0 auto;
+  text-align: center;
+}
+.slide {
+  display: none; /* <-- sembunyikan semua slide */
+}
+.slide[aria-hidden="false"] {
+  display: block; /* <-- tampilkan hanya yang aktif */
+}
+.slide-image {
+  max-width: 100%;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+}
+.slide-text {
+  font-size: 1rem;
+  margin-top: 0.5rem;
+}
+.slider-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.prev, .next {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+.dots {
+  display: flex;
+  gap: 0.5rem;
+}
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ccc;
+  cursor: pointer;
+}
+.dot.active {
+  background: orange;
+}
+.step-indicator {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+}
+</style>

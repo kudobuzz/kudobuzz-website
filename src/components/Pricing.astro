@@ -1,0 +1,549 @@
+---
+import Tabs from "./Tabs.astro";
+
+const { tabs = [], plansByTab = {}, activeTab = 0 } = Astro.props;
+---
+
+<div class="pricing-component">
+  <Tabs tabs={tabs} activeTab={activeTab} />
+
+  <!-- Billing toggle -->
+  <div class="billing-toggle">
+    <span class="label">Monthly</span>
+    <label class="switch">
+      <input id="billingSwitch" type="checkbox" />
+      <span class="slider"></span>
+    </label>
+    <span class="label">Yearly</span>
+  </div>
+
+  <!-- Cards per tab -->
+  <div class="pricing-content">
+    {tabs.map((tab, tabIndex) => {
+      const plans = (plansByTab[tab] || []);
+      return (
+        <div
+          class="pricing-wrapper"
+          data-tab={tabIndex}
+          style={`display: ${tabIndex === activeTab ? "grid" : "none"}`}
+        >
+          {plans.map((plan, idx) => (
+            <article class="pricing-card" key={idx}>
+              <div class="card-header">
+                <h4 class="plan-title">{plan.title}</h4>
+
+                {plan.oldPrice ? (
+                  <div class="old-price">${plan.oldPrice}</div>
+                ) : null}
+
+                <div
+                  class="price"
+                  data-monthly={plan.monthlyPrice ?? ""}
+                  data-yearly={plan.yearlyPrice ?? ""}
+                >
+                  <span class="amount">${plan.monthlyPrice ?? plan.price ?? ""}</span>
+                  <span class="per">per month</span>
+                </div>
+
+                {plan.description ? <p class="subtitle">{plan.description}</p> : null}
+                {plan.packageName ? <div class="package">{plan.packageName}</div> : null}
+                {plan.buttonText ? (
+                  <a class="btn-primary" href={plan.buttonLink ?? "#"}>{plan.buttonText}</a>
+                ) : null}
+              </div>
+
+              <div class="card-body">
+                {plan.featureHeading ? (
+                  <h5 class="features-heading">{plan.featureHeading}</h5>
+                ) : (
+                  <h5 class="features-heading">Features</h5>
+                )}
+                <ul class="features">
+                  {(plan.features || []).map((f, i) => (
+                    <li key={i}>
+                      {f}
+                      <img src="/assets/icon-check.svg" width="20" height="20" loading="lazy" decoding="async" />
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div class="card-footer">
+                <a class="see-all" href="#" data-tab={tabIndex}>See All Features</a>
+              </div>
+            </article>
+          ))}
+        </div>
+      );
+    })}
+  </div>
+
+  <!-- Modal per-tab -->
+  {tabs.map((tab, tabIndex) => (
+    <div class="modal-overlay" id={`modal-${tabIndex}`} key={tabIndex}>
+      <div class="modal-content">
+        <!-- Header -->
+        <div class="modal-header">
+          <div class="compare-header">
+            <div class="header-feature">
+              <span class="badge">{tab}</span>
+              <div class="sub">Monthly Plan</div>
+            </div>
+            <div class="header-plan" data-col="0">
+              <div class="plan-name">—</div>
+              <div class="plan-sub">Students Package</div>
+              <a class="btn-primary btn-sm" href="#" style="display:none">CTA</a>
+            </div>
+            <div class="header-plan" data-col="1">
+              <div class="plan-name">—</div>
+              <div class="plan-sub" style="display:none"></div>
+              <a class="btn-primary btn-sm" href="#">Sign Up Free</a>
+            </div>
+            <div class="header-plan" data-col="2">
+              <div class="plan-name">—</div>
+              <div class="plan-sub" style="display:none"></div>
+              <a class="btn-primary btn-sm" href="#">Sign Up Free</a>
+            </div>
+          </div>
+          <button class="modal-close" data-tab={tabIndex}>✕</button>
+        </div>
+
+        <!-- Body -->
+        <div class="modal-body"></div>
+      </div>
+    </div>
+  ))}
+</div>
+
+<script client:load>
+(function() {
+  const root = document.currentScript.parentElement;
+  if (!root) return;
+
+  const tabButtons = root.querySelectorAll(".tab");
+  const wrappers = root.querySelectorAll(".pricing-wrapper");
+  const billingSwitch = root.querySelector("#billingSwitch");
+  const priceEls = root.querySelectorAll(".price");
+
+  /* TAB switching */
+  tabButtons.forEach((btn, index) => {
+    btn.addEventListener("click", () => {
+      tabButtons.forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+
+      wrappers.forEach((wrap, i) => {
+        wrap.style.display = i === index ? "grid" : "none";
+      });
+    });
+  });
+
+  /* Billing toggle */
+  function updatePrices(yearly) {
+    priceEls.forEach(el => {
+      const monthly = el.dataset.monthly ?? "";
+      const yearlyPric = el.dataset.yearly ?? "";
+      const amountEl = el.querySelector(".amount");
+      const perEl = el.querySelector(".per");
+      if (!amountEl || !perEl) return;
+
+      if (yearly && yearlyPric) {
+        amountEl.textContent = yearlyPric;
+        perEl.textContent = "Per Year";
+      } else {
+        amountEl.textContent = monthly || yearlyPric || amountEl.textContent;
+        perEl.textContent = "Per Month";
+      }
+    });
+  }
+  if (billingSwitch) {
+    billingSwitch.addEventListener("change", e => updatePrices(e.target.checked));
+  }
+  updatePrices(false);
+
+  /* Modal handling */
+  root.querySelectorAll(".see-all").forEach(btn => {
+    btn.addEventListener("click", e => {
+      e.preventDefault();
+      const tabIndex = btn.dataset.tab;
+      const modal = root.querySelector(`#modal-${tabIndex}`);
+      if (!modal) return;
+
+      // Sync modal header plans with visible cards
+      const wrap = root.querySelector(`.pricing-wrapper[data-tab='${tabIndex}']`);
+      const cards = wrap ? Array.from(wrap.querySelectorAll('.pricing-card')) : [];
+      const header = modal.querySelector('.modal-header .compare-header');
+      const headerPlans = header ? header.querySelectorAll('.header-plan') : [];
+      headerPlans.forEach((hp, i) => {
+        const card = cards[i];
+        if (!card) return;
+        const title = card.querySelector('.plan-title')?.textContent?.trim() || '';
+        const pkg = card.querySelector('.package')?.textContent?.trim() || '';
+        const btnEl = card.querySelector('.btn-primary, .btn-outline');
+        const nameEl = hp.querySelector('.plan-name');
+        const subEl = hp.querySelector('.plan-sub');
+        const ctaEl = hp.querySelector('a.btn-primary, a.btn-outline');
+        if (nameEl) nameEl.textContent = title;
+        if (pkg && subEl) { subEl.textContent = pkg; subEl.style.display = 'block'; }
+        else if (subEl) { subEl.style.display = 'none'; }
+        if (ctaEl) {
+          if (btnEl) {
+            ctaEl.textContent = btnEl.textContent.trim() || 'Sign Up Free';
+            ctaEl.href = btnEl.getAttribute('href') || '#';
+            ctaEl.style.display = 'inline-block';
+          } else {
+            ctaEl.style.display = 'none';
+          }
+        }
+      });
+
+      const body = modal.querySelector(".modal-body");
+      body.innerHTML = `
+        <div class="feature-compare">
+          <div class="feature-group">
+            <div class="group-title">Collect Social Reviews</div>
+            <table class="feature-table">
+              <colgroup>
+                <col style="width:32%" />
+                <col style="width:22.666%" />
+                <col style="width:22.666%" />
+                <col style="width:22.666%" />
+              </colgroup>
+              <tbody>
+                <tr>
+                  <th>Social Reviews</th>
+                  <td>1 Facebook Page</td>
+                  <td>Unlimited Accounts</td>
+                  <td>Unlimited Accounts</td>
+                </tr>
+                <tr>
+                  <th>Collect Photo</th>
+                  <td>1 Facebook Page</td>
+                  <td><span class="check-circle"><img src="/assets/icon-check.svg" alt="check" /></span></td>
+                  <td><span class="check-circle"><img src="/assets/icon-check.svg" alt="check" /></span></td>
+                </tr>
+                <tr>
+                  <th>Collect Video</th>
+                  <td></td>
+                  <td><span class="check-circle"><img src="/assets/icon-check.svg" alt="check" /></span></td>
+                  <td><span class="check-circle"><img src="/assets/icon-check.svg" alt="check" /></span></td>
+                </tr>
+                <tr>
+                  <th>Collect Q&A</th>
+                  <td></td>
+                  <td><span class="check-circle"><img src="/assets/icon-check.svg" alt="check" /></span></td>
+                  <td><span class="check-circle"><img src="/assets/icon-check.svg" alt="check" /></span></td>
+                </tr>
+                <tr>
+                  <th>Allowed Social Accounts</th>
+                  <td>1 Facebook Page</td>
+                  <td>Unlimited Accounts</td>
+                  <td>Unlimited Accounts</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="feature-group">
+            <div class="group-title">Collect Reviews</div>
+            <table class="feature-table">
+              <colgroup>
+                <col style="width:32%" />
+                <col style="width:22.666%" />
+                <col style="width:22.666%" />
+                <col style="width:22.666%" />
+              </colgroup>
+              <tbody>
+                <tr>
+                  <th>Offline Reviews</th>
+                  <td><span class="check-circle"><img src="/assets/icon-check.svg" alt="check" /></span></td>
+                  <td><span class="check-circle"><img src="/assets/icon-check.svg" alt="check" /></span></td>
+                  <td><span class="check-circle"><img src="/assets/icon-check.svg" alt="check" /></span></td>
+                </tr>
+                <tr>
+                  <th>After Purchase Reviews</th>
+                  <td>10 Orders / Month</td>
+                  <td>500 Orders / Month</td>
+                  <td>3000 Orders / Month</td>
+                </tr>
+                <tr>
+                  <th>Campaigns</th>
+                  <td></td>
+                  <td><span class="check-circle"><img src="/assets/icon-check.svg" alt="check" /></span></td>
+                  <td><span class="check-circle"><img src="/assets/icon-check.svg" alt="check" /></span></td>
+                </tr>
+                <tr>
+                  <th>Advance Customization</th>
+                  <td><span class="check-circle"><img src="/assets/icon-check.svg" alt="check" /></span></td>
+                  <td><span class="check-circle"><img src="/assets/icon-check.svg" alt="check" /></span></td>
+                  <td><span class="check-circle"><img src="/assets/icon-check.svg" alt="check" /></span></td>
+                </tr>
+                <tr>
+                  <th>Import Reviews (CSV)</th>
+                  <td><span class="check-circle"><img src="/assets/icon-check.svg" alt="check" /></span></td>
+                  <td><span class="check-circle"><img src="/assets/icon-check.svg" alt="check" /></span></td>
+                  <td><span class="check-circle"><img src="/assets/icon-check.svg" alt="check" /></span></td>
+                </tr>
+                <tr>
+                  <th>Edit Review Request Email</th>
+                  <td><span class="check-circle"><img src="/assets/icon-check.svg" alt="check" /></span></td>
+                  <td><span class="check-circle"><img src="/assets/icon-check.svg" alt="check" /></span></td>
+                  <td><span class="check-circle"><img src="/assets/icon-check.svg" alt="check" /></span></td>
+                </tr>
+                <tr>
+                  <th>Review Request Translation</th>
+                  <td><span class="check-circle"><img src="/assets/icon-check.svg" alt="check" /></span></td>
+                  <td><span class="check-circle"><img src="/assets/icon-check.svg" alt="check" /></span></td>
+                  <td><span class="check-circle"><img src="/assets/icon-check.svg" alt="check" /></span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      `;
+
+      modal.style.display = "flex";
+    });
+  });
+
+  root.querySelectorAll(".modal-close").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const tabIndex = btn.dataset.tab;
+      const modal = root.querySelector(`#modal-${tabIndex}`);
+      if (modal) modal.style.display = "none";
+    });
+  });
+})();
+</script>
+
+<style>
+.pricing-component { max-width: 1200px; margin: 0 auto; padding: 40px 24px; box-sizing: border-box; }
+
+/* Billing toggle */
+.billing-toggle {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:1rem;
+  margin: 32px;
+  font-weight: 700;
+}
+.billing-toggle .label { color:#444; font-size:0.95rem; }
+
+/* Switch */
+.switch { position: relative; width:46px; height:24px; display:inline-block; }
+.switch input { opacity:0; width:0; height:0; }
+.slider { position:absolute; inset:0; background:#ddd; border-radius:999px; transition:.25s }
+.slider::before { content:""; position:absolute; left:3px; top:3px; width:18px; height:18px; background:#fff; border-radius:50%; transition:.25s; }
+.switch input:checked + .slider { background:#f28c38; }
+.switch input:checked + .slider::before { transform: translateX(22px); }
+
+/* Grid wrapper */
+.pricing-wrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(12px, 3vw, 16px);
+  margin-top: 12px;
+}
+
+/* Card (outer) */
+.pricing-card {
+  padding:20px;
+  border: 1px solid #e6e6e6;
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 520px;
+  background: #fff;
+  transition: transform .15s ease, box-shadow .2s ease, border-color .2s ease;
+}
+
+/* header area (light peach) */
+.card-header {
+    padding: 20px;
+    
+    background: #FDF4EB;
+    border-radius: 10px;
+    text-align: center;
+    min-height:320px;
+}
+.plan-title {
+      color: #e08944;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: .6px;
+    margin: 20px 0 30px;
+    font-size: 20px;
+}
+.old-price { color:#777; font-size:0.85rem; text-decoration:line-through; margin-bottom: 8px; }
+.price { font-weight:900; font-size: 30px; margin: 6px 0; }
+.price .amount { font-size: 32px; }
+.price .per { display:block; font-size: 0.85rem; font-weight:600; color:#333; margin-top:6px; }
+.subtitle { 
+       color: #444;
+    font-size: 14px;
+    
+    line-height: 20px;
+    
+    max-width: 180px;
+    margin: 30px auto;
+}
+.package { color:#c7bdb6; font-weight:700; margin-top:12px; }
+
+/* CTA */
+.btn {
+  display:inline-block;
+  background:#e08944;
+  color:white;
+  padding:10px 22px;
+  border-radius:24px;
+  text-decoration:none;
+  font-weight:700;
+  margin-top: 10px;
+}
+
+/* body */
+.card-body {  flex:1; }
+.features-heading { font-size:16px; font-weight:800; margin-bottom: 10px; }
+.features { list-style:none; padding:0; margin:0; }
+.features li { 
+  border-bottom: 1px solid #f2f2f2;
+  font-size: 14px;; padding: 8px 0;  display:flex; justify-content:space-between; align-items:center; }
+
+.features li:last-child { border-bottom: 0;}  
+.features li .dot-icon { background: #fff1e6; border:2px solid #e89a5a; color:#e08944; border-radius:50%; width:28px; height:28px; display:inline-flex; align-items:center; justify-content:center; font-weight:700; }
+.features li img{
+  width:32px;
+}
+/* footer */
+.card-footer { padding: 18px 0 0; border-top:1px solid #f2f2f2; text-align:center; margin-top: 20px; }
+.see-all { color:#e08944; font-weight:800; text-decoration:none; }
+
+.pricing-card:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(0,0,0,0.08); border-color: #f0f0f0; }
+
+
+/* Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Modal box */
+.modal-content {
+  background: #fff;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 1100px;
+  max-height: 90vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  position: relative;
+}
+
+/* Header sticky */
+.modal-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: #fff;
+  padding: 1rem 2rem 0.5rem;
+  border-bottom: 1px solid #eee;
+}
+.modal-header .compare-header { }
+.modal-header .btn.small { margin-top: 6px; }
+
+/* Close button */
+.modal-close {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  background: transparent;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+  color: #666;
+  transition: color 0.2s ease;
+}
+.modal-close:hover {
+  color: #000;
+}
+
+/* Body scroll */
+.modal-body {
+  padding: 1.5rem 2rem;
+  overflow-y: auto;
+}
+
+/* ===== Compare header (modal) ===== */
+.modal-header .compare-header {
+  display: grid;
+  grid-template-columns: 32% 1fr 1fr 1fr;
+  align-items: start;
+  gap: 0;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  
+}
+.modal-header .compare-header .header-feature { display: block; }
+.modal-header .compare-header .badge { background: #EAEBEE; color: #5b5c62; font-weight: 700; padding: 8px 12px; border-radius: 999px; font-size: 13px; display: inline-block; }
+.modal-header .compare-header .sub { color: #8F9097; font-weight: 700; font-size: 14px;     margin: 8px 10px; }
+.modal-header .compare-header .header-plan { text-align: center; }
+.modal-header .compare-header .plan-name { color: #e08944; font-weight: 800; letter-spacing: .6px; text-transform: uppercase; margin-bottom:8px; }
+.modal-header .compare-header .plan-sub { color: #b4aba4; font-weight: 600; margin-top: 8px; }
+.modal-header .compare-header .btn.small { /* deprecated; kept for backward compatibility */ }
+
+/* ===== Feature Compare Table in Modal ===== */
+.feature-compare { display: grid; gap: 18px; }
+.feature-group { border-radius: 12px; }
+.group-title {
+  background: #EAEBEE;
+  color: #5b5c62;
+  font-weight: 700;
+  padding: 12px 16px;
+  border: 1px solid #e6e6e6;
+  border-bottom: 0;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+.feature-table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid #e6e6e6;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  background: #fff;
+}
+.feature-table th, .feature-table td { padding: 14px 16px; border-top: 1px solid #efefef; }
+.feature-table tr:first-child th, .feature-table tr:first-child td { border-top: 0; }
+.feature-table th { text-align: left; font-weight: 600; color: #333; }
+.feature-table td { text-align: center; color: #555; }
+.feature-table td + td { border-left: 1px solid #efefef; }
+
+.check-circle { display:inline-flex; justify-content:center; align-items:center; width:22px; height:22px; border-radius:50%; border:2px solid #e08944; background:#fff1e6; }
+.check-circle img { width: 12px; height: 12px; }
+
+/* responsive */
+@media (max-width: 1048px) {
+  .pricing-wrapper { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) {
+  .pricing-wrapper { grid-template-columns: 1fr; gap: 8px; }
+  .billing-toggle { gap: .5rem; }
+  .pricing-card{ padding: 12px; }
+}
+
+
+</style>
