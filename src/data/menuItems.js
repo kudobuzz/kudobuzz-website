@@ -29,6 +29,6 @@ export const menuItems = [
         ]
     },
     { label: "Pricing", link: "/pricing" },
-    { label: "Blog", link: "/blog" },
-    { label: "Get Help", link: "/help" }
+    { label: "Blog", link: "https://blog.kudobuzz.com/", target: "_blank" },
+    { label: "Get Help", link: "https://support.kudobuzz.com/en/", target: "_blank" }
 ];

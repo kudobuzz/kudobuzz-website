@@ -18,13 +18,24 @@ import { menuItems } from "../data/menuItems.js";
   <ul class="navbar-menu">
     {menuItems.map((item) => (
       <li class={item.children ? "has-dropdown" : ""}>
-        <a href={item.link ?? "#"}>{item.label}</a>
+        <a
+          href={item.link ?? "#"}
+          target={item.target}
+          rel={item.target === "_blank" ? "noopener noreferrer" : undefined}
+        >
+          {item.label}
+        </a>
 
         {item.children && (
           <div class="dropdown">
             <div class="dropdown-grid">
               {item.children.map((child) => (
-                <a href={child.link ?? "#"} class="dropdown-item">
+                <a
+                  href={child.link ?? "#"}
+                  target={child.target}
+                  rel={child.target === "_blank" ? "noopener noreferrer" : undefined}
+                  class="dropdown-item"
+                >
                   {child.icon && <img src={child.icon} alt={child.title} loading="lazy" decoding="async" width="40" height="40" />}
                   <div>
                     <h4>{child.title}</h4>
@@ -56,12 +67,24 @@ import { menuItems } from "../data/menuItems.js";
               <div class="mobile-group-title">{item.label}</div>
               <div class="mobile-group-links">
                 {item.children.map((child) => (
-                  <a href={child.link ?? "#"}>{child.title}</a>
+                  <a
+                    href={child.link ?? "#"}
+                    target={child.target}
+                    rel={child.target === "_blank" ? "noopener noreferrer" : undefined}
+                  >
+                    {child.title}
+                  </a>
                 ))}
               </div>
             </div>
           ) : (
-            <a href={item.link ?? "#"}>{item.label}</a>
+            <a
+              href={item.link ?? "#"}
+              target={item.target}
+              rel={item.target === "_blank" ? "noopener noreferrer" : undefined}
+            >
+              {item.label}
+            </a>
           )}
         </li>
       ))}
@@ -139,6 +162,9 @@ import { menuItems } from "../data/menuItems.js";
   justify-content: space-between;
   align-items: center;
   padding: 16px var(--page-padding);
+  width: min(100%, var(--container-max));
+  margin: 0 auto;
+  box-sizing: border-box;
 }
 .navbar-logo img { width: 160px; }
 

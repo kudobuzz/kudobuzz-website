@@ -1,0 +1,124 @@
+---
+import Base from "../layouts/Base.astro";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+import LegalPage from "../components/LegalPage.astro";
+import { menuItems } from "../data/menuItems.js";
+import { footerLinks } from "../data/footerLinks.js";
+import AddSpace from "../components/AddSpace.astro";
+
+const {
+  branding,
+  columns,
+  advancedTitle,
+  advancedColumns,
+  social: socialLinks,
+  bottom,
+} = footerLinks;
+---
+
+<Base title="Privacy Policy — Kudobuzz">
+  <Navbar menuItems={menuItems} />
+
+  <LegalPage title="Privacy Policy">
+    <Fragment slot="intro">
+      <p>
+        This Privacy Policy explains how Kudobuzz collects, uses, and shares information when you
+        access or use our websites, products, and services. By using Kudobuzz you agree to the
+        practices described below.
+      </p>
+    </Fragment>
+
+    <section class="legal-section">
+      <h2>1. Information We Collect</h2>
+      <p>
+        We collect information you provide directly to us such as account details, profile data,
+        billing information, and any content you choose to upload to Kudobuzz. We also automatically
+        collect certain technical information including device data, log files, cookies, and usage
+        analytics that help us keep the service secure and improve performance.
+      </p>
+      <p>
+        When you connect third-party services—like e‑commerce platforms or social networks—we may
+        receive additional information from those services as permitted by their terms and the
+        permissions you grant.
+      </p>
+    </section>
+
+    <section class="legal-section">
+      <h2>2. How We Use Information</h2>
+      <p>We use collected information to:</p>
+      <ul>
+        <li>Provide, maintain, and customise the Kudobuzz platform and customer experience.</li>
+        <li>Process payments, fulfil support requests, and communicate important updates.</li>
+        <li>Monitor and protect the security, integrity, and availability of our services.</li>
+        <li>Develop new features and analyse product performance using aggregated data.</li>
+        <li>Comply with legal obligations and enforce our agreements.</li>
+      </ul>
+    </section>
+
+    <section class="legal-section">
+      <h2>3. Sharing & Disclosure</h2>
+      <p>
+        We do not sell your personal information. We may share data with trusted vendors that help us
+        operate Kudobuzz (for example, hosting providers, payment processors, or analytics tools)
+        under strict confidentiality agreements. We may also disclose information if required by law,
+        to protect our rights, or in connection with a merger, acquisition, or sale of assets.
+      </p>
+    </section>
+
+    <section class="legal-section">
+      <h2>4. Data Retention & Security</h2>
+      <p>
+        We retain personal information for as long as necessary to deliver our services and satisfy
+        legal requirements. Data is stored using industry-standard security controls including
+        encryption in transit, strict access policies, continuous monitoring, and regular backups.
+      </p>
+    </section>
+
+    <section class="legal-section">
+      <h2>5. Your Rights</h2>
+      <p>
+        Depending on your location you may have rights to access, correct, delete, or export your
+        personal data, as well as to object to certain processing activities. You can exercise these
+        rights by contacting us at <a href="mailto:privacy@kudobuzz.com">privacy@kudobuzz.com</a>.
+      </p>
+    </section>
+
+    <section class="legal-section">
+      <h2>6. International Transfers</h2>
+      <p>
+        Kudobuzz is a global service. When we transfer personal data to other countries we rely on
+        recognised safeguards such as Standard Contractual Clauses to ensure your information remains
+        protected.
+      </p>
+    </section>
+
+    <section class="legal-section">
+      <h2>7. Changes To This Policy</h2>
+      <p>
+        We may update this Privacy Policy from time to time. Any material changes will be announced
+        through the Kudobuzz dashboard or by email. Continued use of the service after an update
+        constitutes acceptance of the revised policy.
+      </p>
+    </section>
+
+    <section class="legal-section">
+      <h2>8. Contact</h2>
+      <p>
+        If you have questions about this Privacy Policy or our data practices, contact us at
+        <a href="mailto:privacy@kudobuzz.com">privacy@kudobuzz.com</a> or write to Kudobuzz, Inc.
+        2055 Limestone Rd, Suite 200, Wilmington, DE 19808, USA.
+      </p>
+    </section>
+  </LegalPage>
+ <AddSpace color="white" />
+  <AddSpace color="white" />
+  <Footer
+    branding={branding}
+    columns={columns}
+    advancedTitle={advancedTitle}
+    advancedColumns={advancedColumns}
+    socialLinks={socialLinks}
+    bottom={bottom}
+  />
+</Base>

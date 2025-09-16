@@ -1,0 +1,87 @@
+---
+interface Props {
+  title: string;
+  updated?: string;
+  intro?: string;
+}
+
+const {
+  title,
+  updated = "Updated September 2024",
+  intro,
+} = Astro.props;
+---
+
+<main class="legal-page">
+  <header>
+    {updated && <p class="eyebrow" style="padding:0px;">{updated}</p>}
+    <h1>{title}</h1>
+    {intro && <p>{intro}</p>}
+    <slot name="intro" />
+  </header>
+  <slot />
+</main>
+
+<style>
+
+.legal-page {
+  width: min(100%, 960px);
+  margin: 0 auto;
+  padding: clamp(16px, 2.2vw, 24px) var(--page-padding);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(10px, 2vw, 16px);
+  color: #1f2937;
+}
+
+
+
+.legal-page header {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.legal-page .eyebrow {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #f28c38;
+}
+
+.legal-page h1 {
+  font-size: clamp(36px, 5vw, 48px);
+  margin: 0;
+}
+
+
+.legal-section + .legal-section {
+  margin-top: clamp(10px, 1.6vw, 16px);
+}
+
+
+
+.legal-section p,
+.legal-section li {
+  font-size: 16px;
+  line-height: 1.7;
+  color: #4b5563;
+}
+
+.legal-section ul {
+  padding-left: 20px;
+  margin: 0;
+}
+
+.legal-section ul li + li {
+  margin-top: 8px;
+}
+
+@media (max-width: 650px) {
+  .legal-page {
+    padding: clamp(12px, 4vw, 20px) var(--page-padding);
+    gap: 12px;
+  }
+}
+</style>

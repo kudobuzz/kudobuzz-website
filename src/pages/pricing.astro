@@ -1,11 +1,11 @@
 ---
 import Navbar from '../components/Navbar.astro';
-import Hero from '../components/Hero.astro';
-import TrustedBrand from '../components/TrustedBrand.astro';
 import Section from '../components/Section.astro';
 import Footer from "../components/Footer.astro";
 import AddSpace from "../components/AddSpace.astro";
 import Pricing from "../components/Pricing.astro";
+import Base from "../layouts/Base.astro";
+import { footerLinks } from "../data/footerLinks.js";
 
 
 const menuItems = [
@@ -43,145 +43,124 @@ const menuItems = [
   { label: "Get Help", link: "/help" }
 ];
 
-const companyLinks = [
-  { name: "Pricing", url: "#" },
-  { name: "Blogs", url: "#" },
-  { name: "Jobs", url: "#" }
-];
-
-const integrationLinks = [
-  { name: "Developer API", url: "#" },
-  { name: "Developer API", url: "#" },
-];
-
-const resourcesLinks = [
-  { name: "E-Books", url: "#" },
-  { name: "Merchant Stories", url: "#" },
-];
-
-const supportLinks = [
-  { name: "Help Center", url: "#" },
-  { name: "GDPR", url: "#" },
-  { name: "GDPR2", url: "#" },
-  { name: "GDPR3", url: "#" },
-];
-
-const socialLinks = [
-  { icon: "/assets/icons/icon-linkedin.svg", url: "#" },
-  { icon: "/assets/icons/icon-x.svg", url: "#" },
-  { icon: "/assets/icons/icon-youtube.svg", url: "#" },
-  { icon: "/assets/icons/icon-instagram.svg", url: "#" },
-  { icon: "/assets/icons/icon-facebook.svg", url: "#" },
-];
+const {
+  branding,
+  columns,
+  advancedTitle,
+  advancedColumns,
+  social: socialLinks,
+  bottom,
+} = footerLinks;
 ---
+<Base title="Pricing — Kudobuzz">
+  <Navbar menuItems={menuItems} />
+  <AddSpace color="white" />
 
-<html lang="en">
-  <head>
-  
+  <Section
+    tag="Pricing"
+    title="Choose a plan and "
+    titlehighlight="grow your business effortlessly"
+    layout="center"
+    colorScheme="white"
+  />
 
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kudobuzz Clone</title>
-  </head>
-  <body>
-    
-    <Navbar menuItems={menuItems} />
-    <AddSpace color="white"/>
-    <Section
-      tag="Pricing"
-      title="Choose a plan and "
-      titlehighlight = "grow your business effortlessly"
-      
-      layout="center"
-      colorScheme="white"
-    />
-
-   <Pricing
-  tabs={[
-    "Product & Social Reviews",
-    "UGC & Shoppable Videos",
-    "CRO"
-  ]}
-  plansByTab={
-    
-    {
-      "Product & Social Reviews": [
-        {
-          title: "Coffee",
-          monthlyPrice: "0",
-          yearlyPrice: "0",
-          oldPrice: "20",
-          description: "For students who are learn new experience",
-          packageName: "",
-          buttonText: "Sign Up Free",
-          buttonLink: "#",
-          features: ["Import Facebook Reviews", "10 Monthly Review Request", "Published 10 Reviews", "Checkout Reviews"],
-          moreLink: "#",
-
-          allFeatures: {
-            groups: [
-              {
-                title: "Collect Social Reviews",
-                rows: [
-                  ["Social Reviews", "1 Facebook Page", "Unlimited Accounts", "Unlimited Accounts"],
-                  ["Collect Photo", "1 Facebook Page", "✔", "✔"],
-                ]
-              }
-            ]
+  <Pricing
+    tabs={[
+      "Product & Social Reviews",
+      "UGC & Shoppable Videos",
+      "CRO"
+    ]}
+    plansByTab={
+      {
+        "Product & Social Reviews": [
+          {
+            title: "Coffee",
+            monthlyPrice: "0",
+            yearlyPrice: "0",
+            oldPrice: "20",
+            description: "For students who are learn new experience",
+            packageName: "",
+            buttonText: "Sign Up Free",
+            buttonLink: "#",
+            features: ["Import Facebook Reviews", "10 Monthly Review Request", "Published 10 Reviews", "Checkout Reviews"],
+            moreLink: "#",
+            allFeatures: {
+              groups: [
+                {
+                  title: "Collect Social Reviews",
+                  rows: [
+                    ["Social Reviews", "1 Facebook Page", "Unlimited Accounts", "Unlimited Accounts"],
+                    ["Collect Photo", "1 Facebook Page", "✔", "✔"]
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            title: "Lunch",
+            monthlyPrice: "99.9",
+            yearlyPrice: "999",
+            oldPrice: "399.9",
+            description: "For small companies who are gaining momentum",
+            packageName: "",
+            buttonText: "Sign Up Free",
+            buttonLink: "#",
+            features: [
+              "Import AliExpress Reviews",
+              "1500 Monthly Review Request",
+              "Published 500 Reviews",
+              "Photo Reviews",
+              "Google Product Richsnippet",
+              "Customer Loyalty",
+              "Advance Customization"
+            ],
+            moreLink: "#"
+          },
+          {
+            title: "Dinner",
+            monthlyPrice: "399.9",
+            yearlyPrice: "3999",
+            oldPrice: "499.9",
+            description: "For enterprise & large merchants",
+            packageName: "",
+            buttonText: "Sign Up Free",
+            buttonLink: "#",
+            features: [
+              "Import Etsy Reviews",
+              "3000 Monthly Review Request",
+              "Published 1000 Reviews",
+              "Video Reviews",
+              "Google Seller Ratings",
+              "Domain Branding",
+              "API Access"
+            ],
+            moreLink: "#"
           }
-        },
-        {
-          title: "Lunch",
-          monthlyPrice: "99.9",
-          yearlyPrice: "999",
-          oldPrice: "399.9",
-          description: "For small companies who are gaining momentum",
-          packageName: "",
-          buttonText: "Sign Up Free",
-          buttonLink: "#",
-          features: ["Import AliExpress Reviews", "1500 Monthly Review Request", "Published 500 Reviews", "Photo Reviews", "Google Product Richsnippet", "Customer Loyalty", "Advance Customization"],
-          moreLink: "#"
-        },
-        {
-          title: "Dinner",
-          monthlyPrice: "399.9",
-          yearlyPrice: "3999",
-          oldPrice: "499.9",
-          description: "For enterprise & large merchants",
-          packageName: "",
-          buttonText: "Sign Up Free",
-          buttonLink: "#",
-          features: ["Import Etsy Reviews", "3000 Monthly Review Request", "Published 1000 Reviews", "Video Reviews", "Google Seller Ratings", "Domain Branding", "API Access"],
-          moreLink: "#"
-        }
-      ],
-      "UGC & Shoppable Videos": [
-        // 3 different cards for UGC tab (must provide 3 objects)
-        { title: "UGC Basic", monthlyPrice: "15", yearlyPrice: "150", description: "UGC starter", features: ["UGC uploads", "Shoppable links"], buttonText: "Try Now", buttonLink:"#", moreLink:"#"},
-        { title: "UGC Pro", monthlyPrice: "39", yearlyPrice: "390", description: "More uploads & analytics", features: ["More uploads","Analytics"], buttonText: "Choose Pro", buttonLink:"#", moreLink:"#"},
-        { title: "UGC Enterprise", monthlyPrice: "120", yearlyPrice: "1200", description: "Agency plan", features: ["Unlimited UGC","Dedicated manager"], buttonText: "Contact Us", buttonLink:"#", moreLink:"#"}
-      ],
-      "CRO": [
-        { title: "CRO Starter", monthlyPrice: "19", yearlyPrice: "190", description: "Basic CRO tools", features: ["A/B testing","Heatmaps"], buttonText: "Start Free", buttonLink:"#", moreLink:"#"},
-        { title: "CRO Pro", monthlyPrice: "49", yearlyPrice: "490", description: "Advanced CRO", features:["Personalization","Advanced reports"], buttonText:"Choose Pro", buttonLink:"#", moreLink:"#"},
-        { title: "CRO Enterprise", monthlyPrice: "150", yearlyPrice: "1500", description: "Full CRO Suite", features:["Full integrations","Dedicated CRO expert"], buttonText:"Contact Us", buttonLink:"#", moreLink:"#"}
-      ]
+        ],
+        "UGC & Shoppable Videos": [
+          { title: "UGC Basic", monthlyPrice: "15", yearlyPrice: "150", description: "UGC starter", features: ["UGC uploads", "Shoppable links"], buttonText: "Try Now", buttonLink: "#", moreLink: "#" },
+          { title: "UGC Pro", monthlyPrice: "39", yearlyPrice: "390", description: "More uploads & analytics", features: ["More uploads", "Analytics"], buttonText: "Choose Pro", buttonLink: "#", moreLink: "#" },
+          { title: "UGC Enterprise", monthlyPrice: "120", yearlyPrice: "1200", description: "Agency plan", features: ["Unlimited UGC", "Dedicated manager"], buttonText: "Contact Us", buttonLink: "#", moreLink: "#" }
+        ],
+        CRO: [
+          { title: "CRO Starter", monthlyPrice: "19", yearlyPrice: "190", description: "Basic CRO tools", features: ["A/B testing", "Heatmaps"], buttonText: "Start Free", buttonLink: "#", moreLink: "#" },
+          { title: "CRO Pro", monthlyPrice: "49", yearlyPrice: "490", description: "Advanced CRO", features: ["Personalization", "Advanced reports"], buttonText: "Choose Pro", buttonLink: "#", moreLink: "#" },
+          { title: "CRO Enterprise", monthlyPrice: "150", yearlyPrice: "1500", description: "Full CRO Suite", features: ["Full integrations", "Dedicated CRO expert"], buttonText: "Contact Us", buttonLink: "#", moreLink: "#" }
+        ]
+      }
     }
+  />
 
-  }
-/>
+  <AddSpace color="transparent" />
+  <AddSpace color="transparent" />
+  <AddSpace color="transparent" />
 
-
-    <AddSpace color="trasparent"/>
-    <AddSpace color="trasparent"/>
-    <AddSpace color="trasparent"/>
 <Footer
-  companyLinks={companyLinks}
-  integrationLinks={integrationLinks}
-  resourcesLinks={resourcesLinks}
-  supportLinks={supportLinks}
+  branding={branding}
+  columns={columns}
+  advancedTitle={advancedTitle}
+  advancedColumns={advancedColumns}
   socialLinks={socialLinks}
-  showBanner={false}/>
-
-  </body>
-</html>
+  bottom={bottom}
+/>
+</Base>

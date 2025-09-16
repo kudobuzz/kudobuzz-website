@@ -1,0 +1,105 @@
+---
+import Base from "../layouts/Base.astro";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+import LegalPage from "../components/LegalPage.astro";
+import { menuItems } from "../data/menuItems.js";
+import { footerLinks } from "../data/footerLinks.js";
+import AddSpace from "../components/AddSpace.astro";
+
+const {
+  branding,
+  columns,
+  advancedTitle,
+  advancedColumns,
+  social: socialLinks,
+  bottom,
+} = footerLinks;
+---
+
+<Base title="Security — Kudobuzz">
+  <Navbar menuItems={menuItems} />
+
+  <LegalPage title="Security">
+    <Fragment slot="intro">
+      <p>
+        Security is core to Kudobuzz. This page describes how we protect customer data and the
+        controls you can expect when using our platform.
+      </p>
+    </Fragment>
+
+    <section class="legal-section">
+      <h2>1. Infrastructure</h2>
+      <p>
+        Kudobuzz is hosted on leading cloud infrastructure with built-in redundancy, firewalls, and
+        continuous monitoring. Production systems are segmented from corporate networks and access is
+        restricted using least-privilege principles and multi-factor authentication.
+      </p>
+    </section>
+
+    <section class="legal-section">
+      <h2>2. Data Protection</h2>
+      <p>
+        All traffic to and from Kudobuzz is encrypted using TLS 1.2+ and strong cipher suites. Data
+        at rest is encrypted using AES-256. Backups are performed automatically and tested to ensure
+        recoverability. We retain backups for a limited period to guard against accidental loss.
+      </p>
+    </section>
+
+    <section class="legal-section">
+      <h2>3. Application Security</h2>
+      <p>
+        We follow secure development lifecycle practices, including peer code reviews, dependency
+        management, and automated testing. Regular penetration tests and vulnerability scans are
+        performed by trusted external specialists. Critical issues are triaged immediately and
+        patched according to severity.
+      </p>
+    </section>
+
+    <section class="legal-section">
+      <h2>4. Compliance & Privacy</h2>
+      <p>
+        Kudobuzz aligns with global privacy regulations, including GDPR and CCPA. Data processing
+        agreements are available for customers who need additional assurances. We maintain detailed
+        audit logs and employ data minimisation practices to collect only what is necessary.
+      </p>
+    </section>
+
+    <section class="legal-section">
+      <h2>5. Responsible Disclosure</h2>
+      <p>
+        We welcome reports from the security community. If you believe you’ve found a vulnerability,
+        please contact <a href="mailto:security@kudobuzz.com">security@kudobuzz.com</a> with
+        details. We investigate all legitimate reports and work with reporters to remediate issues
+        promptly.
+      </p>
+    </section>
+
+    <section class="legal-section">
+      <h2>6. Business Continuity</h2>
+      <p>
+        Our disaster recovery plan outlines procedures for incident response, data restoration, and
+        communication. We conduct tabletop exercises to validate our readiness and continually
+        improve our response process.
+      </p>
+    </section>
+
+    <section class="legal-section">
+      <h2>7. Questions</h2>
+      <p>
+        Need more detail about Kudobuzz security? Reach out to
+        <a href="mailto:security@kudobuzz.com">security@kudobuzz.com</a> and our team will assist.
+      </p>
+    </section>
+  </LegalPage>
+ <AddSpace color="white" />
+  <AddSpace color="white" />
+  <Footer
+    branding={branding}
+    columns={columns}
+    advancedTitle={advancedTitle}
+    advancedColumns={advancedColumns}
+    socialLinks={socialLinks}
+    bottom={bottom}
+  />
+</Base>

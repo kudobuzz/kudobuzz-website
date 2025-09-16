@@ -21,45 +21,46 @@ const {
 ---
 
 <section class="hero">
-  <div class={`hero-image ${animate ? 'is-animated' : ''}`} data-animate="slide-left">
-    <img src={imageSrc} alt={imageAlt} decoding="async" fetchpriority="high" /> 
-  </div>
-  <div class="hero-content">
-   {tag && <div class="tag">
-      {tag}
+  <div class="container">
+    <div class={`hero-image ${animate ? 'is-animated' : ''}`} data-animate="slide-left">
+      <img src={imageSrc} alt={imageAlt} decoding="async" fetchpriority="high" /> 
     </div>
-   }
-    <h1 class="hero-title">
-      {title} <span>{titlehighlight}</span>
-    </h1>
-
-    {subtitle &&
-      <h2 class="hero-subtitle">{subtitle}</h2>
+    <div class="hero-content">
+    {tag && <div class="tag">
+        {tag}
+      </div>
     }
-    <p class="hero-description">
-      {description}
-    </p>
-    <div class="hero-buttons">
-      <a href={buttonTextLink1} target=blank class="btn-primary">{buttonText1}</a>
-      <a href={buttonTextLink2} target=blank class="btn-outline">{buttonText2}</a>
-    </div>
-   <ul class="hero-features">
-      <li>
-        <img src="/assets/icon-check.svg" alt="check" class="feature-icon">
-        {feature1}
-      </li>
-      <li>
-        <img src="/assets/icon-check.svg" alt="check" class="feature-icon">
-        {feature2}
-      </li>
-      <li>
-        <img src="/assets/icon-check.svg" alt="check" class="feature-icon">
-        {feature3}
-      </li>
-    </ul>
+      <h1 class="hero-title">
+        {title} <span>{titlehighlight}</span>
+      </h1>
 
+      {subtitle &&
+        <h2 class="hero-subtitle">{subtitle}</h2>
+      }
+      <p class="hero-description">
+        {description}
+      </p>
+      <div class="hero-buttons">
+        <a href={buttonTextLink1} target=blank class="btn-primary">{buttonText1}</a>
+        <a href={buttonTextLink2} target=blank class="btn-outline">{buttonText2}</a>
+      </div>
+    <ul class="hero-features">
+        <li>
+          <img src="/assets/icon-check.svg" alt="check" class="feature-icon">
+          {feature1}
+        </li>
+        <li>
+          <img src="/assets/icon-check.svg" alt="check" class="feature-icon">
+          {feature2}
+        </li>
+        <li>
+          <img src="/assets/icon-check.svg" alt="check" class="feature-icon">
+          {feature3}
+        </li>
+      </ul>
+
+    </div>
   </div>
-  
 </section>
 
 <script client:load>
@@ -104,16 +105,21 @@ const {
 
 
 .hero {
+  padding: clamp(40px, 7vw, 120px) var(--page-padding);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: clamp(24px, 3vw, 60px) var(--page-padding) clamp(80px, 10vw, 150px);
-  margin: 0;
   gap: clamp(20px, 4vw, 40px);
-  position: relative;
   width: 100%;
+  max-width: var(--container-max);
+  margin: 0 auto;
   box-sizing: border-box;
-  overflow: hidden;
+  position: relative;
 }
 
 .hero-content {
@@ -216,8 +222,7 @@ const {
 @media (max-width: 1024px) {
   .hero-image{ width: clamp(20rem, 50vw, 32rem); } 
   .hero{
-    overflow:hidden;
-    padding: 20px clamp(20px, 6vw, 64px) 20px;
+    padding: clamp(32px, 8vw, 72px) var(--page-padding);
   }
   
     .hero-title{
@@ -237,8 +242,7 @@ const {
 
 @media (max-width: 768px) {
   .hero{
-    overflow:hidden;
-    padding: 20px clamp(16px, 6vw, 32px) 96px;
+    padding: clamp(28px, 10vw, 64px) var(--page-padding);
   }
   .hero-content{
     max-width: 50%;
@@ -267,11 +271,13 @@ const {
 }
 
 /* Responsive */
-@media (max-width: 425px) {
+@media (max-width: 650px) {
   .hero {
+    padding: clamp(24px, 12vw, 48px) var(--page-padding);
+  }
+  .hero-container {
     flex-direction: column;
     text-align: center;
-    padding: 20px 20px;
   }
 .hero-image{
       width:100%;

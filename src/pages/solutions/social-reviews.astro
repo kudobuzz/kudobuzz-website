@@ -6,6 +6,7 @@ import Hero from '../../components/Hero.astro';
 import Section from '../../components/Section.astro';
 import AddSpace from "../../components/AddSpace.astro";
 import { menuItems } from "../../data/menuItems.js";
+import { footerLinks } from "../../data/footerLinks.js";
 
 export async function getStaticPaths() {
   // definisikan langsung di dalam fungsi
@@ -24,36 +25,14 @@ const { solution } = Astro.props;
 
 
 
-const companyLinks = [
-  { name: "Pricing", url: "#" },
-  { name: "Blogs", url: "#" },
-  { name: "Jobs", url: "#" }
-];
-
-const integrationLinks = [
-  { name: "Developer API", url: "#" },
-  { name: "Developer API", url: "#" },
-];
-
-const resourcesLinks = [
-  { name: "E-Books", url: "#" },
-  { name: "Merchant Stories", url: "#" },
-];
-
-const supportLinks = [
-  { name: "Help Center", url: "#" },
-  { name: "GDPR", url: "#" },
-  { name: "GDPR2", url: "#" },
-  { name: "GDPR3", url: "#" },
-];
-
-const socialLinks = [
-  { icon: "/assets/icons/icon-linkedin.svg", url: "#" },
-  { icon: "/assets/icons/icon-x.svg", url: "#" },
-  { icon: "/assets/icons/icon-youtube.svg", url: "#" },
-  { icon: "/assets/icons/icon-instagram.svg", url: "#" },
-  { icon: "/assets/icons/icon-facebook.svg", url: "#" },
-];
+const {
+  branding,
+  columns,
+  advancedTitle,
+  advancedColumns,
+  social: socialLinks,
+  bottom,
+} = footerLinks;
 ---
 
 <Base title="Social Reviews — Kudobuzz">
@@ -164,10 +143,11 @@ const socialLinks = [
     <AddSpace color="grey"/>
     
 <Footer
-  companyLinks={companyLinks}
-  integrationLinks={integrationLinks}
-  resourcesLinks={resourcesLinks}
-  supportLinks={supportLinks}
+  branding={branding}
+  columns={columns}
+  advancedTitle={advancedTitle}
+  advancedColumns={advancedColumns}
   socialLinks={socialLinks}
-  showBanner={false}/>
- </Base>
+  bottom={bottom}
+/>
+</Base>

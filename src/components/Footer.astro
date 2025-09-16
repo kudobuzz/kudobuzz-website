@@ -1,20 +1,52 @@
 ---
 import Banner from './Banner.astro';
 
+interface FooterLink {
+  name: string;
+  url: string;
+  target?: string;
+}
+
+interface FooterColumn {
+  title: string;
+  links: FooterLink[];
+}
+
+interface SocialLink {
+  icon: string;
+  url: string;
+  target?: string;
+}
+
+interface FooterBottom {
+  text?: string;
+  links?: FooterLink[];
+}
+
+interface FooterBranding {
+  logo?: {
+    src: string;
+    alt?: string;
+  };
+  tagline?: string;
+}
+
 interface FooterProps {
-  companyLinks: { name: string; url: string }[];
-  integrationLinks: { name: string; url: string }[];
-  resourcesLinks: { name: string; url: string }[];
-  supportLinks: { name: string; url: string }[];
-  socialLinks: { icon: string; url: string }[];
+  columns?: FooterColumn[];
+  advancedTitle?: string;
+  advancedColumns?: FooterColumn[];
+  socialLinks?: SocialLink[];
+  bottom?: FooterBottom;
+  branding?: FooterBranding;
 }
 
 const {
-  companyLinks = [],
-  integrationLinks = [],
-  resourcesLinks = [],
-  supportLinks = [],
-  socialLinks = []
+  columns = [],
+  advancedTitle = "",
+  advancedColumns = [],
+  socialLinks = [],
+  bottom = {},
+  branding = {}
 } = Astro.props;
 ---
 
@@ -25,128 +57,94 @@ const {
 <footer class="footer">
     
   <div class="footer-top">
-    
-    <img class="logo" src="/assets/kudobuzz-logo.svg" alt="Kudobuzz Logo" />
-    <div class="footer-content">
-        <p class="tagline">Start building trust today</p>
-        <div class="social-links">
-        {socialLinks.map((item) => (
-            <a href={item.url} target="_blank" rel="noopener noreferrer">
-            <img src={item.icon} alt="social" />
-            </a>
-        ))}
-        </div>
-    </div>
-
+    {branding.logo?.src && (
+      <img class="logo" src={branding.logo.src} alt={branding.logo.alt ?? "Logo"} />
+    )}
+    {(branding.tagline || socialLinks.length > 0) && (
+      <div class="footer-content">
+        {branding.tagline && <p class="tagline">{branding.tagline}</p>}
+        {socialLinks.length > 0 && (
+          <div class="social-links">
+            {socialLinks.map((item, index) => (
+              <a
+                key={`${item.icon}-${index}`}
+                href={item.url}
+                target={item.target ?? "_self"}
+                rel={item.target === "_blank" ? "noopener noreferrer" : undefined}
+              >
+                <img src={item.icon} alt="social" />
+              </a>
+            ))}
+          </div>
+        )}
+      </div>
+    )}
   </div>
 
   <hr class="divider" />
 
   <div class="footer-links">
-    <div>
-      <h4>Company</h4>
-      <ul>
-        {companyLinks.map((link) => (
-          <li><a href={link.url}>{link.name}</a></li>
-        ))}
-      </ul>
-    </div>
-
-    <div>
-      <h4>Integration</h4>
-      <ul>
-        {integrationLinks.map((link) => (
-          <li><a href={link.url}>{link.name}</a></li>
-        ))}
-      </ul>
-    </div>
-
-    <div>
-      <h4>Resources</h4>
-      <ul>
-        {resourcesLinks.map((link) => (
-          <li><a href={link.url}>{link.name}</a></li>
-        ))}
-      </ul>
-    </div>
-
-    <div>
-      <h4>Support</h4>
-      <ul>
-        {supportLinks.map((link) => (
-          <li><a href={link.url}>{link.name}</a></li>
-        ))}
-      </ul>
-    </div>
-
-     <div>
-      <h4>Support</h4>
-      <ul>
-        {supportLinks.map((link) => (
-          <li><a href={link.url}>{link.name}</a></li>
-        ))}
-      </ul>
-    </div>
+    {columns.map((column, index) => (
+      <div key={`col-${index}`}>
+        <h4>{column.title}</h4>
+        <ul>
+          {column.links.map((link) => (
+            <li key={link.name}>
+              <a
+                href={link.url}
+                target={link.target}
+                rel={link.target === "_blank" ? "noopener noreferrer" : undefined}
+              >
+                {link.name}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))}
   </div>
     
-    <p class="title">Advanced Resources</p>
+    {advancedTitle && <p class="title">{advancedTitle}</p>}
   <hr class="divider" />
     <div class="footer-links">
-        <div>
-        <h4>Company</h4>
-        <ul>
-            {companyLinks.map((link) => (
-            <li><a href={link.url}>{link.name}</a></li>
+      {advancedColumns.map((column, index) => (
+        <div key={`advanced-${index}`}>
+          <h4>{column.title}</h4>
+          <ul>
+            {column.links.map((link) => (
+              <li key={`${column.title}-${link.name}`}>
+                <a
+                  href={link.url}
+                  target={link.target}
+                  rel={link.target === "_blank" ? "noopener noreferrer" : undefined}
+                >
+                  {link.name}
+                </a>
+              </li>
             ))}
-        </ul>
+          </ul>
         </div>
-
-        <div>
-        <h4>Integration</h4>
-        <ul>
-            {integrationLinks.map((link) => (
-            <li><a href={link.url}>{link.name}</a></li>
-            ))}
-        </ul>
-        </div>
-
-        <div>
-        <h4>Resources</h4>
-        <ul>
-            {resourcesLinks.map((link) => (
-            <li><a href={link.url}>{link.name}</a></li>
-            ))}
-        </ul>
-        </div>
-
-        <div>
-        <h4>Support</h4>
-        <ul>
-            {supportLinks.map((link) => (
-            <li><a href={link.url}>{link.name}</a></li>
-            ))}
-        </ul>
-        </div>
-
-        <div>
-        <h4>Support</h4>
-        <ul>
-            {supportLinks.map((link) => (
-            <li><a href={link.url}>{link.name}</a></li>
-            ))}
-        </ul>
-        </div>
+      ))}
     </div>
 
 
   <div class="footer-bottom">
-    <p>© 2024 Kudobuzz, Inc. All Rights Reserved.</p>
-    <ul>
-      <li><a href="#">Terms</a></li>
-      <li><a href="#">Privacy</a></li>
-      <li><a href="#">Cookie</a></li>
-      <li><a href="#">Security</a></li>
-    </ul>
+    {bottom.text && <p>{bottom.text}</p>}
+    {bottom.links?.length && (
+      <ul>
+        {bottom.links.map((link, index) => (
+          <li key={`bottom-${index}`}>
+            <a
+              href={link.url}
+              target={link.target}
+              rel={link.target === "_blank" ? "noopener noreferrer" : undefined}
+            >
+              {link.name}
+            </a>
+          </li>
+        ))}
+      </ul>
+    )}
   </div>
 </footer>
 
@@ -156,6 +154,15 @@ const {
   color: #e2e2e2;
   padding: 200px var(--page-padding) 50px;
   font-family: sans-serif;
+}
+.footer-top,
+.footer-links,
+.footer-bottom,
+.footer .title,
+.footer .divider {
+  width: min(100%, var(--container-max));
+  margin-left: auto;
+  margin-right: auto;
 }
 .footer-content{
     display:flex;
@@ -257,6 +264,8 @@ footer .title{
 
 .banner-wrapper {
   position: relative;
+  width: min(100%, var(--container-max));
+  margin: 0 auto;
 }
 
 .banner-wrapper :global(.banner) {
@@ -274,7 +283,7 @@ footer .title{
 @media (max-width: 7684px) {
  
 }
-@media (max-width: 425px) {
+@media (max-width: 650px) {
   .footer{
     padding: 200px 20px 32px;
     text-align:center;

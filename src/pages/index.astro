@@ -5,187 +5,164 @@ import TrustedBrand from '../components/TrustedBrand.astro';
 import Section from '../components/Section.astro';
 import Footer from "../components/Footer.astro";
 import AddSpace from "../components/AddSpace.astro";
+import Base from "../layouts/Base.astro";
+import { footerLinks } from "../data/footerLinks.js";
 
 
 const menuItems = [];
 
-const companyLinks = [
-  { name: "Pricing", url: "#" },
-  { name: "Blogs", url: "#" },
-  { name: "Jobs", url: "#" }
-];
-
-const integrationLinks = [
-  { name: "Developer API", url: "#" },
-  { name: "Developer API", url: "#" },
-];
-
-const resourcesLinks = [
-  { name: "E-Books", url: "#" },
-  { name: "Merchant Stories", url: "#" },
-];
-
-const supportLinks = [
-  { name: "Help Center", url: "#" },
-  { name: "GDPR", url: "#" },
-  { name: "GDPR2", url: "#" },
-  { name: "GDPR3", url: "#" },
-];
-
-const socialLinks = [
-  { icon: "/assets/icons/icon-linkedin.svg", url: "#" },
-  { icon: "/assets/icons/icon-x.svg", url: "#" },
-  { icon: "/assets/icons/icon-youtube.svg", url: "#" },
-  { icon: "/assets/icons/icon-instagram.svg", url: "#" },
-  { icon: "/assets/icons/icon-facebook.svg", url: "#" },
-];
+const {
+  branding,
+  columns,
+  advancedTitle,
+  advancedColumns,
+  social: socialLinks,
+  bottom,
+} = footerLinks;
 ---
-
-<html lang="en">
-  <head>
-    <link rel="preload" as="image" href="/assets/illustrations/hero1.svg" imagesrcset="/assets/illustrations/hero1.svg" />
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kudobuzz Clone</title>
-  </head>
-  <body>
-    
-    <Navbar menuItems={menuItems} />
-    
-    <Hero 
-      animate={true}
-      tag = "Kudobuzz For All"
-      title = "Your customers are talking."
-      titlehighlight = "Let them sell for you."
-      subtitle = "All from one simple platform."
-      description = "Kudobuzz helps online brands turn reviews, UGC, and videos into more trust, more clicks, and more conversions." 
-      buttonText1 = "Try Kudobuzz Free" 
-      buttonTextLink1 = "https://kudobuzz.com/"
-      buttonText2 = "Get a Free Demo"
-      buttonTextLink2 = "https://kudobuzz.com/"
-
-      feature1 = "Collect product & business reviews"
-      feature2 = "Turn real content into shoppable experiences"
-      feature3 = "Optimize pages to convert faster"
-      imageSrc = "/assets/illustrations/hero1.svg"
-      imageAlt = "Kudobuzz"/>
-    <TrustedBrand />
-
-     <AddSpace color="grey"/>
-   
-    <Section
-      title="Everything you need to turn "
-      titleHighLight="trust into revenue"
-      description="We’re more than reviews. We’re your conversion engine."
-      layout="center"
-      colorScheme="grey"
+<Base title="Kudobuzz Clone">
+  <Fragment slot="head">
+    <link
+      rel="preload"
+      as="image"
+      href="/assets/illustrations/hero1.svg"
+      imagesrcset="/assets/illustrations/hero1.svg"
     />
-    <Section
-      
-      title="Your Business Goals "
-      imageSrc="/assets/illustrations/kudobuzz-img1.svg"
-      imageAlt="kudobuzz-illustration"
-      layout="right"
-      colorScheme="grey"
-      showImage={true}
-      showChecklist={true}
-      checkedItems={[
-        {icon: "/assets/icon-check.svg", title: "Build instant credibility"},
-        {icon: "/assets/icon-check.svg", title: "Sell with authenticity"},
-        {icon: "/assets/icon-check.svg", title: "Make social content shoppable"},
-        {icon: "/assets/icon-check.svg", title: "Drive conversions fast"},
-        {icon: "/assets/icon-check.svg", title: "Grow without complexity"}  
-      ]} />
+  </Fragment>
 
-     <Section
-      
-      title="Kudobuzz Makes It Happen"
-      imageSrc="/assets/illustrations/kudobuzz-img2.svg"
-      imageAlt="kudobuzz-illustration"
-      layout="left"
-      colorScheme="grey"
-      showImage={true}
-      showChecklist={true}
-      checkedItems={[
-        {icon: "/assets/icon-check.svg", title: "Verified product & business reviews that inspire trust"},
-        {icon: "/assets/icon-check.svg", title: "Show off real customer photos, quotes & stories"},
-        {icon: "/assets/icon-check.svg", title: "Turn TikToks, Reels & Instagram posts into product showcases"},
-        {icon: "/assets/icon-check.svg", title: "On-page CRO tools to test what actually works"},
-        {icon: "/assets/icon-check.svg", title: "Simple setup, smart automation, no dev required"}  
-      ]}/>
-    
-    <AddSpace color="grey"/>
-    
-    <AddSpace color="white"/>
-    <Section
-      title="From clicks to conversions in 4 simple steps"
-      
-      subtitle="Built for lean teams. Loved by fast-growing merchants."
-      description="Other platforms stop at star ratings. We give you a content engine — to turn love into loyalty and clicks into cash."
-      imageSrc="/assets/illustrations/default-image.png"
-      layout="bothside"
-      colorScheme="white"
-      showTextSide={true}
-      showCardsSide={false}
-      showCardsBottom={true}
-      showBanner={true}
-      cards={[
-        { icon: "/assets/icons/icon-review.svg", title: "Collect", text: "Pull in reviews, customer photos, social mentions & videos" },
-        { icon: "/assets/icons/icon-review-display.svg", title: "Display", text: "Drop them into product pages, galleries, banners & popups" },
-        { icon: "/assets/icons/icon-convert.svg", title: "Convert", text: "Use trust-driven content to boost engagement and sales" },
-        { icon: "/assets/icons/icon-optimize.svg", title: "Optimize", text: "Use built-in CRO tools to test, refine, grow and increase sales" },
-        // dst...
-      ]}
+  <Navbar menuItems={menuItems} />
 
+  <Hero
+    animate={true}
+    tag="Kudobuzz For All"
+    title="Your customers are talking."
+    titlehighlight="Let them sell for you."
+    subtitle="All from one simple platform."
+    description="Kudobuzz helps online brands turn reviews, UGC, and videos into more trust, more clicks, and more conversions."
+    buttonText1="Try Kudobuzz Free"
+    buttonTextLink1="https://kudobuzz.com/"
+    buttonText2="Get a Free Demo"
+    buttonTextLink2="https://kudobuzz.com/"
+    feature1="Collect product & business reviews"
+    feature2="Turn real content into shoppable experiences"
+    feature3="Optimize pages to convert faster"
+    imageSrc="/assets/illustrations/hero1.svg"
+    imageAlt="Kudobuzz"
+  />
 
-      showBanner={true}
-      titleBanner="Supported Platforms"
-      platforms={[
-        { icon: "/assets/icons/icon-shopify.svg", name: "Shopify" },
-        { icon: "/assets/icons/icon-wix.svg", name: "Wix" },
-        { icon: "/assets/icons/icon-shoplazza.svg", name: "Shoplazza" },
-        { icon: "/assets/icons/icon-bigcommerce.svg", name: "Bigcommerce" }
-      ]}
-      buttons={[
-        { text: "Try Now", link: "/trial", style: "outline" },
-        { text: "Schedule Demo", link: "/demo", style: "primary" }
-      ]}/>
+  <TrustedBrand />
 
-    <AddSpace color="white"/>
-    <AddSpace color="grey"/>    
-   
-    <Section
-      title="All-in-One Solution"
-      description="Everything you need to launch your project successfully."
-      layout="center"
-      colorScheme="grey"
-      
-      showReview={true}
-      reviews={[
-          {reviewContent:"Very patient and kind with me! Helped resolve my confusion with navigation. Got everything settled 🙂 Great app.", 
-          author:"Tranquil Bliss", 
-          detailAuthor:"Over 4 months using the app"
-        },
-        
-        {reviewContent:"Excellent working with the crew at Kudobuzz. I was unable to implement code properly and their wonderful staff helped me out and everything looks fantastic now. Pleasure to work with!", 
-          author:"Libertarian Country", 
-          detailAuthor:"Over 8 years using the app"
-        },
+  <AddSpace color="grey" />
 
-       
-         {reviewContent:"Amazing app! used for several years, and any issue support is super helpful and quick! is working very good! thanks!", 
-          author:"Odilia Bridal", 
-          detailAuthor:"Over 3 years using the app"
-        }
-      ]}
-      
+  <Section
+    title="Everything you need to turn "
+    titleHighLight="trust into revenue"
+    description="We’re more than reviews. We’re your conversion engine."
+    layout="center"
+    colorScheme="grey"
+  />
 
-       buttonTextReview = "More Success Stories"
-       buttonTextReviewLink = "https://kudobuzz.com/"/>
-    
-    <AddSpace color="white"/>
-    
-    <Section
+  <Section
+    title="Your Business Goals "
+    imageSrc="/assets/illustrations/kudobuzz-img1.svg"
+    imageAlt="kudobuzz-illustration"
+    layout="right"
+    colorScheme="grey"
+    showImage={true}
+    showChecklist={true}
+    checkedItems={[
+      { icon: "/assets/icon-check.svg", title: "Build instant credibility" },
+      { icon: "/assets/icon-check.svg", title: "Sell with authenticity" },
+      { icon: "/assets/icon-check.svg", title: "Make social content shoppable" },
+      { icon: "/assets/icon-check.svg", title: "Drive conversions fast" },
+      { icon: "/assets/icon-check.svg", title: "Grow without complexity" }
+    ]}
+  />
+
+  <Section
+    title="Kudobuzz Makes It Happen"
+    imageSrc="/assets/illustrations/kudobuzz-img2.svg"
+    imageAlt="kudobuzz-illustration"
+    layout="left"
+    colorScheme="grey"
+    showImage={true}
+    showChecklist={true}
+    checkedItems={[
+      { icon: "/assets/icon-check.svg", title: "Verified product & business reviews that inspire trust" },
+      { icon: "/assets/icon-check.svg", title: "Show off real customer photos, quotes & stories" },
+      { icon: "/assets/icon-check.svg", title: "Turn TikToks, Reels & Instagram posts into product showcases" },
+      { icon: "/assets/icon-check.svg", title: "On-page CRO tools to test what actually works" },
+      { icon: "/assets/icon-check.svg", title: "Simple setup, smart automation, no dev required" }
+    ]}
+  />
+
+  <AddSpace color="grey" />
+
+  <AddSpace color="white" />
+  <Section
+    title="From clicks to conversions in 4 simple steps"
+    subtitle="Built for lean teams. Loved by fast-growing merchants."
+    description="Other platforms stop at star ratings. We give you a content engine — to turn love into loyalty and clicks into cash."
+    imageSrc="/assets/illustrations/default-image.png"
+    layout="bothside"
+    colorScheme="white"
+    showTextSide={true}
+    showCardsSide={false}
+    showCardsBottom={true}
+    showBanner={true}
+    cards={[
+      { icon: "/assets/icons/icon-review.svg", title: "Collect", text: "Pull in reviews, customer photos, social mentions & videos" },
+      { icon: "/assets/icons/icon-review-display.svg", title: "Display", text: "Drop them into product pages, galleries, banners & popups" },
+      { icon: "/assets/icons/icon-convert.svg", title: "Convert", text: "Use trust-driven content to boost engagement and sales" },
+      { icon: "/assets/icons/icon-optimize.svg", title: "Optimize", text: "Use built-in CRO tools to test, refine, grow and increase sales" }
+    ]}
+    showBanner={true}
+    titleBanner="Supported Platforms"
+    platforms={[
+      { icon: "/assets/icons/icon-shopify.svg", name: "Shopify" },
+      { icon: "/assets/icons/icon-wix.svg", name: "Wix" },
+      { icon: "/assets/icons/icon-shoplazza.svg", name: "Shoplazza" },
+      { icon: "/assets/icons/icon-bigcommerce.svg", name: "Bigcommerce" }
+    ]}
+    buttons={[
+      { text: "Try Now", link: "/trial", style: "outline" },
+      { text: "Schedule Demo", link: "/demo", style: "primary" }
+    ]}
+  />
+
+  <AddSpace color="white" />
+  <AddSpace color="grey" />
+
+  <Section
+    title="All-in-One Solution"
+    description="Everything you need to launch your project successfully."
+    layout="center"
+    colorScheme="grey"
+    showReview={true}
+    reviews={[
+      {
+        reviewContent: "Very patient and kind with me! Helped resolve my confusion with navigation. Got everything settled 🙂 Great app.",
+        author: "Tranquil Bliss",
+        detailAuthor: "Over 4 months using the app"
+      },
+      {
+        reviewContent: "Excellent working with the crew at Kudobuzz. I was unable to implement code properly and their wonderful staff helped me out and everything looks fantastic now. Pleasure to work with!",
+        author: "Libertarian Country",
+        detailAuthor: "Over 8 years using the app"
+      },
+      {
+        reviewContent: "Amazing app! used for several years, and any issue support is super helpful and quick! is working very good! thanks!",
+        author: "Odilia Bridal",
+        detailAuthor: "Over 3 years using the app"
+      }
+    ]}
+    buttonTextReview="More Success Stories"
+    buttonTextReviewLink="https://kudobuzz.com/"
+  />
+
+  <AddSpace color="white" />
+
+  <Section
     title="Here's what makes Kudobuzz different"
     subtitle="Built for lean teams. Loved by fast-growing merchants."
     description="Other platforms stop at star ratings. We give you a content engine — to turn love into loyalty and clicks into cash."
@@ -201,22 +178,22 @@ const socialLinks = [
     cards={[
       { icon: "/assets/icons/icon-multistar.svg", title: "Multi-source content", text: "Pull reviews from social, email, web & in-store" },
       { icon: "/assets/icons/icon-play.svg", title: "Shoppable video support", text: "Embed videos that sell directly" },
-      { icon:"/assets/icons/icon-boost.svg", title: "Lightweight CRO", text: "Boost conversion rates without extra tools" },
+      { icon: "/assets/icons/icon-boost.svg", title: "Lightweight CRO", text: "Boost conversion rates without extra tools" },
       { icon: "/assets/icons/icon-world.svg", title: "Global-ready", text: "Multi language support and international merchant ready" },
-      { icon: "/assets/icons/icon-fasttime.svg", title: "No-code install", text: "Go live in minutes, not months" },
-      // dst...
-    ]}/>
+      { icon: "/assets/icons/icon-fasttime.svg", title: "No-code install", text: "Go live in minutes, not months" }
+    ]}
+  />
 
-    <AddSpace color="trasparent"/>
-    <AddSpace color="trasparent"/>
-    <AddSpace color="trasparent"/>
-<Footer
-  companyLinks={companyLinks}
-  integrationLinks={integrationLinks}
-  resourcesLinks={resourcesLinks}
-  supportLinks={supportLinks}
-  socialLinks={socialLinks}
-  showBanner={false}/>
+  <AddSpace color="transparent" />
+  <AddSpace color="transparent" />
+  <AddSpace color="transparent" />
 
-  </body>
-</html>
+  <Footer
+    branding={branding}
+    columns={columns}
+    advancedTitle={advancedTitle}
+    advancedColumns={advancedColumns}
+    socialLinks={socialLinks}
+    bottom={bottom}
+  />
+</Base>

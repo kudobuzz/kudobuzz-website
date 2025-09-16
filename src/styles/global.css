@@ -12,11 +12,13 @@
 }
 
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Poppins';
   background: #fff;
   color: #20222F;
   margin: 0;
   width: 100%;
+
+
 }
 
 ul {
@@ -26,9 +28,12 @@ ul {
   padding-inline-start: unset;
 }
 
-nav,
+nav {
+  padding: 16px var(--page-padding);
+}
+
 section {
-  padding: 20px var(--page-padding);
+  padding: clamp(40px, 7vw, 120px) var(--page-padding);
 }
 
 header {
@@ -266,6 +271,30 @@ tbody tr:nth-child(even) {
   width: 100%;
 }
 
+.container {
+  display: flex;
+  justify-content: space-between;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  gap: clamp(24px, 6vw, 140px);
+  align-items: center;
+}
+
+.legal-page p {
+  padding-bottom: 40px;
+
+}
+
+.legal-page .legal-section {
+  padding: 20px 0px 20px 60px
+}
+
+.legal-section h2 {
+  font-size: 24px;
+  margin: 0 0 10px;
+  color: #111827;
+}
+
 @media (max-width: 1024px) {
 
   .btn-primary,
@@ -284,7 +313,7 @@ tbody tr:nth-child(even) {
   .btn-primary,
   .btn-outline {
     padding: 12px 20px;
-    font-size: 16px;
+    font-size: 14px;
   }
 
   h2 {
@@ -292,9 +321,12 @@ tbody tr:nth-child(even) {
     line-height: 45px;
   }
 
-  nav,
+  nav {
+    padding: 16px var(--page-padding);
+  }
+
   section {
-    padding: 20px clamp(16px, 5vw, 32px);
+    padding: clamp(28px, 10vw, 64px) var(--page-padding);
   }
 
   button {
@@ -313,7 +345,11 @@ tbody tr:nth-child(even) {
   }
 }
 
-@media (max-width: 425px) {
+@media (max-width: 650px) {
+  section {
+    padding: clamp(24px, 12vw, 48px) var(--page-padding);
+  }
+
   .hero-buttons {
     display: block;
     gap: 16px;

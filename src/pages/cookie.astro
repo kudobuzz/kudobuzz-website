@@ -1,0 +1,110 @@
+---
+import Base from "../layouts/Base.astro";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+import LegalPage from "../components/LegalPage.astro";
+import { menuItems } from "../data/menuItems.js";
+import { footerLinks } from "../data/footerLinks.js";
+import AddSpace from "../components/AddSpace.astro";
+
+const {
+  branding,
+  columns,
+  advancedTitle,
+  advancedColumns,
+  social: socialLinks,
+  bottom,
+} = footerLinks;
+---
+
+<Base title="Cookie Policy — Kudobuzz">
+  <Navbar menuItems={menuItems} />
+
+  <LegalPage title="Cookie Policy">
+    <Fragment slot="intro">
+      <p>
+        This Cookie Policy explains how Kudobuzz uses cookies and similar tracking technologies on
+        our websites and apps. We use these technologies to understand how you use our services,
+        improve your experience, and deliver relevant content.
+      </p>
+    </Fragment>
+
+    <section class="legal-section">
+      <h2>1. What Are Cookies?</h2>
+      <p>
+        Cookies are small text files stored on your device when you visit a website. They allow us to
+        recognise your browser, remember preferences, and measure engagement. We use both session
+        cookies (which expire when you close your browser) and persistent cookies (which remain until
+        deleted).
+      </p>
+    </section>
+
+    <section class="legal-section">
+      <h2>2. Types Of Cookies We Use</h2>
+      <ul>
+        <li>
+          <strong>Essential cookies</strong> enable core functionality like account authentication,
+          security protections, and shopping cart features.
+        </li>
+        <li>
+          <strong>Analytics cookies</strong> help us understand product usage, diagnose issues, and
+          make improvements. We typically use privacy-focused analytics tools with aggregated
+          reporting.
+        </li>
+        <li>
+          <strong>Functional cookies</strong> remember your preferences such as language, storefront,
+          or layout settings so you don’t have to set them each visit.
+        </li>
+        <li>
+          <strong>Advertising cookies</strong> (used sparingly) enable us to deliver and measure
+          promotional campaigns in a privacy-respecting way.
+        </li>
+      </ul>
+    </section>
+
+    <section class="legal-section">
+      <h2>3. Third-Party Technologies</h2>
+      <p>
+        Some analytics and marketing partners may set their own cookies. These third parties process
+        data according to their privacy policies. We work only with vendors who adhere to recognised
+        privacy standards and provide ways to opt out.
+      </p>
+    </section>
+
+    <section class="legal-section">
+      <h2>4. Your Choices</h2>
+      <p>
+        You can control cookies through your browser settings, by clearing cookies or by using
+        browser add-ons that block tracking. Certain features of Kudobuzz may not function properly
+        without essential cookies. When required, we will present a cookie banner so you can manage
+        optional cookie categories directly on our site.
+      </p>
+    </section>
+
+    <section class="legal-section">
+      <h2>5. Updates</h2>
+      <p>
+        We may update this Cookie Policy to reflect changes in technology, law, or our use of
+        cookies. Please review this page regularly for the latest information.
+      </p>
+    </section>
+
+    <section class="legal-section">
+      <h2>6. Contact</h2>
+      <p>
+        If you have questions about our use of cookies, contact
+        <a href="mailto:privacy@kudobuzz.com">privacy@kudobuzz.com</a>.
+      </p>
+    </section>
+  </LegalPage>
+ <AddSpace color="white" />
+  <AddSpace color="white" />
+  <Footer
+    branding={branding}
+    columns={columns}
+    advancedTitle={advancedTitle}
+    advancedColumns={advancedColumns}
+    socialLinks={socialLinks}
+    bottom={bottom}
+  />
+</Base>
