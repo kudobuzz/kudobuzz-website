@@ -89,11 +89,11 @@ export const footerLinks = {
     },
   ],
   social: [
-    { icon: "/assets/icons/icon-linkedin.svg", url: "#", target: "_blank" },
-    { icon: "/assets/icons/icon-x.svg", url: "#", target: "_blank" },
-    { icon: "/assets/icons/icon-youtube.svg", url: "#", target: "_blank" },
-    { icon: "/assets/icons/icon-instagram.svg", url: "#", target: "_blank" },
-    { icon: "/assets/icons/icon-facebook.svg", url: "#", target: "_blank" },
+    { icon: "/assets/icons/icon-linkedin.svg", url: "https://www.linkedin.com/company/kudobuzz", target: "_blank" },
+    { icon: "/assets/icons/icon-x.svg", url: "https://x.com/kudobuzz", target: "_blank" },
+    { icon: "/assets/icons/icon-youtube.svg", url: "https://www.youtube.com/channel/UC3RyY_cyWlEBgIjsDE0-8fg", target: "_blank" },
+    { icon: "/assets/icons/icon-instagram.svg", url: "https://www.instagram.com/kudobuzz/", target: "_blank" },
+    { icon: "/assets/icons/icon-facebook.svg", url: "https://www.facebook.com/kudobuzz/", target: "_blank" },
   ],
   bottom: {
     text: "© 2024 Kudobuzz, Inc. All Rights Reserved.",

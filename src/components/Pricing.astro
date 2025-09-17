@@ -1,10 +1,11 @@
 ---
 import Tabs from "./Tabs.astro";
 
-const { tabs = [], plansByTab = {}, activeTab = 0 } = Astro.props;
+const { tabs = [], plansByTab = {}, modalContent = {}, activeTab = 0 } = Astro.props;
+const modalDataEncoded = encodeURIComponent(JSON.stringify(modalContent));
 ---
 
-<div class="pricing-component">
+<div class="pricing-component" data-modal-content={modalDataEncoded}>
   <Tabs tabs={tabs} activeTab={activeTab} />
 
   <!-- Billing toggle -->
@@ -21,9 +22,10 @@ const { tabs = [], plansByTab = {}, activeTab = 0 } = Astro.props;
   <div class="pricing-content">
     {tabs.map((tab, tabIndex) => {
       const plans = (plansByTab[tab] || []);
+      const columnClass = `columns-${Math.max(1, Math.min(plans.length || 1, 3))}`;
       return (
         <div
-          class="pricing-wrapper"
+          class={`pricing-wrapper ${columnClass}`}
           data-tab={tabIndex}
           style={`display: ${tabIndex === activeTab ? "grid" : "none"}`}
         >
@@ -48,7 +50,7 @@ const { tabs = [], plansByTab = {}, activeTab = 0 } = Astro.props;
                 {plan.description ? <p class="subtitle">{plan.description}</p> : null}
                 {plan.packageName ? <div class="package">{plan.packageName}</div> : null}
                 {plan.buttonText ? (
-                  <a class="btn-primary" href={plan.buttonLink ?? "#"}>{plan.buttonText}</a>
+                  <a class="btn-primary" target="blank" href={plan.buttonLink ?? "#"}>{plan.buttonText}</a>
                 ) : null}
               </div>
 
@@ -68,9 +70,11 @@ const { tabs = [], plansByTab = {}, activeTab = 0 } = Astro.props;
                 </ul>
               </div>
 
-              <div class="card-footer">
-                <a class="see-all" href="#" data-tab={tabIndex}>See All Features</a>
-              </div>
+              {plan.showFooter !== false && (
+                <div class="card-footer">
+                  <a class="see-all" href="#" data-tab={tabIndex}>See All Features</a>
+                </div>
+              )}
             </article>
           ))}
         </div>
@@ -82,6 +86,7 @@ const { tabs = [], plansByTab = {}, activeTab = 0 } = Astro.props;
   {tabs.map((tab, tabIndex) => (
     <div class="modal-overlay" id={`modal-${tabIndex}`} key={tabIndex}>
       <div class="modal-content">
+        <div class="modal-scroll">
         <!-- Header -->
         <div class="modal-header">
           <div class="compare-header">
@@ -110,17 +115,31 @@ const { tabs = [], plansByTab = {}, activeTab = 0 } = Astro.props;
 
         <!-- Body -->
         <div class="modal-body"></div>
+        </div>
       </div>
     </div>
   ))}
 </div>
 
 <script client:load>
+
 (function() {
-  const root = document.currentScript.parentElement;
+  const scriptEl = document.currentScript;
+  const root = scriptEl?.previousElementSibling?.closest?.('.pricing-component')
+    || scriptEl?.parentElement?.querySelector?.('.pricing-component')
+    || document.querySelector('.pricing-component');
   if (!root) return;
 
+  let modalData = {};
+  try {
+    const rawData = root.dataset.modalContent || '';
+    modalData = rawData ? JSON.parse(decodeURIComponent(rawData)) : {};
+  } catch (err) {
+    modalData = {};
+  }
+
   const tabButtons = root.querySelectorAll(".tab");
+  const tabNames = Array.from(tabButtons).map(btn => btn.textContent?.trim() || "");
   const wrappers = root.querySelectorAll(".pricing-wrapper");
   const billingSwitch = root.querySelector("#billingSwitch");
   const priceEls = root.querySelectorAll(".price");
@@ -161,156 +180,132 @@ const { tabs = [], plansByTab = {}, activeTab = 0 } = Astro.props;
   updatePrices(false);
 
   /* Modal handling */
-  root.querySelectorAll(".see-all").forEach(btn => {
-    btn.addEventListener("click", e => {
-      e.preventDefault();
-      const tabIndex = btn.dataset.tab;
-      const modal = root.querySelector(`#modal-${tabIndex}`);
-      if (!modal) return;
+  const buildTable = (groups, columns) => {
+    if (!groups.length || !columns) {
+      return '<p class="modal-empty">Detailed comparison coming soon.</p>';
+    }
 
-      // Sync modal header plans with visible cards
-      const wrap = root.querySelector(`.pricing-wrapper[data-tab='${tabIndex}']`);
-      const cards = wrap ? Array.from(wrap.querySelectorAll('.pricing-card')) : [];
-      const header = modal.querySelector('.modal-header .compare-header');
-      const headerPlans = header ? header.querySelectorAll('.header-plan') : [];
-      headerPlans.forEach((hp, i) => {
-        const card = cards[i];
-        if (!card) return;
-        const title = card.querySelector('.plan-title')?.textContent?.trim() || '';
-        const pkg = card.querySelector('.package')?.textContent?.trim() || '';
-        const btnEl = card.querySelector('.btn-primary, .btn-outline');
-        const nameEl = hp.querySelector('.plan-name');
-        const subEl = hp.querySelector('.plan-sub');
-        const ctaEl = hp.querySelector('a.btn-primary, a.btn-outline');
-        if (nameEl) nameEl.textContent = title;
-        if (pkg && subEl) { subEl.textContent = pkg; subEl.style.display = 'block'; }
-        else if (subEl) { subEl.style.display = 'none'; }
-        if (ctaEl) {
-          if (btnEl) {
-            ctaEl.textContent = btnEl.textContent.trim() || 'Sign Up Free';
-            ctaEl.href = btnEl.getAttribute('href') || '#';
-            ctaEl.style.display = 'inline-block';
-          } else {
-            ctaEl.style.display = 'none';
-          }
+    const checkIcon = '<span class="check-circle"><img src="/assets/icon-check.svg" alt="check" /></span>';
+
+    const renderValue = (value) => {
+      if (value === true) return checkIcon;
+      if (typeof value === "string") {
+        const trimmed = value.trim();
+        if (!trimmed) return "";
+        if (trimmed.toLowerCase() === "check") return checkIcon;
+        return trimmed;
+      }
+      if (value === false || value === null || value === undefined) return "";
+      return String(value);
+    };
+
+    const colWidth = (68 / columns).toFixed(2);
+
+    let html = '<div class="feature-compare">';
+    groups.forEach(group => {
+      html += '<div class="feature-group">';
+      if (group.title) {
+        html += `<div class="group-title">${group.title}</div>`;
+      }
+      html += '<table class="feature-table">';
+      html += '<colgroup><col style="width:32%" />';
+      for (let i = 0; i < columns; i += 1) {
+        html += `<col style="width:${colWidth}%" />`;
+      }
+      html += '</colgroup><tbody>';
+
+      (group.rows || []).forEach(row => {
+        html += '<tr>';
+        html += `<th>${row.feature || ''}</th>`;
+        const values = Array.isArray(row.values) ? row.values : [];
+        for (let i = 0; i < columns; i += 1) {
+          const cell = i < values.length ? renderValue(values[i]) : '';
+          html += `<td>${cell}</td>`;
         }
+        html += '</tr>';
       });
 
-      const body = modal.querySelector(".modal-body");
-      body.innerHTML = `
-        <div class="feature-compare">
-          <div class="feature-group">
-            <div class="group-title">Collect Social Reviews</div>
-            <table class="feature-table">
-              <colgroup>
-                <col style="width:32%" />
-                <col style="width:22.666%" />
-                <col style="width:22.666%" />
-                <col style="width:22.666%" />
-              </colgroup>
-              <tbody>
-                <tr>
-                  <th>Social Reviews</th>
-                  <td>1 Facebook Page</td>
-                  <td>Unlimited Accounts</td>
-                  <td>Unlimited Accounts</td>
-                </tr>
-                <tr>
-                  <th>Collect Photo</th>
-                  <td>1 Facebook Page</td>
-                  <td><span class="check-circle"><img src="/assets/icon-check.svg" alt="check" /></span></td>
-                  <td><span class="check-circle"><img src="/assets/icon-check.svg" alt="check" /></span></td>
-                </tr>
-                <tr>
-                  <th>Collect Video</th>
-                  <td></td>
-                  <td><span class="check-circle"><img src="/assets/icon-check.svg" alt="check" /></span></td>
-                  <td><span class="check-circle"><img src="/assets/icon-check.svg" alt="check" /></span></td>
-                </tr>
-                <tr>
-                  <th>Collect Q&A</th>
-                  <td></td>
-                  <td><span class="check-circle"><img src="/assets/icon-check.svg" alt="check" /></span></td>
-                  <td><span class="check-circle"><img src="/assets/icon-check.svg" alt="check" /></span></td>
-                </tr>
-                <tr>
-                  <th>Allowed Social Accounts</th>
-                  <td>1 Facebook Page</td>
-                  <td>Unlimited Accounts</td>
-                  <td>Unlimited Accounts</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <div class="feature-group">
-            <div class="group-title">Collect Reviews</div>
-            <table class="feature-table">
-              <colgroup>
-                <col style="width:32%" />
-                <col style="width:22.666%" />
-                <col style="width:22.666%" />
-                <col style="width:22.666%" />
-              </colgroup>
-              <tbody>
-                <tr>
-                  <th>Offline Reviews</th>
-                  <td><span class="check-circle"><img src="/assets/icon-check.svg" alt="check" /></span></td>
-                  <td><span class="check-circle"><img src="/assets/icon-check.svg" alt="check" /></span></td>
-                  <td><span class="check-circle"><img src="/assets/icon-check.svg" alt="check" /></span></td>
-                </tr>
-                <tr>
-                  <th>After Purchase Reviews</th>
-                  <td>10 Orders / Month</td>
-                  <td>500 Orders / Month</td>
-                  <td>3000 Orders / Month</td>
-                </tr>
-                <tr>
-                  <th>Campaigns</th>
-                  <td></td>
-                  <td><span class="check-circle"><img src="/assets/icon-check.svg" alt="check" /></span></td>
-                  <td><span class="check-circle"><img src="/assets/icon-check.svg" alt="check" /></span></td>
-                </tr>
-                <tr>
-                  <th>Advance Customization</th>
-                  <td><span class="check-circle"><img src="/assets/icon-check.svg" alt="check" /></span></td>
-                  <td><span class="check-circle"><img src="/assets/icon-check.svg" alt="check" /></span></td>
-                  <td><span class="check-circle"><img src="/assets/icon-check.svg" alt="check" /></span></td>
-                </tr>
-                <tr>
-                  <th>Import Reviews (CSV)</th>
-                  <td><span class="check-circle"><img src="/assets/icon-check.svg" alt="check" /></span></td>
-                  <td><span class="check-circle"><img src="/assets/icon-check.svg" alt="check" /></span></td>
-                  <td><span class="check-circle"><img src="/assets/icon-check.svg" alt="check" /></span></td>
-                </tr>
-                <tr>
-                  <th>Edit Review Request Email</th>
-                  <td><span class="check-circle"><img src="/assets/icon-check.svg" alt="check" /></span></td>
-                  <td><span class="check-circle"><img src="/assets/icon-check.svg" alt="check" /></span></td>
-                  <td><span class="check-circle"><img src="/assets/icon-check.svg" alt="check" /></span></td>
-                </tr>
-                <tr>
-                  <th>Review Request Translation</th>
-                  <td><span class="check-circle"><img src="/assets/icon-check.svg" alt="check" /></span></td>
-                  <td><span class="check-circle"><img src="/assets/icon-check.svg" alt="check" /></span></td>
-                  <td><span class="check-circle"><img src="/assets/icon-check.svg" alt="check" /></span></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      `;
-
-      modal.style.display = "flex";
+      html += '</tbody></table></div>';
     });
-  });
 
-  root.querySelectorAll(".modal-close").forEach(btn => {
-    btn.addEventListener("click", () => {
-      const tabIndex = btn.dataset.tab;
+    html += '</div>';
+    return html;
+  };
+
+  const openModal = (tabIndex) => {
+    const modal = root.querySelector(`#modal-${tabIndex}`);
+    if (!modal) return;
+
+    const wrap = root.querySelector(`.pricing-wrapper[data-tab='${tabIndex}']`);
+    const cards = wrap ? Array.from(wrap.querySelectorAll('.pricing-card')) : [];
+    const header = modal.querySelector('.modal-header .compare-header');
+    const headerPlans = header ? header.querySelectorAll('.header-plan') : [];
+    headerPlans.forEach((hp, i) => {
+      const card = cards[i];
+      if (!card) return;
+      const title = card.querySelector('.plan-title')?.textContent?.trim() || '';
+      const pkg = card.querySelector('.package')?.textContent?.trim() || '';
+      const btnEl = card.querySelector('.btn-primary, .btn-outline');
+      const nameEl = hp.querySelector('.plan-name');
+      const subEl = hp.querySelector('.plan-sub');
+      const ctaEl = hp.querySelector('a.btn-primary, a.btn-outline');
+      if (nameEl) nameEl.textContent = title;
+      if (subEl) {
+        if (pkg) {
+          subEl.textContent = pkg;
+          subEl.style.display = 'block';
+        } else {
+          subEl.style.display = 'none';
+        }
+      }
+      if (ctaEl) {
+        if (btnEl) {
+          ctaEl.textContent = btnEl.textContent.trim() || 'Sign Up Free';
+          ctaEl.href = btnEl.getAttribute('href') || '#';
+          ctaEl.style.display = 'inline-block';
+        } else {
+          ctaEl.style.display = 'none';
+        }
+      }
+    });
+
+    const tabName = tabNames[tabIndex] || tabs[tabIndex];
+    const groups = tabName ? modalData[tabName] || [] : [];
+    const body = modal.querySelector('.modal-body');
+    body.innerHTML = buildTable(groups, cards.length);
+
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeModal = (modal) => {
+    if (!modal) return;
+    modal.style.display = 'none';
+    document.body.style.overflow = '';
+  };
+
+  root.addEventListener('click', (event) => {
+    const btn = event.target.closest('.see-all');
+    if (btn && root.contains(btn)) {
+      event.preventDefault();
+      const tabIndex = Number(btn.dataset.tab || 0);
+      openModal(tabIndex);
+      return;
+    }
+
+    const closeBtn = event.target.closest('.modal-close');
+    if (closeBtn && root.contains(closeBtn)) {
+      event.preventDefault();
+      const tabIndex = closeBtn.dataset.tab;
       const modal = root.querySelector(`#modal-${tabIndex}`);
-      if (modal) modal.style.display = "none";
-    });
+      closeModal(modal);
+      return;
+    }
+
+    const overlay = event.target.closest('.modal-overlay');
+    if (overlay && event.target === overlay) {
+      closeModal(overlay);
+    }
   });
 })();
 </script>
@@ -343,6 +338,16 @@ const { tabs = [], plansByTab = {}, activeTab = 0 } = Astro.props;
   grid-template-columns: repeat(3, 1fr);
   gap: clamp(12px, 3vw, 16px);
   margin-top: 12px;
+}
+
+.pricing-wrapper.columns-1 {
+  grid-template-columns: minmax(260px, 1fr);
+  justify-content: center;
+}
+
+.pricing-wrapper.columns-2 {
+  grid-template-columns: repeat(2, minmax(260px, 1fr));
+  justify-content: center;
 }
 
 /* Card (outer) */
@@ -440,14 +445,22 @@ const { tabs = [], plansByTab = {}, activeTab = 0 } = Astro.props;
 .modal-content {
   background: #fff;
   border-radius: 12px;
-  width: 90%;
+  width: min(960px, calc(100vw - 24px));
   max-width: 1100px;
   max-height: 90vh;
-  overflow: hidden;
+  overflow-y: hidden;
+  overflow-x: auto;
   display: flex;
-  flex-direction: column;
   box-shadow: 0 10px 30px rgba(0,0,0,0.2);
   position: relative;
+}
+
+.modal-scroll {
+  min-width: 560px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 /* Header sticky */
@@ -482,6 +495,14 @@ const { tabs = [], plansByTab = {}, activeTab = 0 } = Astro.props;
 .modal-body {
   padding: 1.5rem 2rem;
   overflow-y: auto;
+  flex: 1;
+}
+
+.modal-empty {
+  padding: 1.5rem 2rem;
+  text-align: center;
+  color: #6b7280;
+  font-size: 0.95rem;
 }
 
 /* ===== Compare header (modal) ===== */
@@ -543,7 +564,17 @@ const { tabs = [], plansByTab = {}, activeTab = 0 } = Astro.props;
   .pricing-wrapper { grid-template-columns: 1fr; gap: 8px; }
   .billing-toggle { gap: .5rem; }
   .pricing-card{ padding: 12px; }
+  .modal-content {
+    width: calc(100vw - 16px);
+  }
+  .modal-body {
+    padding: 1rem 1.25rem 1.5rem;
+  }
+  .modal-header {
+    padding: 1rem 1.25rem 0.5rem;
+  }
 }
+
 
 
 </style>

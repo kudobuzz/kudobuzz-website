@@ -38,6 +38,7 @@ interface FooterProps {
   socialLinks?: SocialLink[];
   bottom?: FooterBottom;
   branding?: FooterBranding;
+  showBanner?: boolean;
 }
 
 const {
@@ -46,13 +47,15 @@ const {
   advancedColumns = [],
   socialLinks = [],
   bottom = {},
-  branding = {}
+  branding = {},
+  showBanner = true,
 } = Astro.props;
 ---
-
-<div class="banner-wrapper">
-  <Banner />
-</div>
+{showBanner && (
+  <div class="banner-wrapper">
+    <Banner />
+  </div>
+)}
 
 <footer class="footer">
     
