@@ -47,7 +47,7 @@ export const footerLinks = {
   advancedTitle: "Other Resources",
   advancedColumns: [
     {
-      title: "Platform Matchups",
+      title: "",
       links: [
         { name: "Kudobuzz vs Yotpo Compare", url: "#", target: "_blank" },
         { name: "Kudobuzz vs Loox Compare", url: "#", target: "_blank" },
@@ -56,7 +56,7 @@ export const footerLinks = {
       ],
     },
     {
-      title: "Review Platform Face-offs",
+      title: "",
       links: [
         { name: "Kudobuzz Reviews vs PowerReviews", url: "#", target: "_blank" },
         { name: "Kudobuzz Reviews vs BazaarVoice", url: "#", target: "_blank" },
@@ -65,7 +65,7 @@ export const footerLinks = {
       ],
     },
     {
-      title: "Playbooks & Templates",
+      title: "",
       links: [
         { name: "50+ Proven Review Request Email Templates", url: "#", target: "_blank" },
         { name: "How to Write Review Requests", url: "#", target: "_blank" },
@@ -74,7 +74,7 @@ export const footerLinks = {
       ],
     },
     {
-      title: "Customer Review Guides",
+      title: "",
       links: [
         { name: "How to Respond to Negative Reviews: 25+ Professional Templates", url: "#", target: "_blank" },
         { name: "Thank You Templates for 5-Star Reviews That Build Loyalty", url: "#", target: "_blank" },
@@ -83,7 +83,7 @@ export const footerLinks = {
       ],
     },
     {
-      title: "Research & Insights",
+      title: "",
       links: [
         { name: "The Ultimate Guide to Shoplazza Customer Reviews", url: "#", target: "_blank" },
         { name: "The Ultimate Guide to Bigcommerce Customer Reviews", url: "#", target: "_blank" },

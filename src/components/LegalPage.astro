@@ -25,7 +25,7 @@ const {
 <style>
 
 .legal-page {
-  width: min(100%, 960px);
+  width: min(100%, 1080px);
   margin: 0 auto;
   padding: clamp(16px, 2.2vw, 24px) var(--page-padding);
   display: flex;
@@ -40,6 +40,7 @@ const {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  padding-bottom:30px;
 }
 
 .legal-page .eyebrow {
@@ -61,22 +62,6 @@ const {
 }
 
 
-
-.legal-section p,
-.legal-section li {
-  font-size: 16px;
-  line-height: 1.7;
-  color: #4b5563;
-}
-
-.legal-section ul {
-  padding-left: 20px;
-  margin: 0;
-}
-
-.legal-section ul li + li {
-  margin-top: 8px;
-}
 
 @media (max-width: 650px) {
   .legal-page {

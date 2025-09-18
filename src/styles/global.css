@@ -280,19 +280,39 @@ tbody tr:nth-child(even) {
   align-items: center;
 }
 
-.legal-page p {
-  padding-bottom: 40px;
-
-}
-
-.legal-page .legal-section {
-  padding: 20px 0px 20px 60px
-}
 
 .legal-section h2 {
   font-size: 24px;
-  margin: 0 0 10px;
-  color: #111827;
+  font-weight: 800;
+  margin-bottom: 16px;
+  margin-top: 0;
+
+}
+
+.legal-page p,
+.legal-page li {
+  font-size: 20px;
+  color: #63646D;
+}
+
+.legal-page li {
+  padding-bottom: 4px;
+  font-weight: 400;
+}
+
+.legal-section {
+  padding: 20px 0 40px 60px
+}
+
+.legal-page ul {
+  padding: 16px 20px;
+  margin: 0;
+  list-style-type: disc;
+  list-style-position: outside;
+}
+
+.legal-page ul li+li {
+  margin-top: 8px;
 }
 
 @media (max-width: 1024px) {
