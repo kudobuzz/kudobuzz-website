@@ -361,6 +361,7 @@ tbody tr:nth-child(even) {
     padding: 16px 24px;
     margin: 8px 0;
   }
+
 }
 
 @media (max-width: 320px) {
