@@ -10,10 +10,10 @@ export const footerLinks = {
     {
       title: "Features",
       links: [
-        { name: "Product Reviews", url: "#" },
-        { name: "Social Reviews", url: "#" },
-        { name: "UGC & Shoppable Videos", url: "#" },
-        { name: "CRO", url: "#" },
+        { name: "Product Reviews", url: "/solutions/product-reviews" },
+        { name: "Social Reviews", url: "/solutions/social-reviews" },
+        { name: "UGC & Shoppable Videos", url: "/solutions/ugc" },
+        { name: "CRO", url: "/solutions/cro" },
       ],
     },
     {
