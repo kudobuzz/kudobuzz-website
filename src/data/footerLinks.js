@@ -41,7 +41,7 @@ export const footerLinks = {
     {
       title: "Resources",
       links: [
-        { name: "E-book", url: "blog.kudobuzz.com/tag/e-book/", target: "_blank" },
+        { name: "E-book", url: "https://blog.kudobuzz.com/tag/e-book/", target: "_blank" },
       ],
     },
   ],
