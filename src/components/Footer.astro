@@ -61,7 +61,9 @@ const {
     
   <div class="footer-top">
     {branding.logo?.src && (
-      <img class="logo" src={branding.logo.src} alt={branding.logo.alt ?? "Logo"} />
+      <a class="logo-link" href="/">
+        <img class="logo" src={branding.logo.src} alt={branding.logo.alt ?? "Logo"} />
+      </a>
     )}
     {(branding.tagline || socialLinks.length > 0) && (
       <div class="footer-content">
@@ -175,6 +177,10 @@ const {
 .logo {
   height: 40px;
   margin-bottom: 48px;
+}
+
+.logo-link {
+  display: inline-block;
 }
 
 footer .title{
