@@ -15,12 +15,14 @@ const {
   social: socialLinks,
   bottom,
 } = footerLinks;
+
+const updated = `Updated ${new Intl.DateTimeFormat("en-US", { month: "long", year: "numeric" }).format(new Date())}`;
 ---
 
 <Base title="Privacy Policy — Kudobuzz">
   <Navbar menuItems={menuItems} />
 
-  <LegalPage title="Privacy Policy">
+  <LegalPage title="Privacy Policy" updated={updated}>
     
      <Fragment slot="intro">
       <p>
@@ -363,7 +365,7 @@ const {
     <section class="legal-section">
       
       <p>
-       If you have any questions about these Terms, please contact us. Email:  <a href="mailto:hello@kudobuzz.com"> hello@kudobuzz.com </a>
+       If you have any questions about these Terms, please contact us. Email:  <a href="mailto:help@kudobuzz.com"> help@kudobuzz.com </a>
       </p>
     </section> 
   </LegalPage>

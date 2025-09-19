@@ -1,0 +1,168 @@
+---
+import Base from "../layouts/Base.astro";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+import LegalPage from "../components/LegalPage.astro";
+import { menuItems } from "../data/menuItems.js";
+import { footerLinks } from "../data/footerLinks.js";
+import AddSpace from "../components/AddSpace.astro";
+
+const {
+  branding,
+  columns,
+  advancedTitle,
+  advancedColumns,
+  social: socialLinks,
+  bottom,
+} = footerLinks;
+
+const updated = `Updated ${new Intl.DateTimeFormat("en-US", { month: "long", year: "numeric" }).format(new Date())}`;
+---
+
+<Base title="GDPR Compliance — Kudobuzz">
+  <Navbar menuItems={menuItems} />
+
+  <LegalPage title="GDPR Compliance" updated={updated}>
+    <Fragment slot="intro">
+      <p>
+        This General Data Protection Regulation (GDPR) notice explains how Kudobuzz INC collects, uses, safeguards, and shares personal data belonging to individuals located in the European Economic Area (EEA), the United Kingdom, and Switzerland.
+      </p>
+      <p>
+        We designed this page to help you understand your rights, the legal bases for our processing activities, and the measures we take to protect your information across the Kudobuzz platform.
+      </p>
+    </Fragment>
+
+    <section class="legal-section">
+      <h2>Data Controller</h2>
+      <p>
+        Kudobuzz INC, 237 15th Street, Accra, Ghana, acts as the data controller for personal data processed through our platform, websites, customer support channels, and marketing activities. You can reach us at <a href="mailto:help@kudobuzz.com">help@kudobuzz.com</a> for any data protection inquiries.
+      </p>
+    </section>
+
+    <section class="legal-section">
+      <h2>Scope of This Notice</h2>
+      <p>
+        This notice covers personal data we collect when merchants, shoppers, reviewers, or partners interact with Kudobuzz products and services. It supplements our Privacy Policy and applies where GDPR, UK GDPR, or Swiss data protection laws govern our processing.
+      </p>
+    </section>
+
+    <section class="legal-section">
+      <h2>Information We Collect</h2>
+      <p>We process personal data that falls into the following categories:</p>
+      <ul>
+        <li>Account details such as name, business information, billing contacts, and login credentials.</li>
+        <li>Contact information including email addresses, phone numbers, and communication preferences.</li>
+        <li>Content supplied by customers and reviewers such as ratings, testimonials, media uploads, or support requests.</li>
+        <li>Usage data from our applications, APIs, analytics tools, and cookies.</li>
+        <li>Technical telemetry like IP address, device identifiers, browser information, and session metadata.</li>
+        <li>Commercial data related to plan subscriptions, invoices, payment status, and transactional history.</li>
+      </ul>
+    </section>
+
+    <section class="legal-section">
+      <h2>Legal Bases for Processing</h2>
+      <p>
+        We rely on several legal bases to process personal data under GDPR:
+      </p>
+      <ul>
+        <li><strong>Contractual necessity</strong> for delivering services you sign up for and maintaining your account.</li>
+        <li><strong>Legitimate interests</strong> in improving our platform, securing our systems, preventing abuse, and supporting our business operations.</li>
+        <li><strong>Consent</strong> for activities such as marketing emails, cookies that are not strictly necessary, and showcasing user-generated content where required.</li>
+        <li><strong>Legal obligations</strong> to comply with accounting, taxation, consumer protection, and regulatory requirements.</li>
+        <li><strong>Vital interests</strong> or <strong>public interest</strong> where applicable, such as responding to lawful requests from authorities.</li>
+      </ul>
+    </section>
+
+    <section class="legal-section">
+      <h2>How We Use Personal Data</h2>
+      <p>
+        We use personal data to provide the Kudobuzz services you expect, including authenticating users, delivering customer support, powering integrations, surfacing analytics, and tailoring experiences. We also process data to detect fraud, maintain platform reliability, and communicate product updates or offers relevant to your role.
+      </p>
+    </section>
+
+    <section class="legal-section">
+      <h2>Sharing and Subprocessors</h2>
+      <p>
+        We limit data sharing to trusted service providers that help us operate the Kudobuzz platform, including hosting, analytics, payment processing, email delivery, customer support, and security vendors. Each provider signs data processing agreements that reflect GDPR requirements. We maintain a live list of subprocessors, which we can share upon request.
+      </p>
+    </section>
+
+    <section class="legal-section">
+      <h2>International Data Transfers</h2>
+      <p>
+        If we transfer personal data outside the EEA, UK, or Switzerland, we implement safeguards such as standard contractual clauses, data processing agreements, and documented security practices to ensure equivalent protection. We regularly review transfer impact assessments to account for regulatory updates.
+      </p>
+    </section>
+
+    <section class="legal-section">
+      <h2>Data Retention</h2>
+      <p>
+        We retain personal data only for as long as we have an ongoing legitimate business need or legal obligation to do so. When data is no longer required, we delete it or anonymize it in line with our retention schedules and contractual commitments.
+      </p>
+    </section>
+
+    <section class="legal-section">
+      <h2>Security Measures</h2>
+      <p>
+        Kudobuzz uses layered technical and organizational measures to safeguard personal data. Controls include encryption in transit, network segmentation, access management, logging, regular vulnerability assessments, and security awareness training for employees and contractors.
+      </p>
+    </section>
+
+    <section class="legal-section">
+      <h2>Your Data Subject Rights</h2>
+      <p>
+        Individuals located in the EEA, UK, or Switzerland have the right to:
+      </p>
+      <ul>
+        <li>Request access to their personal data and obtain a copy.</li>
+        <li>Ask for inaccurate or incomplete data to be rectified.</li>
+        <li>Request deletion of personal data where GDPR allows.</li>
+        <li>Object to processing based on legitimate interests or direct marketing.</li>
+        <li>Restrict processing under certain circumstances.</li>
+        <li>Receive personal data in a portable format and transmit it to another controller.</li>
+        <li>Withdraw consent at any time when consent is the legal basis.</li>
+        <li>Lodge a complaint with a supervisory authority in their country.</li>
+      </ul>
+    </section>
+
+    <section class="legal-section">
+      <h2>Exercising Your Rights</h2>
+      <p>
+        To exercise your rights, please email <a href="mailto:help@kudobuzz.com">help@kudobuzz.com</a> with a description of your request. We may need to verify your identity before completing your request. We respond within one month, or sooner where possible, unless GDPR permits an extension.
+      </p>
+    </section>
+
+    <section class="legal-section">
+      <h2>Cookies and Tracking Technologies</h2>
+      <p>
+        Our cookie banner lets you manage consent for optional cookies. You can also control cookies through your browser settings. Essential cookies remain active because they support the core functionality of our platform.
+      </p>
+    </section>
+
+    <section class="legal-section">
+      <h2>Automated Decision-Making</h2>
+      <p>
+        Kudobuzz does not engage in automated decision-making that produces legal or similarly significant effects without human review. If we introduce such processing, we will update this notice and provide meaningful information about the logic involved and the potential consequences.
+      </p>
+    </section>
+
+    <section class="legal-section">
+      <h2>Contacting Our Data Protection Team</h2>
+      <p>
+        If you have questions, concerns, or complaints about how we process personal data, contact our data protection team at <a href="mailto:help@kudobuzz.com">help@kudobuzz.com</a>. We are happy to work with you and supervisory authorities to resolve any issues.
+      </p>
+    </section>
+  </LegalPage>
+
+  <AddSpace color="white" />
+  <AddSpace color="white" />
+  <Footer
+    branding={branding}
+    columns={columns}
+    advancedTitle={advancedTitle}
+    advancedColumns={advancedColumns}
+    socialLinks={socialLinks}
+    bottom={bottom}
+    showBanner={false}
+  />
+</Base>

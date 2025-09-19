@@ -28,6 +28,7 @@ export interface Props {
   imageAlt?: string;
   layout?: "left" | "right" | "center" | "bothside";
   colorScheme?: "white" | "grey";
+  padding?: string;
   buttonTextReview?: string;
   buttonTextReviewLink?: string;
 }
@@ -42,6 +43,7 @@ const {
   imageAlt = "Default image",
   layout = "left",
   colorScheme = "white",
+  padding,
   checkedItems = [],
   reviews = [],
   buttonTextReview,
@@ -68,7 +70,10 @@ import Slider from "./Slider.astro";
 
 ---
 
-<section class={`two-column-section ${colorScheme}`}>
+<section
+  class={`two-column-section ${colorScheme}`}
+  style={padding ? `padding: ${padding}` : undefined}
+>
   {layout === "center" ? (
     <div class="center-container">
       <div class="center-text">

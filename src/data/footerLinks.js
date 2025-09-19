@@ -1,3 +1,5 @@
+const currentYear = new Date().getFullYear();
+
 export const footerLinks = {
   branding: {
     logo: {
@@ -21,7 +23,7 @@ export const footerLinks = {
       links: [
         { name: "Pricing", url: "/pricing" },
         { name: "Blog", url: "https://blog.kudobuzz.com/", target: "_blank" },
-        { name: "Jobs", url: "https://kudobuzz.com/jobs", target: "_blank" },
+        { name: "Jobs", url: "https://wellfound.com/company/kudobuzz-1/jobs", target: "_blank" },
       ],
     },
     {
@@ -34,13 +36,13 @@ export const footerLinks = {
       title: "Support",
       links: [
         { name: "Help Center", url: "https://support.kudobuzz.com/en/", target: "_blank" },
-        { name: "GDPR", url: "https://kudobuzz.com/gdpr", target: "_blank" },
+        { name: "GDPR", url: "/gdpr" },
       ],
     },
     {
       title: "Resources",
       links: [
-        { name: "E-book", url: "https://kudobuzz.com/resources", target: "_blank" },
+        { name: "E-book", url: "blog.kudobuzz.com/tag/e-book/", target: "_blank" },
       ],
     },
   ],
@@ -100,8 +102,9 @@ export const footerLinks = {
     { icon: "/assets/icons/icon-facebook.svg", url: "https://www.facebook.com/kudobuzz/", target: "_blank" },
   ],
   bottom: {
-    text: "© 2024 Kudobuzz, Inc. All Rights Reserved.",
+    text: `© ${currentYear} Kudobuzz, Inc. All Rights Reserved.`,
     links: [
+      { name: "GDPR", url: "/gdpr" },
       { name: "Terms", url: "/terms" },
       { name: "Privacy", url: "/privacy" },
       { name: "Cookie", url: "/cookie" },

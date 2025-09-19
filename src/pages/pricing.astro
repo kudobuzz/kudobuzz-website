@@ -22,7 +22,7 @@ const {
 ---
 <Base title="Pricing — Kudobuzz">
   <Navbar menuItems={menuItems} />
-  <AddSpace color="white" />
+ <AddSpace color="transparent" />
 
   <Section
     tag="Pricing"
@@ -30,13 +30,14 @@ const {
     titlehighlight="grow your business effortlessly"
     layout="center"
     colorScheme="white"
+    padding="0px"
   />
 
   <Pricing
     tabs={pricingData.tabs}
     plansByTab={pricingData.plansByTab}
     modalContent={pricingData.modalContent}
-  />
+/>
 
   <AddSpace color="transparent" />
   <AddSpace color="transparent" />
