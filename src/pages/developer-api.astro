@@ -1,0 +1,86 @@
+---
+import Base from "../layouts/Base.astro";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+import LegalPage from "../components/LegalPage.astro";
+import { menuItems } from "../data/menuItems.js";
+import { footerLinks } from "../data/footerLinks.js";
+import AddSpace from "../components/AddSpace.astro";
+
+const {
+  branding,
+  columns,
+  advancedTitle,
+  advancedColumns,
+  social: socialLinks,
+  bottom,
+} = footerLinks;
+
+const updated = `Updated ${new Intl.DateTimeFormat("en-US", { month: "long", year: "numeric" }).format(new Date())}`;
+---
+
+<Base title="Developer API — Kudobuzz">
+  <Navbar menuItems={menuItems} />
+
+  <LegalPage title="Developer API" updated={updated}>
+    <Fragment slot="intro">
+      <p>
+        Our Developer API gives your business the flexibility to build custom integrations and unlock even more value from Kudobuzz.
+      </p>
+      <p>
+        Businesses on the Buffet plan get full API access. App developers looking to integrate with Kudobuzz get API access for free.
+      </p>
+      <p>
+        If you'd like access to the API, kindly email us at <a href="mailto:help@kudobuzz.com">help@kudobuzz.com</a> and our team will get you set up.
+      </p>
+    </Fragment>
+
+    <section class="legal-section">
+      <h2>Eligibility</h2>
+      <p>
+        The Developer API is available to Kudobuzz customers on the Buffet plan as well as app developers building integrations with our platform. We authorize access on a per-account basis to keep your data secure.
+      </p>
+    </section>
+
+    <section class="legal-section">
+      <h2>Getting Access</h2>
+      <p>
+        Send a request to <a href="mailto:help@kudobuzz.com">help@kudobuzz.com</a> with details about your project, and our team will guide you through authentication credentials, rate limits, and best practices for going live.
+      </p>
+    </section>
+
+    <section class="legal-section">
+      <h2>FAQ</h2>
+      <ul>
+        <li>
+          <strong>Who can use the API?</strong>
+          <p>Businesses on our Buffet plan and app developers who want to integrate with Kudobuzz.</p>
+        </li>
+        <li>
+          <strong>What can I do with the API?</strong>
+          <p>You can build custom workflows, connect Kudobuzz data to your internal systems, or create new apps and integrations powered by Kudobuzz.</p>
+        </li>
+        <li>
+          <strong>How do I get access?</strong>
+          <p>Simply email <a href="mailto:help@kudobuzz.com">help@kudobuzz.com</a> with your request, and our team will guide you through the process.</p>
+        </li>
+        <li>
+          <strong>Is there a cost for API access?</strong>
+          <p>API access is included in the Buffet plan. If you're an app developer integrating with us, it's completely free.</p>
+        </li>
+      </ul>
+    </section>
+  </LegalPage>
+
+  <AddSpace color="white" />
+  <AddSpace color="white" />
+  <Footer
+    branding={branding}
+    columns={columns}
+    advancedTitle={advancedTitle}
+    advancedColumns={advancedColumns}
+    socialLinks={socialLinks}
+    bottom={bottom}
+    showBanner={false}
+  />
+</Base>

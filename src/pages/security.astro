@@ -17,78 +17,122 @@ const {
 } = footerLinks;
 ---
 
-<Base title="Security — Kudobuzz">
+<Base title="Kudobuzz Security Policy — Kudobuzz">
   <Navbar menuItems={menuItems} />
 
-  <LegalPage title="Security">
-    <Fragment slot="intro">
+  <LegalPage title="Kudobuzz Security Policy">
+
+     <Fragment slot="intro">
       <p>
-        Security is core to Kudobuzz. This page describes how we protect customer data and the
-        controls you can expect when using our platform.
+         At Kudobuzz, safeguarding the data of our merchants and their customers is a top priority. This policy outlines our approach to data security, including the technical, organizational, and procedural measures we implement to protect data.
+      </p>
+      
+      <p>
+        While Kudobuzz takes extensive steps to secure its platform, merchants also share responsibility for ensuring their own systems and practices align with security best practices.
       </p>
     </Fragment>
 
+  
     <section class="legal-section">
-      <h2>1. Infrastructure</h2>
+      <h2>Security Principles</h2>
+      <p>Kudobuzz’s security framework is built around the following core principles:</p>
+      <ul>
+        <li>Confidentiality – Data is accessible only to authorized parties.</li>
+        <li>Integrity – Data is protected from unauthorized alteration or destruction.</li>
+        <li>Availability – Services and data remain accessible with minimal downtime.</li>
+      </ul>
+    </section>
+
+    <section class="legal-section">
+      <h2>Data Encryption</h2>
+      <ul>
+        <li>In Transit: All data transmitted between Kudobuzz and users is encrypted using TLS/SSL protocols.</li>
+        <li>At Rest: Sensitive data is encrypted at rest using industry-standard algorithms where applicable.</li>
+      </ul>
+    </section>
+
+    <section class="legal-section">
+      <h2>Access Control</h2>
+      <ul>
+        <li>Strict role-based access control (RBAC) ensures that only authorized personnel can access sensitive data.</li>
+        <li>Multi-factor authentication (MFA) is enforced for internal administrative access.</li>
+        <li>Regular audits of access logs are conducted to detect unusual activity.</li>
+      </ul>
+    </section>
+
+    <section class="legal-section">
+      <h2>Application Security</h2>
+      <ul>
+        <li>Code is reviewed and tested for vulnerabilities before deployment.</li>
+        <li>Regular penetration tests and vulnerability scans are performed.</li>
+        <li>Security patches and updates are applied promptly.</li>
+      </ul>
+    </section>
+
+    <section class="legal-section">
+      <h2>Infrastructure Security</h2>
+      <ul>
+        <li>Kudobuzz is hosted on leading cloud providers with strong compliance standards (such as SOC 2, ISO 27001, and GDPR-ready).</li>
+        <li>Firewalls, intrusion detection, and monitoring tools are in place to mitigate threats.</li>
+        <li>Backup and disaster recovery plans ensure service continuity.</li>
+      </ul>
+    </section>
+
+    <section class="legal-section">
+      <h2>Data Retention & Disposal</h2>
+      <ul>
+        <li>Data is retained only as long as necessary to deliver services or comply with legal obligations.</li>
+        <li>When data is no longer needed, it is securely deleted in accordance with industry standards.</li>
+      </ul>
+    </section>
+
+    <section class="legal-section">
+      <h2>Sub-Processors</h2>
+      <ul>
+        <li>Kudobuzz uses select third-party vendors for infrastructure, analytics, and communication services.</li>
+        <li>Each sub-processor is reviewed for security compliance before engagement.</li>
+        <li>A list of current sub-processors is available on request.</li>
+      </ul>
+    </section>
+
+    <section class="legal-section">
+      <h2>Incident Response</h2>
+      <p>In case of a security incident:</p>
+      <ul>
+        <li>Kudobuzz will promptly investigate and contain the issue.</li>
+        <li>Customers will be notified without undue delay if their data is affected.</li>
+        <li>Post-incident reviews are conducted to strengthen our security posture.</li>
+      </ul>
+    </section>
+
+    <section class="legal-section">
+      <h2>Merchant Responsibilities</h2>
+      <ul>
+        <li>Maintaining secure access to their Kudobuzz accounts (e.g., strong passwords, MFA).</li>
+        <li>Ensuring their integrations and third-party apps are secure.</li>
+        <li>Complying with applicable data protection and security regulations.</li>
+      </ul>
       <p>
-        Kudobuzz is hosted on leading cloud infrastructure with built-in redundancy, firewalls, and
-        continuous monitoring. Production systems are segmented from corporate networks and access is
-        restricted using least-privilege principles and multi-factor authentication.
+        Note: Kudobuzz is not liable for breaches or data losses caused by merchant negligence, misconfigurations, or use of insecure third-party services.
       </p>
     </section>
 
     <section class="legal-section">
-      <h2>2. Data Protection</h2>
+      <h2>Continuous Improvement</h2>
       <p>
-        All traffic to and from Kudobuzz is encrypted using TLS 1.2+ and strong cipher suites. Data
-        at rest is encrypted using AES-256. Backups are performed automatically and tested to ensure
-        recoverability. We retain backups for a limited period to guard against accidental loss.
+        Kudobuzz continually reviews and enhances its security practices in line with evolving threats, industry standards, and regulatory requirements.
       </p>
     </section>
 
     <section class="legal-section">
-      <h2>3. Application Security</h2>
+      <h2>Contact Information</h2>
       <p>
-        We follow secure development lifecycle practices, including peer code reviews, dependency
-        management, and automated testing. Regular penetration tests and vulnerability scans are
-        performed by trusted external specialists. Critical issues are triaged immediately and
-        patched according to severity.
+        For security concerns, disclosures, or questions about this policy, contact:
       </p>
-    </section>
-
-    <section class="legal-section">
-      <h2>4. Compliance & Privacy</h2>
       <p>
-        Kudobuzz aligns with global privacy regulations, including GDPR and CCPA. Data processing
-        agreements are available for customers who need additional assurances. We maintain detailed
-        audit logs and employ data minimisation practices to collect only what is necessary.
-      </p>
-    </section>
-
-    <section class="legal-section">
-      <h2>5. Responsible Disclosure</h2>
-      <p>
-        We welcome reports from the security community. If you believe you’ve found a vulnerability,
-        please contact <a href="mailto:security@kudobuzz.com">security@kudobuzz.com</a> with
-        details. We investigate all legitimate reports and work with reporters to remediate issues
-        promptly.
-      </p>
-    </section>
-
-    <section class="legal-section">
-      <h2>6. Business Continuity</h2>
-      <p>
-        Our disaster recovery plan outlines procedures for incident response, data restoration, and
-        communication. We conduct tabletop exercises to validate our readiness and continually
-        improve our response process.
-      </p>
-    </section>
-
-    <section class="legal-section">
-      <h2>7. Questions</h2>
-      <p>
-        Need more detail about Kudobuzz security? Reach out to
-        <a href="mailto:security@kudobuzz.com">security@kudobuzz.com</a> and our team will assist.
+        Security Team<br />
+        Kudobuzz<br />
+        <a href="mailto:help@kudobuzz.com">help@kudobuzz.com</a>
       </p>
     </section>
   </LegalPage>

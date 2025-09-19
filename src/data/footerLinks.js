@@ -29,7 +29,7 @@ export const footerLinks = {
     {
       title: "Integration",
       links: [
-        { name: "Developer API", url: "https://developers.kudobuzz.com/", target: "_blank" },
+        { name: "Developer API", url: "/developer-api" },
       ],
     },
     {
@@ -42,6 +42,7 @@ export const footerLinks = {
       title: "Resources",
       links: [
         { name: "E-book", url: "https://blog.kudobuzz.com/tag/e-book/", target: "_blank" },
+        { name: "Merchant Stories", url: "https://blog.kudobuzz.com/tag/merchant-stories/", target: "_blank" },
       ],
     },
   ],
