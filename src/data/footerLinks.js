@@ -36,7 +36,6 @@ export const footerLinks = {
       title: "Support",
       links: [
         { name: "Help Center", url: "https://support.kudobuzz.com/en/", target: "_blank" },
-        { name: "GDPR", url: "/gdpr" },
       ],
     },
     {
