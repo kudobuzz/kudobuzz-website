@@ -1,6 +1,13 @@
 ---
 import "../styles/global.css";
-const { title = "Kudobuzz" } = Astro.props;
+const {
+  title = "Kudobuzz",
+  description = "Collect product reviews, leverage social proof, and grow with Kudobuzz.",
+} = Astro.props;
+const siteUrl = Astro.site ? Astro.site.origin : "";
+const ogImage = Astro.site
+  ? new URL("/assets/web-thumbnail.png", Astro.site).toString()
+  : "/assets/web-thumbnail.png";
 ---
 
 <html lang="en">
@@ -13,6 +20,17 @@ const { title = "Kudobuzz" } = Astro.props;
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
     />
+    <link rel="icon" type="image/png" href="/assets/favicon.png" />
+    <meta property="og:site_name" content="Kudobuzz" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    {siteUrl && <meta property="og:url" content={siteUrl} />}
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
     <slot name="head" />
     <title>{title}</title>
   </head>
