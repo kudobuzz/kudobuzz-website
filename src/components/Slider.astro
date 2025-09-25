@@ -14,13 +14,17 @@ let totalSteps = steps.length;
   </div>
 
   <div class="slider-controls">
-    <button class="prev" aria-label="Previous">&lt;</button>
+    <button class="prev" aria-label="Previous">
+      <img src="/assets/icons/icon-chevron.svg" alt="" aria-hidden="true" />
+    </button>
     <div class="dots">
       {steps.map((_, i) => (
         <span class="dot" data-index={i}></span>
       ))}
     </div>
-    <button class="next" aria-label="Next">&gt;</button>
+    <button class="next" aria-label="Next">
+      <img src="/assets/icons/icon-chevron.svg" alt="" aria-hidden="true" />
+    </button>
   </div>
 
   <div class="step-indicator">
@@ -96,6 +100,14 @@ let totalSteps = steps.length;
   border: none;
   font-size: 1.5rem;
   cursor: pointer;
+}
+.prev img,
+.next img {
+  width: 24px;
+  height: 24px;
+}
+.prev img {
+  transform: scaleX(-1);
 }
 .dots {
   display: flex;
