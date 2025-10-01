@@ -33,7 +33,7 @@ nav {
 }
 
 section {
-  padding: clamp(40px, 7vw, 120px) var(--page-padding);
+  padding: 30px 0;
 }
 
 header {

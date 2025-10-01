@@ -29,54 +29,61 @@ const modalDataEncoded = encodeURIComponent(JSON.stringify(modalContent));
           data-tab={tabIndex}
           style={`display: ${tabIndex === activeTab ? "grid" : "none"}`}
         >
-          {plans.map((plan, idx) => (
-            <article class="pricing-card" key={idx}>
-              <div class="card-header">
-                <h4 class="plan-title">{plan.title}</h4>
+          {plans.map((plan, idx) => {
+            const discountText = typeof plan.discountText === "string" ? plan.discountText.trim() : plan.discountText;
+            return (
+              <article class="pricing-card" key={idx}>
+                <div class="card-header">
+                  <h4 class="plan-title">{plan.title}</h4>
 
-                {plan.oldPrice ? (
-                  <div class="old-price">${plan.oldPrice}</div>
-                ) : null}
+                  {plan.oldPrice ? (
+                    <div class="old-price">${plan.oldPrice}</div>
+                  ) : null}
 
-                <div
-                  class="price"
-                  data-monthly={plan.monthlyPrice ?? ""}
-                  data-yearly={plan.yearlyPrice ?? ""}
-                >
-                  <span class="amount">${plan.monthlyPrice ?? plan.price ?? ""}</span>
-                  <span class="per">per month</span>
+                  {discountText ? (
+                    <div class="discount-text">{discountText}</div>
+                  ) : null}
+
+                  <div
+                    class="price"
+                    data-monthly={plan.monthlyPrice ?? ""}
+                    data-yearly={plan.yearlyPrice ?? ""}
+                  >
+                    <span class="amount">${plan.monthlyPrice ?? plan.price ?? ""}</span>
+                    <span class="per">per month</span>
+                  </div>
+
+                  {plan.description ? <p class="subtitle">{plan.description}</p> : null}
+                  {plan.packageName ? <div class="package">{plan.packageName}</div> : null}
+                  {plan.buttonText ? (
+                    <a class="btn-primary" target="blank" href={plan.buttonLink ?? "#"}>{plan.buttonText}</a>
+                  ) : null}
                 </div>
 
-                {plan.description ? <p class="subtitle">{plan.description}</p> : null}
-                {plan.packageName ? <div class="package">{plan.packageName}</div> : null}
-                {plan.buttonText ? (
-                  <a class="btn-primary" target="blank" href={plan.buttonLink ?? "#"}>{plan.buttonText}</a>
-                ) : null}
-              </div>
+                <div class="card-body">
+                  {plan.featureHeading ? (
+                    <h5 class="features-heading">{plan.featureHeading}</h5>
+                  ) : (
+                    <h5 class="features-heading">Features</h5>
+                  )}
+                  <ul class="features">
+                    {(plan.features || []).map((f, i) => (
+                      <li key={i}>
+                        {f}
+                        <img src="/assets/icon-check.svg" width="20" height="20" loading="lazy" decoding="async" />
+                      </li>
+                    ))}
+                  </ul>
+                </div>
 
-              <div class="card-body">
-                {plan.featureHeading ? (
-                  <h5 class="features-heading">{plan.featureHeading}</h5>
-                ) : (
-                  <h5 class="features-heading">Features</h5>
+                {plan.showFooter !== false && (
+                  <div class="card-footer">
+                    <a class="see-all" href="#" data-tab={tabIndex}>See All Features</a>
+                  </div>
                 )}
-                <ul class="features">
-                  {(plan.features || []).map((f, i) => (
-                    <li key={i}>
-                      {f}
-                      <img src="/assets/icon-check.svg" width="20" height="20" loading="lazy" decoding="async" />
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {plan.showFooter !== false && (
-                <div class="card-footer">
-                  <a class="see-all" href="#" data-tab={tabIndex}>See All Features</a>
-                </div>
-              )}
-            </article>
-          ))}
+              </article>
+            );
+          })}
         </div>
       );
     })}
@@ -381,6 +388,7 @@ const modalDataEncoded = encodeURIComponent(JSON.stringify(modalContent));
     font-size: 20px;
 }
 .old-price { color:#777; font-size:0.85rem; text-decoration:line-through; margin-bottom: 8px; }
+.discount-text { color:#e08944; font-weight:700; font-size:0.95rem; margin-bottom: 8px; text-transform: uppercase; }
 .price { font-weight:900; font-size: 30px; margin: 6px 0; }
 .price .amount { font-size: 32px; }
 .price .per { display:block; font-size: 0.85rem; font-weight:600; color:#333; margin-top:6px; }

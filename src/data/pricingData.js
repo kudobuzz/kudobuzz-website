@@ -10,6 +10,7 @@ export const pricingData = {
         monthlyPrice: "Free",
         yearlyPrice: "Free",
         oldPrice: "",
+        discountText: "",
         description: "For new businesses building their brand",
         featureHeading: "Coffee Features",
         packageName: "",
@@ -29,6 +30,7 @@ export const pricingData = {
         monthlyPrice: "$49.99",
         yearlyPrice: "$499.9",
         oldPrice: "",
+        discountText: "",
         description: "For growing businesses ready to scale",
         featureHeading: "Everything in Coffee plus",
         packageName: "",
@@ -41,7 +43,7 @@ export const pricingData = {
           "Photo Reviews",
           "Google Product Richsnippet",
           "Customer Loyalty",
-          "Advance Customization",
+          "Advanced Customization",
         ],
         moreLink: "#",
         showFooter: true,
@@ -51,6 +53,7 @@ export const pricingData = {
         monthlyPrice: "$99.99",
         yearlyPrice: "$999.9",
         oldPrice: "",
+        discountText: "Discounted $19.99",
         description: "For enterprise brands seeking full control",
         featureHeading: "Everything on Lunch plus",
         packageName: "",
@@ -74,6 +77,7 @@ export const pricingData = {
         title: "UGC Basic",
         monthlyPrice: "Free",
         yearlyPrice: "Free",
+        discountText: "",
         description: "Best for: New or small merchants starting with UGC.",
         featureHeading: "Free for you",
         features: [
@@ -93,6 +97,7 @@ export const pricingData = {
         title: "UGC Growth",
         monthlyPrice: "$10",
         yearlyPrice: "$100",
+        discountText: "",
         description: "Best for: Merchants ready to scale UGC and display it beautifully.",
         featureHeading: "Supercharge Your Sales",
         features: [
@@ -119,6 +124,7 @@ export const pricingData = {
         title: "Basic",
         monthlyPrice: "Free",
         yearlyPrice: "Free",
+        discountText: "",
         description: "For starter merchants",
         featureHeading: "Free for you ",
         features: [
@@ -134,6 +140,7 @@ export const pricingData = {
         title: "Growth",
         monthlyPrice: "$20",
         yearlyPrice: "$200",
+        discountText: "",
         description: "For merchants looking to scale",
         featureHeading: "Supercharge Your Sales",
         features: [
@@ -156,7 +163,7 @@ export const pricingData = {
         title: "Collect Social Reviews",
         rows: [
           { feature: "Social Reviews", values: ["1 Facebook Page", "Unlimited Accounts", "Unlimited Accounts"] },
-          { feature: "Collect Photo", values: ["1 Facebook Page", true, true] },
+          { feature: "Collect Photo", values: ["", true, true] },
           { feature: "Collect Video", values: ["", "", true] },
           { feature: "Collect Q&A", values: ["", true, true] },
           { feature: "Allowed Social Accounts", values: ["1 Facebook Page", "Unlimited Accounts", "Unlimited Accounts"] },
@@ -168,7 +175,7 @@ export const pricingData = {
           { feature: "Offline Reviews", values: [true, true, true] },
           { feature: "After Purchase Reviews", values: ["10 Orders / Month", "500 Orders / Month", "3000 Orders / Month"] },
           { feature: "Campaigns", values: ["", "", true] },
-          { feature: "Advance Customization", values: [true, true, true] },
+          { feature: "Advanced Customization", values: [true, true, true] },
           { feature: "Import Reviews (CSV)", values: [true, true, true] },
           { feature: "Edit Review Request Email", values: [true, true, true] },
           { feature: "Review Request Translation", values: [true, true, true] },
@@ -177,7 +184,7 @@ export const pricingData = {
       {
         title: "Reviews Moderation",
         rows: [
-          { feature: "Publish Reviews", values: ["50 Reviews", "500 Reviews", "2000 Reviews"] },
+          { feature: "Published Reviews", values: ["50 Reviews", "500 Reviews", "2000 Reviews"] },
           { feature: "Review Update Requests", values: [false, true, true] },
           { feature: "Review Reminders", values: [false, true, true] },
           { feature: "Review Moderation (Manual)", values: [true, true, true] },
