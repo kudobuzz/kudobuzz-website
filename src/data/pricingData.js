@@ -10,7 +10,10 @@ export const pricingData = {
         monthlyPrice: "Free",
         yearlyPrice: "Free",
         oldPrice: "",
-        discountText: "",
+        discountText: {
+          monthly: { tag: "", text: "" },
+          yearly: { tag: "", text: "" },
+        },
         description: "For new businesses building their brand",
         featureHeading: "Coffee Features",
         packageName: "",
@@ -30,7 +33,10 @@ export const pricingData = {
         monthlyPrice: "$49.99",
         yearlyPrice: "$499.9",
         oldPrice: "",
-        discountText: "",
+        discountText: {
+          monthly: { tag: "", text: "" },
+          yearly: { tag: "", text: "" },
+        },
         description: "For growing businesses ready to scale",
         featureHeading: "Everything in Coffee plus",
         packageName: "",
@@ -53,7 +59,10 @@ export const pricingData = {
         monthlyPrice: "$99.99",
         yearlyPrice: "$999.9",
         oldPrice: "",
-        discountText: "Discounted $19.99",
+        discountText: {
+          monthly: { tag: "Discounted", text: "$19.99" },
+          yearly: { tag: "Discounted", text: "$199.9" },
+        },
         description: "For enterprise brands seeking full control",
         featureHeading: "Everything on Lunch plus",
         packageName: "",
@@ -77,7 +86,10 @@ export const pricingData = {
         title: "UGC Basic",
         monthlyPrice: "Free",
         yearlyPrice: "Free",
-        discountText: "",
+        discountText: {
+          monthly: { tag: "", text: "" },
+          yearly: { tag: "", text: "" },
+        },
         description: "Best for: New or small merchants starting with UGC.",
         featureHeading: "Free for you",
         features: [
@@ -97,7 +109,10 @@ export const pricingData = {
         title: "UGC Growth",
         monthlyPrice: "$10",
         yearlyPrice: "$100",
-        discountText: "",
+        discountText: {
+          monthly: { tag: "", text: "" },
+          yearly: { tag: "", text: "" },
+        },
         description: "Best for: Merchants ready to scale UGC and display it beautifully.",
         featureHeading: "Supercharge Your Sales",
         features: [
@@ -124,7 +139,10 @@ export const pricingData = {
         title: "Basic",
         monthlyPrice: "Free",
         yearlyPrice: "Free",
-        discountText: "",
+        discountText: {
+          monthly: { tag: "", text: "" },
+          yearly: { tag: "", text: "" },
+        },
         description: "For starter merchants",
         featureHeading: "Free for you ",
         features: [
@@ -140,7 +158,10 @@ export const pricingData = {
         title: "Growth",
         monthlyPrice: "$20",
         yearlyPrice: "$200",
-        discountText: "",
+        discountText: {
+          monthly: { tag: "", text: "" },
+          yearly: { tag: "", text: "" },
+        },
         description: "For merchants looking to scale",
         featureHeading: "Supercharge Your Sales",
         features: [

@@ -3,6 +3,19 @@ import Tabs from "./Tabs.astro";
 
 const { tabs = [], plansByTab = {}, modalContent = {}, activeTab = 0 } = Astro.props;
 const modalDataEncoded = encodeURIComponent(JSON.stringify(modalContent));
+
+const normalizeDiscount = (value) => {
+  if (!value) {
+    return { tag: "", text: "" };
+  }
+  if (typeof value === "string") {
+    const trimmed = value.trim();
+    return { tag: "", text: trimmed };
+  }
+  const tag = typeof value.tag === "string" ? value.tag.trim() : "";
+  const text = typeof value.text === "string" ? value.text.trim() : "";
+  return { tag, text };
+};
 ---
 
 <div class="pricing-component" data-modal-content={modalDataEncoded}>
@@ -30,7 +43,10 @@ const modalDataEncoded = encodeURIComponent(JSON.stringify(modalContent));
           style={`display: ${tabIndex === activeTab ? "grid" : "none"}`}
         >
           {plans.map((plan, idx) => {
-            const discountText = typeof plan.discountText === "string" ? plan.discountText.trim() : plan.discountText;
+            const discountSource = plan.discountText ?? {};
+            const discountMonthly = normalizeDiscount(discountSource?.monthly);
+            const discountYearly = normalizeDiscount(discountSource?.yearly);
+            const hasAnyDiscount = Boolean(discountMonthly.text || discountYearly.text);
             return (
               <article class="pricing-card" key={idx}>
                 <div class="card-header">
@@ -40,8 +56,25 @@ const modalDataEncoded = encodeURIComponent(JSON.stringify(modalContent));
                     <div class="old-price">${plan.oldPrice}</div>
                   ) : null}
 
-                  {discountText ? (
-                    <div class="discount-text">{discountText}</div>
+                  {hasAnyDiscount ? (
+                    <div
+                      class="discount-text"
+                      data-monthly-text={discountMonthly.text}
+                      data-monthly-tag={discountMonthly.tag}
+                      data-yearly-text={discountYearly.text}
+                      data-yearly-tag={discountYearly.tag}
+                      style={`display: ${discountMonthly.text ? "inline-flex" : "none"}`}
+                    >
+                      <span
+                        class="discount-tag"
+                        style={`display: ${discountMonthly.tag ? "inline-flex" : "none"}`}
+                      >
+                        {discountMonthly.tag}
+                      </span>
+                      <span class="discount-copy">
+                        {discountMonthly.text}
+                      </span>
+                    </div>
                   ) : null}
 
                   <div
@@ -150,6 +183,7 @@ const modalDataEncoded = encodeURIComponent(JSON.stringify(modalContent));
   const wrappers = root.querySelectorAll(".pricing-wrapper");
   const billingSwitch = root.querySelector("#billingSwitch");
   const priceEls = root.querySelectorAll(".price");
+  const discountEls = root.querySelectorAll('.discount-text');
 
   /* TAB switching */
   tabButtons.forEach((btn, index) => {
@@ -178,6 +212,41 @@ const modalDataEncoded = encodeURIComponent(JSON.stringify(modalContent));
       } else {
         amountEl.textContent = monthly || yearlyPric || amountEl.textContent;
         perEl.textContent = "Per Month";
+      }
+    });
+
+    discountEls.forEach(el => {
+      const monthlyText = (el.dataset.monthlyText ?? "").trim();
+      const monthlyTag = (el.dataset.monthlyTag ?? "").trim();
+      const yearlyText = (el.dataset.yearlyText ?? "").trim();
+      const yearlyTag = (el.dataset.yearlyTag ?? "").trim();
+      const tagEl = el.querySelector('.discount-tag');
+      const copyEl = el.querySelector('.discount-copy');
+
+      const activeText = yearly ? yearlyText : monthlyText;
+      const activeTag = yearly ? yearlyTag : monthlyTag;
+
+      if (!activeText) {
+        if (copyEl) copyEl.textContent = '';
+        if (tagEl) {
+          tagEl.textContent = '';
+          tagEl.style.display = 'none';
+        }
+        el.style.display = 'none';
+        return;
+      }
+
+      if (copyEl) copyEl.textContent = activeText;
+      el.style.display = 'inline-flex';
+
+      if (tagEl) {
+        if (activeTag) {
+          tagEl.textContent = activeTag;
+          tagEl.style.display = 'inline-flex';
+        } else {
+          tagEl.textContent = '';
+          tagEl.style.display = 'none';
+        }
       }
     });
   }
@@ -388,7 +457,29 @@ const modalDataEncoded = encodeURIComponent(JSON.stringify(modalContent));
     font-size: 20px;
 }
 .old-price { color:#777; font-size:0.85rem; text-decoration:line-through; margin-bottom: 8px; }
-.discount-text { color:#e08944; font-weight:700; font-size:0.95rem; margin-bottom: 8px; text-transform: uppercase; }
+.discount-text {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 10px;
+  color: #e08944;
+  font-weight: 700;
+}
+.discount-tag {
+  background: #5264FF;
+  color: #fff;
+  font-size: 0.7rem;
+  letter-spacing: 0.6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  text-transform: uppercase;
+}
+.discount-copy {
+  color: #5264FF;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
 .price { font-weight:900; font-size: 30px; margin: 6px 0; }
 .price .amount { font-size: 32px; }
 .price .per { display:block; font-size: 0.85rem; font-weight:600; color:#333; margin-top:6px; }
