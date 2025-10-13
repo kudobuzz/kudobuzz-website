@@ -60,7 +60,7 @@ export const footerLinks = {
     {
       title: "",
       links: [
-        { name: "Kudobuzz Reviews vs PowerReviews", url: "#", target: "_blank" },
+        { name: "Kudobuzz Reviews vs PowerReviews", url: "https://blog.kudobuzz.com/kudobuzz-vs-powerreviews-an-honest-detailed-comparison-for-your-business/", target: "_blank" },
         { name: "Kudobuzz Reviews vs BazaarVoice", url: "#", target: "_blank" },
         { name: "Kudobuzz Reviews vs Reviews.io", url: "#", target: "_blank" },
         { name: "Kudobuzz Reviews vs Fera Reviews", url: "#", target: "_blank" },
@@ -69,8 +69,8 @@ export const footerLinks = {
     {
       title: "",
       links: [
-        { name: "50+ Proven Review Request Email Templates", url: "#", target: "_blank" },
-        { name: "How to Write Review Requests", url: "#", target: "_blank" },
+        { name: "10+ Proven Review Request Email Templates", url: "https://blog.kudobuzz.com/10-proven-review-request-email-templates-that-get-3x-more-responses/", target: "_blank" },
+        { name: "How to Write Review Requests", url: "https://blog.kudobuzz.com/how-to-write-review-requests-that-get-you-noticed-and-get-you-reviews/", target: "_blank" },
         { name: "Post-Purchase Review Request Timing: The Ultimate Guide", url: "#", target: "_blank" },
         { name: "Free Email Templates for Every Stage of the Customer Journey", url: "#", target: "_blank" },
       ],
