@@ -52,7 +52,7 @@ export const footerLinks = {
       title: "",
       links: [
         { name: "Kudobuzz vs Yotpo Compare", url: "#", target: "_blank" },
-        { name: "Kudobuzz vs Loox Compare", url: "#", target: "_blank" },
+        { name: "Kudobuzz vs Loox Compare", url: "https://blog.kudobuzz.com/kudobuzz-vs-loox-which-product-review-app-is-best/", target: "_blank" },
         { name: "Kudobuzz Reviews vs Judge.me", url: "#", target: "_blank" },
         { name: "Kudobuzz Reviews to Okendo", url: "#", target: "_blank" },
       ],
