@@ -53,7 +53,7 @@ export const footerLinks = {
       links: [
         { name: "Kudobuzz vs Yotpo Compare", url: "#", target: "_blank" },
         { name: "Kudobuzz vs Loox Compare", url: "https://blog.kudobuzz.com/kudobuzz-vs-loox-which-product-review-app-is-best/", target: "_blank" },
-        { name: "Kudobuzz Reviews vs Judge.me", url: "#", target: "_blank" },
+        { name: "Kudobuzz Reviews vs Judge.me", url: "https://blog.kudobuzz.com/kudobuzz-vs-judge-me/", target: "_blank" },
         { name: "Kudobuzz Reviews to Okendo", url: "#", target: "_blank" },
       ],
     },
@@ -62,7 +62,7 @@ export const footerLinks = {
       links: [
         { name: "Kudobuzz Reviews vs PowerReviews", url: "https://blog.kudobuzz.com/kudobuzz-vs-powerreviews-an-honest-detailed-comparison-for-your-business/", target: "_blank" },
         { name: "Kudobuzz Reviews vs BazaarVoice", url: "#", target: "_blank" },
-        { name: "Kudobuzz Reviews vs Reviews.io", url: "#", target: "_blank" },
+        { name: "Kudobuzz Reviews vs Reviews.io", url: "https://blog.kudobuzz.com/kudobuzz-vs-reviews-io-14-smart-questions-every-brand-should-ask/", target: "_blank" },
         { name: "Kudobuzz Reviews vs Fera Reviews", url: "#", target: "_blank" },
       ],
     },
