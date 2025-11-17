@@ -72,7 +72,7 @@ export const footerLinks = {
         { name: "10+ Proven Review Request Email Templates", url: "https://blog.kudobuzz.com/10-proven-review-request-email-templates-that-get-3x-more-responses/", target: "_blank" },
         { name: "How to Write Review Requests", url: "https://blog.kudobuzz.com/how-to-write-review-requests-that-get-you-noticed-and-get-you-reviews/", target: "_blank" },
         { name: "Post-Purchase Review Request Timing: The Ultimate Guide", url: "https://blog.kudobuzz.com/the-ultimate-guide-to-post-purchase-review-request-timing/", target: "_blank" },
-        { name: "Free Email Templates for Every Stage of the Customer Journey", url: "#", target: "_blank" },
+        { name: "Free Email Templates for Every Stage of the Customer Journey", url: "https://blog.kudobuzz.com/free-email-templates-for-every-stage-of-the-customer-journey/", target: "_blank" },
       ],
     },
     {
