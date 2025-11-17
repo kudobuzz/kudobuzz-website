@@ -51,19 +51,19 @@ export const footerLinks = {
     {
       title: "",
       links: [
-        { name: "Kudobuzz vs Yotpo Compare", url: "#", target: "_blank" },
+        { name: "Kudobuzz vs Yotpo Compare", url: "https://blog.kudobuzz.com/kudobuzz-vs-yotpo-the-best-shopify-review-app/", target: "_blank" },
         { name: "Kudobuzz vs Loox Compare", url: "https://blog.kudobuzz.com/kudobuzz-vs-loox-which-product-review-app-is-best/", target: "_blank" },
         { name: "Kudobuzz Reviews vs Judge.me", url: "https://blog.kudobuzz.com/kudobuzz-vs-judge-me/", target: "_blank" },
-        { name: "Kudobuzz Reviews to Okendo", url: "#", target: "_blank" },
+        { name: "Kudobuzz Reviews to Okendo", url: "https://blog.kudobuzz.com/kudobuzz-vs-okendo-which-review-platform-actually-converts-shoppers/", target: "_blank" },
       ],
     },
     {
       title: "",
       links: [
         { name: "Kudobuzz Reviews vs PowerReviews", url: "https://blog.kudobuzz.com/kudobuzz-vs-powerreviews-an-honest-detailed-comparison-for-your-business/", target: "_blank" },
-        { name: "Kudobuzz Reviews vs BazaarVoice", url: "#", target: "_blank" },
+        { name: "Kudobuzz Reviews vs BazaarVoice", url: "https://blog.kudobuzz.com/kudobuzz-vs-bazaarvoice-which-review-platform-fits-your-brand-best/", target: "_blank" },
         { name: "Kudobuzz Reviews vs Reviews.io", url: "https://blog.kudobuzz.com/kudobuzz-vs-reviews-io-14-smart-questions-every-brand-should-ask/", target: "_blank" },
-        { name: "Kudobuzz Reviews vs Fera Reviews", url: "#", target: "_blank" },
+        { name: "Kudobuzz Reviews vs Fera Reviews", url: "https://blog.kudobuzz.com/beyond-the-marketing-what-fera-and-kudobuzz-really-deliver/", target: "_blank" },
       ],
     },
     {
@@ -71,26 +71,26 @@ export const footerLinks = {
       links: [
         { name: "10+ Proven Review Request Email Templates", url: "https://blog.kudobuzz.com/10-proven-review-request-email-templates-that-get-3x-more-responses/", target: "_blank" },
         { name: "How to Write Review Requests", url: "https://blog.kudobuzz.com/how-to-write-review-requests-that-get-you-noticed-and-get-you-reviews/", target: "_blank" },
-        { name: "Post-Purchase Review Request Timing: The Ultimate Guide", url: "#", target: "_blank" },
+        { name: "Post-Purchase Review Request Timing: The Ultimate Guide", url: "https://blog.kudobuzz.com/the-ultimate-guide-to-post-purchase-review-request-timing/", target: "_blank" },
         { name: "Free Email Templates for Every Stage of the Customer Journey", url: "#", target: "_blank" },
       ],
     },
     {
       title: "",
       links: [
-        { name: "How to Respond to Negative Reviews: 25+ Professional Templates", url: "#", target: "_blank" },
-        { name: "Thank You Templates for 5-Star Reviews That Build Loyalty", url: "#", target: "_blank" },
-        { name: "The Ultimate Guide to Shopify Customer Reviews", url: "#", target: "_blank" },
-        { name: "The Ultimate Guide to Wix Customer Reviews", url: "#", target: "_blank" },
+        { name: "How to Respond to Negative Reviews: 25+ Professional Templates", url: "https://blog.kudobuzz.com/how-to-respond-to-negative-reviews-7-templates-that-convert-critics-into-advocates/", target: "_blank" },
+        { name: "Thank You Templates for 5-Star Reviews That Build Loyalty", url: "https://blog.kudobuzz.com/10-smart-genuine-ways-to-say-thank-you-for-a-5-star-review/", target: "_blank" },
+        { name: "The Ultimate Guide to Shopify Customer Reviews", url: "https://blog.kudobuzz.com/the-ultimate-guide-to-shopify-reviews/", target: "_blank" },
+        { name: "The Ultimate Guide to Wix Customer Reviews", url: "https://blog.kudobuzz.com/the-ultimate-guide-to-reviews-on-wix/", target: "_blank" },
       ],
     },
     {
       title: "",
       links: [
-        { name: "The Ultimate Guide to Shoplazza Customer Reviews", url: "#", target: "_blank" },
-        { name: "The Ultimate Guide to Bigcommerce Customer Reviews", url: "#", target: "_blank" },
-        { name: "How to Increase Review Response Rates by 300%", url: "#", target: "_blank" },
-        { name: "Review Response Rate Study: What Time, Day, and Method Work Best", url: "#", target: "_blank" },
+        { name: "The Ultimate Guide to Shoplazza Customer Reviews", url: "https://blog.kudobuzz.com/the-ultimate-guide-to-shoplazza-reviews/", target: "_blank" },
+        { name: "The Ultimate Guide to Bigcommerce Customer Reviews", url: "https://blog.kudobuzz.com/the-ultimate-guide-to-bigcommerce-reviews/", target: "_blank" },
+        { name: "How to Increase Review Response Rates by 300%", url: "https://blog.kudobuzz.com/how-to-increase-review-response-rate-by-300/", target: "_blank" },
+        { name: "Review Response Rate Study: What Time, Day, and Method Work Best", url: "https://blog.kudobuzz.com/the-review-response-rate-study-what-time-day-and-method-actually-work/", target: "_blank" },
       ],
     },
   ],
