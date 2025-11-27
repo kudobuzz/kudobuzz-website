@@ -5,6 +5,7 @@ import TrustedBrand from '../components/TrustedBrand.astro';
 import Section from '../components/Section.astro';
 import Footer from "../components/Footer.astro";
 import AddSpace from "../components/AddSpace.astro";
+import HomeModal from "../components/HomeModal.astro";
 import Base from "../layouts/Base.astro";
 import { footerLinks } from "../data/footerLinks.js";
 
@@ -33,6 +34,7 @@ const {
     />
   </Fragment>
 
+  <HomeModal />
   <Navbar menuItems={menuItems} />
 
   <Hero
