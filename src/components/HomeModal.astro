@@ -1,0 +1,159 @@
+---
+---
+
+<div
+  class="modal-root"
+  data-modal="homepage-banner"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Kudobuzz welcome offer"
+>
+  <div class="modal-backdrop" data-backdrop></div>
+  <div class="modal-card">
+    <button class="close-button" type="button" aria-label="Close modal" data-close>
+      ×
+    </button>
+    <a
+      class="modal-image"
+      href="https://dashboard.kudobuzz.com/signup"
+      target="_blank"
+      rel="noreferrer"
+      aria-label="Go to Kudobuzz signup"
+    >
+      <img src="/assets/banner/banner.png" alt="Kudobuzz promo banner" loading="lazy" />
+    </a>
+  </div>
+</div>
+
+<script is:inline>
+  window.addEventListener("DOMContentLoaded", () => {
+    const modal = document.querySelector('[data-modal="homepage-banner"]');
+    if (!modal) return;
+
+    const closeButton = modal.querySelector("[data-close]");
+    const backdrop = modal.querySelector("[data-backdrop]");
+
+    const hideModal = () => {
+      modal.classList.add("is-hidden");
+      modal.setAttribute("aria-hidden", "true");
+    };
+
+    const timer = window.setTimeout(hideModal, 10000);
+    closeButton?.addEventListener("click", () => {
+      hideModal();
+      window.clearTimeout(timer);
+    });
+    backdrop?.addEventListener("click", () => {
+      hideModal();
+      window.clearTimeout(timer);
+    });
+  });
+</script>
+
+<style>
+  .modal-root {
+    position: fixed;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+    z-index: 1200;
+    animation: fadeIn 220ms ease;
+  }
+
+  .modal-root.is-hidden {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 200ms ease;
+  }
+
+  .modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(2px);
+  }
+
+  .modal-card {
+    position: relative;
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 0;
+    max-width: 900px;
+    width: min(900px, 100%);
+    box-shadow: 0 16px 60px rgba(0, 0, 0, 0.12);
+    z-index: 1;
+    animation: slideUp 240ms ease;
+    overflow: hidden;
+  }
+
+  .close-button {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: #f4f6f9;
+    z-index: 2;
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 999px;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1;
+    color: #20222f;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.14);
+    transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .close-button:hover {
+    background: #e7eaf0;
+    transform: translateY(-1px);
+  }
+
+  .close-button:focus-visible {
+    outline: 2px solid #f28c38;
+    outline-offset: 2px;
+  }
+
+  .modal-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .modal-image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .modal-card {
+      border-radius: 14px;
+    }
+  }
+</style>
