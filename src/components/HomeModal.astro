@@ -26,9 +26,13 @@
 </div>
 
 <script is:inline>
-  window.addEventListener("DOMContentLoaded", () => {
+  const initHomepageModal = () => {
     const modal = document.querySelector('[data-modal="homepage-banner"]');
     if (!modal) return;
+
+    // Prevent running twice if re-initialized
+    if (modal.dataset.bound === "true") return;
+    modal.dataset.bound = "true";
 
     const closeButton = modal.querySelector("[data-close]");
     const backdrop = modal.querySelector("[data-backdrop]");
@@ -47,7 +51,17 @@
       hideModal();
       window.clearTimeout(timer);
     });
-  });
+
+    return () => {
+      window.clearTimeout(timer);
+    };
+  };
+
+  if (document.readyState === "loading") {
+    window.addEventListener("DOMContentLoaded", initHomepageModal, { once: true });
+  } else {
+    initHomepageModal();
+  }
 </script>
 
 <style>
