@@ -9,19 +9,26 @@ const initHomepageModal = () => {
   const closeButton = modal.querySelector("[data-close]");
   const backdrop = modal.querySelector("[data-backdrop]");
 
+  const showModal = () => {
+    modal.classList.add("is-visible");
+    modal.setAttribute("aria-hidden", "false");
+  };
+
   const hideModal = () => {
-    modal.classList.add("is-hidden");
+    modal.classList.remove("is-visible");
     modal.setAttribute("aria-hidden", "true");
   };
 
-  const timer = window.setTimeout(hideModal, 10000);
+  // Show modal after 10 seconds
+  const showTimer = window.setTimeout(showModal, 10000);
+
   closeButton?.addEventListener("click", () => {
     hideModal();
-    window.clearTimeout(timer);
+    window.clearTimeout(showTimer);
   });
   backdrop?.addEventListener("click", () => {
     hideModal();
-    window.clearTimeout(timer);
+    window.clearTimeout(showTimer);
   });
 };
 

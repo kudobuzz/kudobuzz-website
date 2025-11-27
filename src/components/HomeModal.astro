@@ -7,6 +7,7 @@
   role="dialog"
   aria-modal="true"
   aria-label="Kudobuzz welcome offer"
+  aria-hidden="true"
 >
   <div class="modal-backdrop" data-backdrop></div>
   <div class="modal-card">
@@ -31,17 +32,15 @@
   .modal-root {
     position: fixed;
     inset: 0;
-    display: grid;
+    display: none;
     place-items: center;
     padding: 24px;
     z-index: 1200;
     animation: fadeIn 220ms ease;
   }
 
-  .modal-root.is-hidden {
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 200ms ease;
+  .modal-root.is-visible {
+    display: grid;
   }
 
   .modal-backdrop {
