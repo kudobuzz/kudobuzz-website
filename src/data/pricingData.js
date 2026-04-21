@@ -1,7 +1,7 @@
 export const pricingData = {
   tabs: [
     "Product & Social Reviews",
-    "CRO",
+    "UGC & Shoppable Videos",
   ],
   plansByTab: {
     "Product & Social Reviews": [
@@ -83,7 +83,7 @@ export const pricingData = {
     ],
     "UGC & Shoppable Videos": [
       {
-        title: "UGC Basic",
+        title: "Free",
         monthlyPrice: "Free",
         yearlyPrice: "Free",
         discountText: {
@@ -93,22 +93,21 @@ export const pricingData = {
         description: "Best for: New or small merchants starting with UGC.",
         featureHeading: "Free for you",
         features: [
-          "1 connected social account (Instagram or TikTok)",
-          "Up to 10 UGC posts",
-          "1 widget (Grid layout)",
-          "Manual moderation",
-          "Basic widget styling",
-          "Kudobuzz branding included"
+          "Up to 10 synced videos",
+          "Manual sync only",
+          "1 widget",
+          "Basic moderation tools",
+          "Kudobuzz branding"
         ],
         buttonText: "Sign Up Free",
-        buttonLink: "https://dashboard.kudobuzz.com/signup",
+        buttonLink: "https://apps.shopify.com/kudobuzz-tiktok-gallery",
         moreLink: "#",
         showFooter: false,
       },
       {
-        title: "UGC Growth",
-        monthlyPrice: "$10",
-        yearlyPrice: "$100",
+        title: "Starter",
+        monthlyPrice: "$9.99",
+        yearlyPrice: "$99",
         discountText: {
           monthly: { tag: "", text: "" },
           yearly: { tag: "", text: "" },
@@ -116,67 +115,85 @@ export const pricingData = {
         description: "Best for: Merchants ready to scale UGC and display it beautifully.",
         featureHeading: "Supercharge Your Sales",
         features: [
-          "Up to 5 connected social accounts",
-          "Up to 200 UGC posts",
+          "Up to 50 synced videos",
+          "Automatic video syncing (every 24 hours)",
           "Unlimited widgets",
-          "Automatic moderation",
-          "Shoppable UGC",
-          "Product tagging",
-          "Engagement analytics",
-          "Full widget customization",
-          "Remove Kudobuzz branding"
-
+          "Advanced moderation tools",
+          "Remove Kudobuzz branding",
+          "Product tagging"
         ],
         buttonText: "Sign Up Free",
-        buttonLink: "https://dashboard.kudobuzz.com/signup",
-        moreLink: "#",
-        showFooter: false,
-      },
-
-    ],
-    CRO: [
-      {
-        title: "Basic",
-        monthlyPrice: "Free",
-        yearlyPrice: "Free",
-        discountText: {
-          monthly: { tag: "", text: "" },
-          yearly: { tag: "", text: "" },
-        },
-        description: "For starter merchants",
-        featureHeading: "Free for you ",
-        features: [
-          "1 Basic CRO Report per month",
-          "Data stored for 1 day",
-        ],
-        buttonText: "Start Free",
-        buttonLink: "#",
+        buttonLink: "https://apps.shopify.com/kudobuzz-tiktok-gallery",
         moreLink: "#",
         showFooter: false,
       },
       {
         title: "Growth",
-        monthlyPrice: "$20",
-        yearlyPrice: "$200",
+        monthlyPrice: "$19.99",
+        yearlyPrice: "$199",
         discountText: {
           monthly: { tag: "", text: "" },
           yearly: { tag: "", text: "" },
         },
-        description: "For merchants looking to scale",
-        featureHeading: "Supercharge Your Sales",
+        description: "Best for: Merchants seeking deep UGC customization.",
+        featureHeading: "Scale Your Growth",
         features: [
-          "10 Premium CRO Reports /month",
-          "1000 Customer Replays /month",
-          "AI Powered Insights",
-          "Data stored for 15 days",
+          "Up to 150 synced videos",
+          "Faster automatic syncing (every 3 hours)",
+          "Unlimited widgets",
+          "Priority video processing",
+          "Advanced performance analytics",
+          "Priority support"
         ],
-
-        buttonText: "Choose Growth",
-        buttonLink: "#",
+        buttonText: "Sign Up Free",
+        buttonLink: "https://apps.shopify.com/kudobuzz-tiktok-gallery",
         moreLink: "#",
         showFooter: false,
       },
     ],
+    // CRO: [
+    //   {
+    //     title: "Basic",
+    //     monthlyPrice: "Free",
+    //     yearlyPrice: "Free",
+    //     discountText: {
+    //       monthly: { tag: "", text: "" },
+    //       yearly: { tag: "", text: "" },
+    //     },
+    //     description: "For starter merchants",
+    //     featureHeading: "Free for you ",
+    //     features: [
+    //       "1 Basic CRO Report per month",
+    //       "Data stored for 1 day",
+    //     ],
+    //     buttonText: "Start Free",
+    //     buttonLink: "#",
+    //     moreLink: "#",
+    //     showFooter: false,
+    //   },
+    //   {
+    //     title: "Growth",
+    //     monthlyPrice: "$20",
+    //     yearlyPrice: "$200",
+    //     discountText: {
+    //       monthly: { tag: "", text: "" },
+    //       yearly: { tag: "", text: "" },
+    //     },
+    //     description: "For merchants looking to scale",
+    //     featureHeading: "Supercharge Your Sales",
+    //     features: [
+    //       "10 Premium CRO Reports /month",
+    //       "1000 Customer Replays /month",
+    //       "AI Powered Insights",
+    //       "Data stored for 15 days",
+    //     ],
+
+    //     buttonText: "Choose Growth",
+    //     buttonLink: "#",
+    //     moreLink: "#",
+    //     showFooter: false,
+    //   },
+    // ],
   },
   modalContent: {
     "Product & Social Reviews": [
