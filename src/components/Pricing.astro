@@ -16,6 +16,19 @@ const normalizeDiscount = (value) => {
   const text = typeof value.text === "string" ? value.text.trim() : "";
   return { tag, text };
 };
+
+const normalizeOldPrice = (value) => {
+  if (!value) {
+    return { monthly: "", yearly: "" };
+  }
+  if (typeof value === "string") {
+    const trimmed = value.trim();
+    return { monthly: trimmed, yearly: trimmed };
+  }
+  const monthly = typeof value.monthly === "string" ? value.monthly.trim() : "";
+  const yearly = typeof value.yearly === "string" ? value.yearly.trim() : "";
+  return { monthly, yearly: yearly || monthly };
+};
 ---
 
 <div class="pricing-component" data-modal-content={modalDataEncoded}>
@@ -46,14 +59,27 @@ const normalizeDiscount = (value) => {
             const discountSource = plan.discountText ?? {};
             const discountMonthly = normalizeDiscount(discountSource?.monthly);
             const discountYearly = normalizeDiscount(discountSource?.yearly);
-            const hasAnyDiscount = Boolean(discountMonthly.text || discountYearly.text);
+            const oldPrice = normalizeOldPrice(plan.oldPrice);
+            const hasAnyDiscount = Boolean(
+              discountMonthly.text ||
+              discountMonthly.tag ||
+              discountYearly.text ||
+              discountYearly.tag
+            );
             return (
               <article class="pricing-card" key={idx}>
                 <div class="card-header">
                   <h4 class="plan-title">{plan.title}</h4>
 
-                  {plan.oldPrice ? (
-                    <div class="old-price">${plan.oldPrice}</div>
+                  {(oldPrice.monthly || oldPrice.yearly) ? (
+                    <div
+                      class="old-price"
+                      data-monthly-old-price={oldPrice.monthly}
+                      data-yearly-old-price={oldPrice.yearly}
+                      style={`display: ${oldPrice.monthly ? "block" : "none"}`}
+                    >
+                      ${oldPrice.monthly}
+                    </div>
                   ) : null}
 
                   {hasAnyDiscount ? (
@@ -63,7 +89,7 @@ const normalizeDiscount = (value) => {
                       data-monthly-tag={discountMonthly.tag}
                       data-yearly-text={discountYearly.text}
                       data-yearly-tag={discountYearly.tag}
-                      style={`display: ${discountMonthly.text ? "inline-flex" : "none"}`}
+                      style={`display: ${discountMonthly.text || discountMonthly.tag ? "inline-flex" : "none"}`}
                     >
                       <span
                         class="discount-tag"
@@ -183,6 +209,7 @@ const normalizeDiscount = (value) => {
   const wrappers = root.querySelectorAll(".pricing-wrapper");
   const billingSwitch = root.querySelector("#billingSwitch");
   const priceEls = root.querySelectorAll(".price");
+  const oldPriceEls = root.querySelectorAll(".old-price");
   const discountEls = root.querySelectorAll('.discount-text');
 
   /* TAB switching */
@@ -215,6 +242,19 @@ const normalizeDiscount = (value) => {
       }
     });
 
+    oldPriceEls.forEach(el => {
+      const monthlyOld = (el.dataset.monthlyOldPrice ?? "").trim();
+      const yearlyOld = (el.dataset.yearlyOldPrice ?? "").trim();
+      const activeOld = yearly ? yearlyOld : monthlyOld;
+      if (!activeOld) {
+        el.textContent = "";
+        el.style.display = "none";
+        return;
+      }
+      el.textContent = `$${activeOld}`;
+      el.style.display = "block";
+    });
+
     discountEls.forEach(el => {
       const monthlyText = (el.dataset.monthlyText ?? "").trim();
       const monthlyTag = (el.dataset.monthlyTag ?? "").trim();
@@ -223,10 +263,10 @@ const normalizeDiscount = (value) => {
       const tagEl = el.querySelector('.discount-tag');
       const copyEl = el.querySelector('.discount-copy');
 
-      const activeText = yearly ? yearlyText : monthlyText;
       const activeTag = yearly ? yearlyTag : monthlyTag;
+      const activeText = yearly ? yearlyText : monthlyText;
 
-      if (!activeText) {
+      if (!activeText && !activeTag) {
         if (copyEl) copyEl.textContent = '';
         if (tagEl) {
           tagEl.textContent = '';
@@ -236,7 +276,10 @@ const normalizeDiscount = (value) => {
         return;
       }
 
-      if (copyEl) copyEl.textContent = activeText;
+      if (copyEl) {
+        copyEl.textContent = activeText;
+        copyEl.style.display = activeText ? 'inline-flex' : 'none';
+      }
       el.style.display = 'inline-flex';
 
       if (tagEl) {
@@ -446,7 +489,11 @@ const normalizeDiscount = (value) => {
     background: #FDF4EB;
     border-radius: 10px;
     text-align: center;
-    min-height:320px;
+    min-height: 380px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
 }
 .plan-title {
       color: #e08944;
@@ -493,6 +540,10 @@ const normalizeDiscount = (value) => {
     margin: 30px auto;
 }
 .package { color:#c7bdb6; font-weight:700; margin-top:12px; }
+.card-header .btn-primary,
+.card-header .btn-outline {
+  margin-top: auto;
+}
 
 /* CTA */
 .btn {

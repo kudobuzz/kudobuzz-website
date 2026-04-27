@@ -56,12 +56,12 @@ export const pricingData = {
       // },
       {
         title: "Dinner",
-        monthlyPrice: "$99.99",
-        yearlyPrice: "$999.9",
-        oldPrice: "",
+        monthlyPrice: "$19.99",
+        yearlyPrice: "$199.99",
+        oldPrice: { monthly: "99.99", yearly: "999.90" },
         discountText: {
-          monthly: { tag: "Discounted", text: "$19.99" },
-          yearly: { tag: "Discounted", text: "$199.9" },
+          monthly: { tag: "80% discount", text: "" },
+          yearly: { tag: "80% discount", text: "" },
         },
         description: "For enterprise brands seeking full control",
         featureHeading: "Dinner Features",
