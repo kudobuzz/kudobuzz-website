@@ -82,28 +82,28 @@ export const pricingData = {
       },
     ],
     "UGC & Shoppable Videos": [
-      {
-        title: "Free",
-        monthlyPrice: "Free",
-        yearlyPrice: "Free",
-        discountText: {
-          monthly: { tag: "", text: "" },
-          yearly: { tag: "", text: "" },
-        },
-        description: "Best for: New or small merchants starting with UGC.",
-        featureHeading: "Free for you",
-        features: [
-          "Up to 10 synced videos",
-          "Manual sync only",
-          "1 widget",
-          "Basic moderation tools",
-          "Kudobuzz branding"
-        ],
-        buttonText: "Sign Up Free",
-        buttonLink: "https://apps.shopify.com/kudobuzz-tiktok-gallery",
-        moreLink: "#",
-        showFooter: false,
-      },
+      // {
+      //   title: "Free",
+      //   monthlyPrice: "Free",
+      //   yearlyPrice: "Free",
+      //   discountText: {
+      //     monthly: { tag: "", text: "" },
+      //     yearly: { tag: "", text: "" },
+      //   },
+      //   description: "Best for: New or small merchants starting with UGC.",
+      //   featureHeading: "Free for you",
+      //   features: [
+      //     "Up to 10 synced videos",
+      //     "Manual sync only",
+      //     "1 widget",
+      //     "Basic moderation tools",
+      //     "Kudobuzz branding"
+      //   ],
+      //   buttonText: "Sign Up Free",
+      //   buttonLink: "https://apps.shopify.com/kudobuzz-tiktok-gallery",
+      //   moreLink: "#",
+      //   showFooter: false,
+      // },
       {
         title: "Starter",
         monthlyPrice: "$9.99",
