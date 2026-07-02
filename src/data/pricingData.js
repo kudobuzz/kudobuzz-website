@@ -5,29 +5,29 @@ export const pricingData = {
   ],
   plansByTab: {
     "Product & Social Reviews": [
-      {
-        title: "Coffee",
-        monthlyPrice: "Free",
-        yearlyPrice: "Free",
-        oldPrice: "",
-        discountText: {
-          monthly: { tag: "", text: "" },
-          yearly: { tag: "", text: "" },
-        },
-        description: "For new businesses building their brand",
-        featureHeading: "Coffee Features",
-        packageName: "",
-        buttonText: "Sign Up Free",
-        buttonLink: "https://dashboard.kudobuzz.com/signup",
-        features: [
-          "Import Facebook, AliExpress, Yelp, Amazon, Etsy and Google Reviews",
-          "10 Monthly Review Requests",
-          "Published 50 Reviews",
-          "Checkout Reviews",
-        ],
-        moreLink: "#",
-        showFooter: true,
-      },
+      // {
+      //   title: "Coffee",
+      //   monthlyPrice: "Free",
+      //   yearlyPrice: "Free",
+      //   oldPrice: "",
+      //   discountText: {
+      //     monthly: { tag: "", text: "" },
+      //     yearly: { tag: "", text: "" },
+      //   },
+      //   description: "For new businesses building their brand",
+      //   featureHeading: "Coffee Features",
+      //   packageName: "",
+      //   buttonText: "Sign Up Free",
+      //   buttonLink: "https://dashboard.kudobuzz.com/signup",
+      //   features: [
+      //     "Import Facebook, AliExpress, Yelp, Amazon, Etsy and Google Reviews",
+      //     "10 Monthly Review Requests",
+      //     "Published 50 Reviews",
+      //     "Checkout Reviews",
+      //   ],
+      //   moreLink: "#",
+      //   showFooter: true,
+      // },
       // {
       //   title: "Lunch",
       //   monthlyPrice: "$49.99",
@@ -66,7 +66,7 @@ export const pricingData = {
         description: "For enterprise brands seeking full control",
         featureHeading: "Dinner Features",
         packageName: "",
-        buttonText: "Sign Up Free",
+        buttonText: "Start 14 Days Free Trial",
         buttonLink: "https://dashboard.kudobuzz.com/signup",
         features: [
           "Import Facebook, AliExpress, Yelp, Amazon, Etsy and Google Reviews",
@@ -122,7 +122,7 @@ export const pricingData = {
           "Remove Kudobuzz branding",
           "Product tagging"
         ],
-        buttonText: "Sign Up Free",
+        buttonText: "Start 14 Days Free Trial",
         buttonLink: "https://apps.shopify.com/kudobuzz-tiktok-gallery",
         moreLink: "#",
         showFooter: false,
@@ -145,7 +145,7 @@ export const pricingData = {
           "Advanced performance analytics",
           "Priority support"
         ],
-        buttonText: "Sign Up Free",
+        buttonText: "Start 14 Days Free Trial",
         buttonLink: "https://apps.shopify.com/kudobuzz-tiktok-gallery",
         moreLink: "#",
         showFooter: false,
