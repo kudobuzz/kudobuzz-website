@@ -55,17 +55,17 @@ export const pricingData = {
       //   showFooter: true,
       // },
       {
-        title: "Dinner",
+        title: "Growth",
         monthlyPrice: "$19.99",
-        yearlyPrice: "$199.99",
-        oldPrice: { monthly: "99.99", yearly: "999.90" },
-        discountText: {
-          monthly: { tag: "80% discount", text: "" },
-          yearly: { tag: "80% discount", text: "" },
-        },
+        yearlyPrice: "$180",
+        // oldPrice: { monthly: "99.99", yearly: "999.90" },
+        // discountText: {
+        //   monthly: { tag: "80% discount", text: "" },
+        //   yearly: { tag: "80% discount", text: "" },
+        // },
         description: "For enterprise brands seeking full control",
-        featureHeading: "Dinner Features",
-        packageName: "",
+        featureHeading: "Supercharge Your Sales",
+        packageName: "Growth Features",
         buttonText: "Start 14 Days Free Trial",
         buttonLink: "https://dashboard.kudobuzz.com/signup",
         features: [
