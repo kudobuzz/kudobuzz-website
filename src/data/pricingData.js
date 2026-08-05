@@ -71,7 +71,7 @@ export const pricingData = {
         features: [
           "Import Facebook, AliExpress, Yelp, Amazon, Etsy and Google Reviews",
           "3000 Monthly Review Requests",
-          "Published 1000 Reviews",
+          "2000 Published Reviews",
           "Video Reviews",
           "Google Product Ratings",
           "Domain Branding",
